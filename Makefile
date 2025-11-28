@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mipang <mipang@student.42.fr>              +#+  +:+       +#+         #
+#    By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/11/24 22:36:34 by mipang           ###   ########.fr        #
+#    Updated: 2025/11/28 22:29:13 by leazannis        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minirt
-CC = gcc
+NAME = miniRT
+CC = cc
 CFLAGS = -Wall -Werror -Wextra -g -Iinclude -Iminilibx
-SRCS = src/main.c
+SRCS = src/main.c \
+		src/atof.c
 
 OBJS =$(SRCS:.c=.o)
 
