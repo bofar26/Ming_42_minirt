@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-/*   Updated: 2025/11/29 00:53:17 by leazannis        ###   ########.fr       */
+/*   Created: 2025/11/28 22:47:04 by leazannis         #+#    #+#             */
+/*   Updated: 2025/11/28 23:16:40 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	ft_innit(t_scene *s)
+int	close_win(t_scene *w_d)
 {
-	s->shift_x = 0.0;
-	s->shift_y = 0.0;
-	s->zoom = 1.0;
+	mlx_destroy_image(w_d->mlx_ptr, w_d->image_ptr);
+	mlx_destroy_window(w_d->mlx_ptr, w_d->win_ptr);
+	mlx_destroy_display(w_d->mlx_ptr);
+	free(w_d->mlx_ptr);
+	exit(EXIT_SUCCESS);
 }
 
-int	main(int argc, char **argv)
+int	handle_exit(void *param, t_scene *s)
 {
-	t_scene	s;
-
-	(void)argc;
-	(void)argv;
-	ft_memset(&s, 0, sizeof(t_scene));
-	if (!create_window(&s))
-		close_win(&s);
-	draw_image(&s);
+	(void)param;
+	close_win(s);
 	return (0);
 }

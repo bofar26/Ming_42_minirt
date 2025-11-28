@@ -6,15 +6,18 @@
 #    By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/11/28 22:29:13 by leazannis        ###   ########.fr        #
+#    Updated: 2025/11/29 00:32:11 by leazannis        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -Iinclude -Iminilibx
+CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 SRCS = src/main.c \
-		src/atof.c
+		src/atof.c \
+		src/close.c \
+		src/window.c \
+		src/key_hook.c
 
 OBJS =$(SRCS:.c=.o)
 
