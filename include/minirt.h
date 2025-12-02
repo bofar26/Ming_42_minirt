@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/11/24 22:57:13 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/02 18:25:57 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "../minilibx/mlx.h"
 #include <fcntl.h>
 #include <stdlib.h>
+#include "parsing.h"
 
 typedef struct t_scene{
 	void	*mlx_ptr;

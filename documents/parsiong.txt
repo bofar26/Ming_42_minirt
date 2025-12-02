@@ -1,0 +1,148 @@
+思路很对，而且适合你现在的节奏：**先写总入口→按 identifier 分发→每类有各自 *c / *utils.c→逐个填坑→最后做一次整体校验**。为了让你落地更顺，我把“骨架+细则”给你捋直了，你照着搭就行。
+
+# 目录/文件建议（精简而清晰）
+
+```
+src/
+  parse/
+    parser.c            // 入口：逐行读取 + 分发 + 最终校验
+    dispatch.c          // 根据首token调度到 A/C/L/sp/pl/cy
+    tokens.c            // split_whitespace, split_commas, trim
+    numbers.c           // parse_double, parse_int，边界&垃圾字符校验
+    vec_color.c         // parse_vec3, parse_color, normalize, clamps
+    error.c             // die_parse(lineno,msg) + 统一释放
+    a_ambient.c         // parse_ambient()
+    c_camera.c          // parse_camera()
+    l_light.c           // parse_light()
+    sp_sphere.c         // parse_sphere()
+    pl_plane.c          // parse_plane()
+    cy_cylinder.c       // parse_cyl()
+  scene/
+    objects.c           // push_back等
+    free.c              // free_scene, free_objects
+```
+
+# 入口骨架（最小伪码）
+
+```c
+// parser.c
+t_scene parse_file(const char *path)
+{
+    int fd = open(path, O_RDONLY);
+    t_scene sc = scene_init();
+    int lineno = 0;
+    char *line;
+
+    if (fd < 0) die_parse(0, "cannot open file");
+    while ((line = get_next_line(fd)) != NULL) {
+        lineno++;
+        trim_inplace(line);                  // 去首尾空白
+        if (*line == '\0') { free(line); continue; } // 空行跳过
+        dispatch_line(&sc, line, lineno);    // 识别&分发
+        free(line);
+    }
+    close(fd);
+    validate_scene_or_die(&sc);              // 最终校验（见下）
+    return sc;
+}
+```
+
+# 分发器（只做识别，不做解析）
+
+```c
+// dispatch.c
+void dispatch_line(t_scene *sc, const char *line, int lineno)
+{
+    char **tok = split_whitespace(line);   // ["A","0.2","255,255,255"]
+    int n = count_tokens(tok);
+
+    if (n == 0) { free_split(tok); return; }
+
+    if      (streq(tok[0], "A"))  parse_ambient(sc, tok, n, lineno);
+    else if (streq(tok[0], "C"))  parse_camera (sc, tok, n, lineno);
+    else if (streq(tok[0], "L"))  parse_light  (sc, tok, n, lineno);
+    else if (streq(tok[0], "sp")) parse_sphere (sc, tok, n, lineno);
+    else if (streq(tok[0], "pl")) parse_plane  (sc, tok, n, lineno);
+    else if (streq(tok[0], "cy")) parse_cyl    (sc, tok, n, lineno);
+    else die_parse(lineno, "unknown identifier");
+
+    free_split(tok);
+}
+```
+
+# 每类的“硬性规则模板”
+
+**先硬判参数个数**，再逐一解析，错即报。方向向量必须非零并归一化。RGB 是 0..255。diam/height > 0。A/C/L 只能各出现一次（用 `set` 标志防重复）。
+
+| 标识 | 期望 token | 字段说明                                                        |
+| -- | -------- | ----------------------------------------------------------- |
+| A  | 3        | `A ratio color`（ratio ∈ [0,1]）                              |
+| C  | 4        | `C pos dir fov`（dir 归一化，fov ∈ [0,180]）                      |
+| L  | 4        | `L pos bright color`（bright ∈ [0,1]）                        |
+| sp | 4        | `sp center diam color`（diam > 0）                            |
+| pl | 4        | `pl point normal color`（normal 非零归一）                        |
+| cy | 6        | `cy center axis diam height color`（axis 归一；diam/height > 0） |
+
+> 颜色/向量字段内部再用 `parse_color("R,G,B")`、`parse_vec3("x,y,z")` 解析（严格逗号）。
+
+# 小而硬的工具函数（建议签名）
+
+```c
+int  parse_double(const char *s, double *out);  // 拒绝尾垃圾/nan/inf
+int  parse_int(const char *s, int *out);
+int  parse_vec3(const char *s, t_vec3 *out);    // 逗号严格，三段double
+int  parse_color(const char *s, t_color *out);  // 三段int 0..255
+int  vec3_normalize_checked(t_vec3 *v);         // 长度>0才归一，失败返回0
+```
+
+**实现要点**
+
+* `strtod/strtol` + 尾指针到底；不允许 `"3.14abc"`。
+* `isfinite()` 保证不是 `nan/inf`。
+* `split_commas(s,3)` 自己写，避免空白 split 误伤。
+
+# 错误出口与资源（别省）
+
+```c
+__attribute__((noreturn))
+void die_parse(int lineno, const char *msg)
+{
+    if (lineno > 0) fprintf(stderr, "Error\nline %d: %s\n", lineno, msg);
+    else            fprintf(stderr, "Error\n%s\n", msg);
+    free_everything_and_exit(); // 释放scene里已经挂的东西
+}
+```
+
+# 最终整体校验（parse 完成后一次做）
+
+```c
+void validate_scene_or_die(t_scene *sc)
+{
+    if (!sc->amb.set)   die_parse(0, "missing Ambient (A)");
+    if (!sc->cam.set)   die_parse(0, "missing Camera (C)");
+    if (!sc->light.set) die_parse(0, "missing Light (L)");
+    // 如需：至少有一个对象
+    if (!sc->objects)   die_parse(0, "no objects found");
+}
+```
+
+# 实现顺序建议（你现在就可以开写）
+
+1. `tokens.c`（空白/逗号 split + trim）
+2. `numbers.c`（double/int 严格解析）
+3. `vec_color.c`（vec3/color + normalize）
+4. `dispatch.c` + `parser.c`（总入口 & 分发）
+5. 依次填 `A → C → L → sp → pl → cy`
+6. `validate_scene_or_die` + 全局 free
+
+# 易错点一把抓（给你省时间）
+
+* 行末多了一个 token 也要报错（比如 `A 0.2 255,255,255 xxx`）。
+* 方向 `0,0,0` 直接非法，别“自动改”。
+* `fov=180` 允许，但 >180 不行；`ratio/bright` 允许等于 0 或 1。
+* **重复单例**立刻报错（第二个 A/C/L 出现时）。
+* 任何失败路径都要释放已经挂入链表的对象。
+
+---
+
+你的方案已经是**正确且高效的工程化路线**。按这个骨架，你可以“一个 identifier 一个 PR”地扎实推进，出错面小、回滚成本低。现在就从 `tokens.c + numbers.c` 开写，写一个就测一个，干净利落。需要我把 `parse_*` 的函数体模板（空实现+参数计数+报错框架）一并给你吗？
