@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/11/29 00:46:07 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/11/29 12:13:50 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <math.h>
+#include <stdio.h>
 #include <errno.h>
 # include <X11/keysym.h>
 

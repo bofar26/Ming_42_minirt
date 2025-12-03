@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2025/11/29 00:42:01 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/02 19:10:52 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ void	fill_frame(t_scene *s)
 		x = 0;
 		while (x < WIDTH)
 		{
-			//coordonate of pixel
-            image_pixel_put(s, 400, 300, TRGB_WHITE);
+			// to render whole window
+			image_pixel_put(s, x, y, TRGB_WHITE);
+			//coordonate of pixel to print
+            image_pixel_put(s, 400, 300, TRGB_BLUE);
+			
 			x++;
 		}
 		y++;
