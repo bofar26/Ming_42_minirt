@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/11/29 12:13:50 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/09 17:32:13 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef struct t_scene
 	double	shift_x;
 	double	shift_y;
 	double	zoom;
+	double	t;
+	int		r;
+	int		g;
+	int		b;
 	int		color;
 }	t_scene;
 
@@ -82,5 +86,9 @@ void	fill_frame(t_scene *s);
 //void	key_hook_color(int key_sym, t_scene *w_d);
 //void	key_up_left_right_down(int key_sym, t_scene *w_d);w
 int		mouse_hook(int button, int x, int y, t_scene *w_d);
+
+//-----COLOR-----
+
+int	give_color(t_scene *w_d);
 
 #endif
