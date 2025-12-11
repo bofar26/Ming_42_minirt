@@ -1,0 +1,11 @@
+• open, close, read, write,
+printf, malloc, free, perror,
+strerror, exit.
+• All functions of the math
+library. (Man page: man
+math.h or man 3 math. Don’t
+forget to compile with the
+-lm flag).
+• All functions of the MinilibX
+library.
+• gettimeofday()
