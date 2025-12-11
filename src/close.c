@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 17:56:17 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 17:35:02 by lzannis          ###   ########.fr       */
+/*   Created: 2025/11/28 22:47:04 by leazannis         #+#    #+#             */
+/*   Updated: 2025/12/11 17:22:22 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "minirt.h"
 
-# include "types.h"
+int	close_win(t_scene *w_d)
+{
+	mlx_destroy_image(w_d->mlx_ptr, w_d->img_ptr);
+	mlx_destroy_window(w_d->mlx_ptr, w_d->win_ptr);
+	mlx_destroy_display(w_d->mlx_ptr);
+	free(w_d->mlx_ptr);
+	free(w_d);
+	exit(EXIT_SUCCESS);
+}
 
-void	parser_error(int lineidx, const char *msg);
-// char	**ft_split(char *str, char sep);
-void	trim_space(char	*str);
-int		dispatch(t_scene *sc, char *line, int lineidx);
-int		is_space(char c);
-t_scene	*scene_init(t_scene *sc);
-t_scene	*parser_rt(t_scene *sc, const char *rt_file_name);
-
-#endif
+int	handle_exit(void *param, t_scene *s)
+{
+	(void)param;
+	close_win(s);
+	return (0);
+}

@@ -3,44 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-/*   Updated: 2025/11/24 22:58:02 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:36:18 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	handle_exit(void *param)
-{
-	(void)param;
-	exit(0);
-	return (0);
-}
-
-int	handle_key_move(int keycode)
-{
-	if (keycode == KEY_ESC)
-		exit(EXIT_SUCCESS);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*window;
-	t_scene	s;
+	t_scene	*s;
 
 	(void)argc;
 	(void)argv;
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, WIDTH,
-			HEIGHT, "minirt");
-	s.mlx_ptr = mlx;
-	s.win_ptr = window;
-	mlx_hook(window, 17, 0, handle_exit, &s);
-	mlx_key_hook(window, handle_key_move, &s);
-	mlx_loop(mlx);
+	s = NULL;
+	s = scene_init(s);
+	parser_rt(s, "test.rt");
+	if (!create_window(s))
+		close_win(s);
+	draw_image(s);
+	close_win(s);
 	return (0);
 }

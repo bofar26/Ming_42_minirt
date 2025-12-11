@@ -3,19 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mipang <mipang@student.42.fr>              +#+  +:+       +#+         #
+#    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/11/24 22:36:34 by mipang           ###   ########.fr        #
+#    Updated: 2025/12/11 16:49:21 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minirt
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g -Iinclude -Iminilibx
-SRCS = src/main.c
+NAME = miniRT
+CC = cc
+CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 
-OBJS =$(SRCS:.c=.o)
+SRCS = src/main.c \
+		src/atof.c \
+		src/close.c \
+		src/window.c \
+		src/key_hook.c \
+		src/color.c
+MATH = math/point.c \
+		math/vector.c \
+		math/ray.c
+PARSING = parsing/utils/dispatch_utils.c \
+			parsing/utils/parser_utils.c \
+			parsing/dispatch.c \
+			parsing/parser.c
+		
+FILES = $(SRCS) $(MATH) $(PARSING)
+OBJS =$(FILES:.c=.o)
 
 LIBFT_DIR = libft
 LIBFT =$(LIBFT_DIR)/libft.a

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dispatch_utils.c                                   :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 18:16:52 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 15:37:58 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/11 16:28:26 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	is_space(char c)
+int	give_color(t_color *c)
 {
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
+	// t = transparency 
+	// c->t = ((double)c->count / (double)c->max_iteration);
+	c->r = (int)(8 * (1 - c->t) * c->t \
+				* c->t * c->t * 255);
+	c->g = (int)(15 * (1 - c->t) * (1 - c->t) \
+				* c->t * c->t * 255);
+	c->b = (int)(5 * (1 - c->t) * (1 - c->t) \
+				* (1 - c->t) * c->t * 255);
+	c->color = 0xFF << 24 | c->r << 16 | c->g << 8 | c->b;
+	return (c->color);
 }
