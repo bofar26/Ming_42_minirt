@@ -6,13 +6,14 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/09 18:51:47 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/11 16:49:21 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
+
 SRCS = src/main.c \
 		src/atof.c \
 		src/close.c \
@@ -20,8 +21,14 @@ SRCS = src/main.c \
 		src/key_hook.c \
 		src/color.c
 MATH = math/point.c \
-		math/vector.c
-FILES = $(SRCS) $(MATH)
+		math/vector.c \
+		math/ray.c
+PARSING = parsing/utils/dispatch_utils.c \
+			parsing/utils/parser_utils.c \
+			parsing/dispatch.c \
+			parsing/parser.c
+		
+FILES = $(SRCS) $(MATH) $(PARSING)
 OBJS =$(FILES:.c=.o)
 
 LIBFT_DIR = libft

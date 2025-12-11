@@ -6,16 +6,16 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/09 19:48:14 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 16:35:53 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINI_RT_H
-#define MINI_RT_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
-#define WIDTH 800
-#define HEIGHT 600
-#define KEY_ESC 65307
+# define WIDTH 800
+# define HEIGHT 600
+# define KEY_ESC 65307
 
 // define color
 # define TRGB_BLACK  0x00000000
@@ -25,58 +25,19 @@
 # define TRGB_BLUE  0x000000FF
 # define TRGB_WHITE  0xFFFFFFFF
 
-#include "../libft/libft.h"
-#include "../minilibx/mlx.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <math.h>
-#include <stdio.h>
-#include <errno.h>
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "parsing.h"
+# include "types.h"
+# include "math.h"
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <math.h>
+# include <stdio.h>
+# include <errno.h>
 # include <X11/keysym.h>
-
-typedef struct t_point
-{
-	int	x;
-	int y;
-	int z;
-}	t_point;
-
-typedef struct t_vector
-{
-	int	x;
-	int y;
-	int z;
-}	t_vector;
-
-typedef struct t_ray
-{
-	t_point		o;
-	t_vector	d;
-	float		time;
-	char		*medium;
-	char		*material;
-}	t_ray;
-
-typedef struct t_scene
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*image_ptr;
-	char	*address;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	double	shift_x;
-	double	shift_y;
-	double	zoom;
-	double	t;
-	int		r;
-	int		g;
-	int		b;
-	int		color;
-}	t_scene;
 
 typedef struct s_atof
 {
@@ -112,19 +73,6 @@ int		mouse_hook(int button, int x, int y, t_scene *w_d);
 
 //-----COLOR-----
 
-int	give_color(t_scene *w_d);
-
-//-----POINT-----
-
-int pos(t_point *p);
-int new_pos_add(t_point *p);
-int new_pos_substract(t_point *p);
-
-//-----VECTOR------
-
-int	vector(t_vector *v);
-int add_vector(t_vector *v);
-int substract_vector(t_vector *v);
-int	length_vector(int start, int finish, t_point *p);
+int		give_color(t_color *c);
 
 #endif

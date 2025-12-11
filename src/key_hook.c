@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:31:37 by leazannis         #+#    #+#             */
-/*   Updated: 2025/11/29 00:50:54 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/11 16:29:29 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int	mouse_hook(int button, int x, int y, t_scene *s)
 		s->zoom *= 2.5;
 	fill_frame(s);
 	mlx_put_image_to_window(s->mlx_ptr, s->win_ptr, \
-		s->image_ptr, 0, 0);
+		s->img_ptr, 0, 0);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2025/12/02 19:10:52 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/11 16:25:25 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ bool	create_window(t_scene *s)
 	s->win_ptr = mlx_new_window(s->mlx_ptr, WIDTH, HEIGHT, "minirt");
 	if (!s->win_ptr)
 		return (false);
-	s->image_ptr = mlx_new_image(s->mlx_ptr, WIDTH, HEIGHT);
-	if (!s->image_ptr)
+	s->img_ptr = mlx_new_image(s->mlx_ptr, WIDTH, HEIGHT);
+	if (!s->img_ptr)
 		return (false);
-	s->address = mlx_get_data_addr(s->image_ptr, \
+	s->address = mlx_get_data_addr(s->img_ptr, \
 		&s->bits_per_pixel, &s->size_line, &s->endian);
 	if (!s->address)
 		return (false);
@@ -44,7 +44,7 @@ void	draw_image(t_scene *w_d)
 {
 	fill_frame(w_d);
 	mlx_put_image_to_window (w_d->mlx_ptr, w_d->win_ptr, \
-		w_d->image_ptr, 0, 0);
+		w_d->img_ptr, 0, 0);
 	mlx_hook(w_d->win_ptr, 2, 1L << 0, handle_key_move, w_d);
 	mlx_mouse_hook(w_d->win_ptr, mouse_hook, w_d);
 	mlx_hook(w_d->win_ptr, 17, 0, close_win, w_d);
@@ -82,5 +82,5 @@ void	fill_frame(t_scene *s)
 		y++;
 	}
 	mlx_put_image_to_window (s->mlx_ptr, s->win_ptr, \
-		s->image_ptr, 0, 0);
+		s->img_ptr, 0, 0);
 }
