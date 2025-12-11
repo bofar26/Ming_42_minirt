@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/11 16:20:06 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 20:27:52 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ int	new_pos_substract(t_point *p);
 int	vector(t_vector *v);
 int	add_vector(t_vector *v);
 int	substract_vector(t_vector *v);
-int	qlength_vector(int start, int finish, t_point *p);
+int	length_vector(int start, int finish, t_point *p);
 
 #endif

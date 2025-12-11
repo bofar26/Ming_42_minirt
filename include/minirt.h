@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 16:35:53 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 20:41:03 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <X11/keysym.h>
+# include <sys/time.h>
 
 typedef struct s_atof
 {
@@ -74,5 +75,9 @@ int		mouse_hook(int button, int x, int y, t_scene *w_d);
 //-----COLOR-----
 
 int		give_color(t_color *c);
+
+//-----TIME-----
+
+int	getexacttimeofday(void);
 
 #endif

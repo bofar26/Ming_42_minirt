@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2025/12/11 16:25:25 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 20:52:13 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,6 @@ void	fill_frame(t_scene *s)
 	}
 	mlx_put_image_to_window (s->mlx_ptr, s->win_ptr, \
 		s->img_ptr, 0, 0);
+	s->render_time = getexacttimeofday() - s->time;
+	printf("render time : %.3lf\n", s->render_time);
 }

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 17:36:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 20:34:48 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ t_scene	*scene_init(t_scene *sc)
 		return (NULL);
 	ft_memset(sc, 0, sizeof(t_scene));
 	sc->zoom = 1.0;
+	sc->time = getexacttimeofday();
 	return (sc);
 }

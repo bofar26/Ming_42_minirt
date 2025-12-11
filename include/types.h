@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 16:28:56 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 20:37:37 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct t_scene
 	int			endian;
 	double		shift_x;
 	double		shift_y;
+	double		time;
+	double		render_time;
 	double		zoom;
 }	t_scene;
 
