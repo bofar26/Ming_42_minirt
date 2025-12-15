@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 20:24:17 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/11 20:25:05 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 22:06:38 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int	getexacttimeofday(void)
 {
 	struct timeval	tv;
-	int				seconds;
-	int				microseconds;
-	int				sum;
+	int			seconds;
+	int			microseconds;
+	int			sum;
 
 	if (gettimeofday(&tv, NULL))
 		return (-1);

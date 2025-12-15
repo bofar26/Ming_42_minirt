@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/15 12:25:09 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/12 21:09:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
-{
-	t_scene	*s;
-	t_line line;
-	t_rect rect;
-
-	(void)argc;
-	(void)argv;
-	s = NULL;
-	rect.x = 100;
-	rect.y = 100;
-	rect.side_w = 10;
-	rect.side_h = 70;
-	rect.color = 0x90ee90;
-	line.x1 = 0;
-	line.y1 = 0;
-	line.x2 = 800;
-	line.y2 = 600;
-	s = scene_init(s);
-	parser_rt(s, "test.rt");
-	if (!create_window(s))
-		close_win(s);
-	draw_image(s, &line, &rect);
-	close_win(s);
-	return (0);
-}
+// double	get_pos_camera(t_camera *camera, double x, double y, double z)
+// {
+// 	double pos;
+	
+// 	camera->viewpoint = camera->viewpoint->x, camera->viewpoint->y, camera->viewpoint->z;
+// 	camera->orientation = camera->orientation->x, camera->orientation->y, camera->orientation->z;
+// 	camera->fov = 70;
+// 	int		set;
+// 	pos = 
+// }

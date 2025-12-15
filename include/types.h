@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 20:37:37 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/11 21:17:14 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct t_color
 
 typedef struct t_camera
 {
-	t_vec3	viewpoint;
-	t_vec3	orientation;
+	t_vec3	*viewpoint;
+	t_vec3	*orientation;
 	int		fov;
 	int		set;
 }	t_camera;
@@ -40,23 +40,23 @@ typedef struct t_camera
 typedef struct t_ambient
 {
 	double	ratio;
-	t_color	ambient_color;
+	t_color	*ambient_color;
 	int		set;
 }	t_ambient;
 
 typedef struct t_light
 {
-	t_vec3	pos;
-	t_color	light_color;
+	t_vec3	*pos;
+	t_color	*light_color;
 	double	ratio;
 	int		set;
 }	t_light;
 
 typedef struct t_scene
 {
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light		light;
+	t_camera	*camera;
+	t_ambient	*ambient;
+	t_light		*light;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;

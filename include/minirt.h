@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 20:41:03 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/15 12:45:07 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define WIDTH 800
 # define HEIGHT 600
 # define KEY_ESC 65307
+# define PI 3.14
+
 
 // define color
 # define TRGB_BLACK  0x00000000
@@ -29,7 +31,7 @@
 # include "../minilibx/mlx.h"
 # include "parsing.h"
 # include "types.h"
-# include "math.h"
+# include "maths.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -62,7 +64,8 @@ int		close_win(t_scene *w_d);
 
 int		handle_key_move(int keycode, t_scene *s);
 bool	create_window(t_scene *s);
-void	draw_image(t_scene *w_d);
+// void	draw_image(t_scene *w_d);
+void	draw_image(t_scene *w_d, t_line *line, t_rect *rect);
 void	image_pixel_put(t_scene *img, int x, int y, int color);
 void	fill_frame(t_scene *s);
 
@@ -74,10 +77,10 @@ int		mouse_hook(int button, int x, int y, t_scene *w_d);
 
 //-----COLOR-----
 
-int		give_color(t_color *c);
+int		give_color(t_color *c, int r, int g, int b);
 
 //-----TIME-----
 
-int	getexacttimeofday(void);
+int		getexacttimeofday(void);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/11 20:25:44 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/15 12:45:57 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,16 @@ SRCS = src/utils_src/atof.c \
 		src/window.c \
 		src/key_hook.c \
 		src/color.c
-MATH = math/point.c \
-		math/vector.c \
-		math/ray.c
+MATHS = maths/point.c \
+		maths/vector.c \
+		maths/ray.c \
+		maths/geometry.c 
 PARSING = parsing/utils/dispatch_utils.c \
 			parsing/utils/parser_utils.c \
 			parsing/dispatch.c \
 			parsing/parser.c
 		
-FILES = $(SRCS) $(MATH) $(PARSING)
+FILES = $(SRCS) $(MATHS) $(PARSING)
 OBJS =$(FILES:.c=.o)
 
 LIBFT_DIR = libft

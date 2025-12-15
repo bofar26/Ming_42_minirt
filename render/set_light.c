@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_light.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/15 12:25:09 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/12 19:30:45 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/12 21:09:49 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
-{
-	t_scene	*s;
-	t_line line;
-	t_rect rect;
+// void	set_light(t_light *light)
+// {
+// 	light->pos->x = -50.0;
+// 	light->pos->y = 0;
+// 	light->pos->z = 20;
+// 	light->ratio = 0.6;
+// 	light->light_color->r = 10;
+// 	light->light_color->g = 0;
+// 	light->light_color->b = 255;
+// 	give_color(light->light_color->color, light->light_color->r, light->light_color->g, light->light_color->b);
 
-	(void)argc;
-	(void)argv;
-	s = NULL;
-	rect.x = 100;
-	rect.y = 100;
-	rect.side_w = 10;
-	rect.side_h = 70;
-	rect.color = 0x90ee90;
-	line.x1 = 0;
-	line.y1 = 0;
-	line.x2 = 800;
-	line.y2 = 600;
-	s = scene_init(s);
-	parser_rt(s, "test.rt");
-	if (!create_window(s))
-		close_win(s);
-	draw_image(s, &line, &rect);
-	close_win(s);
-	return (0);
-}
+
+	
+// }
