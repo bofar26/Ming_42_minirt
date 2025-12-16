@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 22:32:03 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/16 22:51:09 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/16 23:15:22 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_scene	*scene_init(t_scene *sc)
 	sc->camera = camera_init(sc->camera);
 	sc->ambient = ambient_init(sc->ambient);
 	sc->light = light_init(sc->light);
-	sc->zoom = 1.0;
+	sc->zoom = 2.0;
 	sc->time = getexacttimeofday();
 	return (sc);
 }

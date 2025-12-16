@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/16 20:29:26 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/16 23:22:31 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	length_vector(int start, int finish, t_point *p);
 //-----RAY-----
 
 int	did_it_hit(int i, int j, int k, int r);
-float	ray(t_scene *s, t_point *o, t_vec3 *v, float t, int r, int x, int y);
+float	ray(t_scene *s, float t, int r, int x, int y);
 
 
 //-----GEOMETRY-----
