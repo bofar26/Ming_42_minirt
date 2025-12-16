@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsers_C.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/14 18:20:48 by mipang            #+#    #+#             */
+/*   Updated: 2025/12/14 18:21:38 by mipang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
+#include "types.h"
+
+int	parser_C(char **s, t_camera *out)
+{
+	char	*p;
+	char	*save;
+	t_camera	tmp;
+
+	if (!s || !*s || !out)
+		return (0);
+	p = *s;
+	save = *s;
+	if (!parser_vec3(&p, &tmp.viewpoint) || tmp.ratio > 1 || tmp.ratio < 0)
+		return (*s = save, 0);
+	if (!parser_color(&p, &tmp.ambient_color))
+		return (*s = save, 0);
+	if (!ensure_eol(p))
+		return (*s = save, 0);
+	tmp.set = 1;
+	*out = tmp;
+	*s = p;
+	return (1);
+}

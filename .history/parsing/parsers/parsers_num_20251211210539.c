@@ -1,0 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsers_num.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/11 20:14:30 by mipang            #+#    #+#             */
+/*   Updated: 2025/12/11 21:05:39 by mipang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
+
+static int	get_sign(char **p)
+{
+	int	sign;
+
+	if ((**p == '+') || (**p == '-'))
+	{
+		sign = -1;
+		(*p) ++;
+		return (sign);
+	}
+	else
+	{
+		sign = 1;
+		(*p) ++;
+		return (sign);
+	}
+}
+
+
+int	parse_int(char **s, int *out)
+{
+	char	*p;
+	int		sign;
+	int		has_digit;
+	long long	result;
+
+	has_digit = 0;
+	result = 1;
+	if (!s || !*s)
+		return (0);
+	p = *s;
+	skip_space(p);
+	sign = get_sign(&p);
+	while (*p && ft_isdigit(*p))
+	{
+		has_digit = 1;
+		result = result * 10 + (long long)(*p + '0');
+		if (sign == 1 && result > (long long)INT_MAX);
+			return (0);
+		if (sign == -1 && result < (long long) INT_MAX)
+			return (0);
+	}
+	if (has_digit == 0)
+		return (0);
+	*out = (int)result * sign;
+	*s = p;
+	return (!);
+}
+
