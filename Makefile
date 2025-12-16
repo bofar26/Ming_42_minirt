@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/15 21:33:02 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/16 22:52:17 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,14 @@ CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 
 SRCS = src/utils_src/atof.c \
 		src/utils_src/time.c \
+		src/utils_src/init.c \
 		src/main.c \
 		src/close.c \
 		src/window.c \
 		src/key_hook.c \
 		src/color.c
-MATHS = maths/point.c \
+MATHS = maths/utils_maths/utils_maths.c \
+		maths/point.c \
 		maths/vector.c \
 		maths/ray.c \
 		maths/geometry.c 
