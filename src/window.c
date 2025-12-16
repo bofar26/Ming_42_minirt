@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2025/12/12 22:39:17 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/16 20:41:55 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ bool	create_window(t_scene *s)
 
 void	draw_image(t_scene *w_d, t_line *line, t_rect *rect)
 {
-	fill_frame(w_d);
-	draw_rect(rect, w_d);
-	ft_draw_line(line, w_d);
-	draw_circle(w_d);
+	renderer(w_d, line, rect);
 	mlx_put_image_to_window (w_d->mlx_ptr, w_d->win_ptr, \
 		w_d->img_ptr, 0, 0);
 	mlx_hook(w_d->win_ptr, 2, 1L << 0, handle_key_move, w_d);
@@ -64,8 +61,10 @@ void	image_pixel_put(t_scene *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	fill_frame(t_scene *s)
+void	fill_frame(t_scene *s, t_point *o, t_vec3 *v)
 {
+	(void)o;
+	(void)v;
 	int x;
 	int y;
 
@@ -76,10 +75,11 @@ void	fill_frame(t_scene *s)
 		while (x < WIDTH)
 		{
 			// to render whole window
-			image_pixel_put(s, x, y, TRGB_RED);
+			// image_pixel_put(s, x, y, give_color(245, 66, 233));
 			//coordonate of pixel to print
-            image_pixel_put(s, 400, 300, TRGB_BLUE);
-			
+            // image_pixel_put(s, 400, 300, TRGB_BLUE);
+			// ray(s->light, o, v, 0.6, 2, x, y);
+			image_pixel_put(s, x, y, render_color(x, y));
 			x++;
 		}
 		y++;

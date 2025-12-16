@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_maths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/15 20:41:27 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/16 18:07:10 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/16 18:07:42 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+double	norm(double val_init, double max_init, double min_fin, double max_fin)
 {
-	t_scene	*s;
-	t_line line;
-	t_rect rect;
-
-	(void)argc;
-	(void)argv;
-	s = NULL;
-	rect.x = 100;
-	rect.y = 100;
-	rect.side_w = 10;
-	rect.side_h = 70;
-	rect.color = 0x90ee90;
-	line.x1 = 0;
-	line.y1 = 0;
-	line.x2 = 800;
-	line.y2 = 600;
-	
-	s = scene_init(s);
-	parser_rt(s, "test.rt");
-	if (!create_window(s))
-		close_win(s);
-	draw_image(s, &line, &rect);
-	close_win(s);
-	return (0);
+	return ((val_init / max_init) * (max_fin - min_fin) + min_fin);
 }

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/12 19:39:04 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/16 20:44:03 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,24 @@
 // 	c->color = 0xFF << 24 | c->r << 16 | c->g << 8 | c->b;
 // 	return (c->color);
 // }
-int	give_color(t_color *c, int r, int g, int b)
+int	render_color(int x, int y)
 {
-	// t = transparency 
-	// c->t = ((double)c->count / (double)c->max_iteration);
-	// c->t = 0.1;
-	// r = (int)(8 * (1 - c->t) * c->t \
-	// 			* c->t * c->t * 255);
-	// g = (int)(15 * (1 - c->t) * (1 - c->t) \
-	// 			* c->t * c->t * 255);
-	// b = (int)(5 * (1 - c->t) * (1 - c->t) \
-	// 			* (1 - c->t) * c->t * 255);
-	c->color = 0xFF << 24 | r << 16 | g << 8 | b;
-	return (c->color);
+	double auto_r;
+	double auto_g;
+	double auto_b;
+	
+	auto_r = (double)x / (WIDTH - 1);
+	auto_g = (double)y / (HEIGHT - 1);
+	auto_b = 0.0;
+	
+	int r = (int)(255.999 * auto_r);
+	int g = (int)(255.999 * auto_g);
+	int b = (int)(255.999 * auto_b);
+
+	return (0xFF << 24 | r << 16 | g << 8 | b);
+}
+
+int	give_color(int r, int g, int b)
+{
+	return (0xFF << 24 | r << 16 | g << 8 | b);
 }

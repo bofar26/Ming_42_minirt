@@ -6,11 +6,57 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:21:01 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/15 17:43:42 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/15 22:07:49 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+// void	draw_circle(t_scene *win_dis)
+// {
+//     int r;
+// 	int dx;
+//     int dy;
+//     int x = 400;
+//     int y = 300;
+//     int z = 400;
+//     int i;
+//     int j;
+//     int k;
+//     int hit;
+
+    
+// 	r = 100;
+//     j = y - r;
+//     i = x - r;
+//     k = z - r;
+//     dx = x + r;
+// 	dy = y + r;
+//     hit = 0;
+//     while (j < dy && dy < HEIGHT)
+//     {
+//         i = x - r;
+//         k = z - r;
+//         while (i < dx && dx < WIDTH)
+//         {
+//             if ((j - y) * (j - y) + (i - x) * (i - x) + (k - z) * (k - z) < r * r)
+//                 image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE);
+           
+//             i++;
+//             k++;
+//         }
+//         hit = did_it_hit(i, j, k, r);
+//         if (hit >= 2)
+//             image_pixel_put(win_dis, i, j, TRGB_WHITE);
+//         if (hit == 0)
+//             image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE + TRGB_WHITE);
+//         else
+//             image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE + TRGB_BLACK);
+//         j++;
+//     }
+//     mlx_put_image_to_window (win_dis->mlx_ptr, win_dis->win_ptr, \
+//         win_dis->img_ptr, 0, 0);
+// }
 
 void	draw_circle(t_scene *win_dis)
 {
@@ -19,24 +65,40 @@ void	draw_circle(t_scene *win_dis)
     int dy;
     int x = 400;
     int y = 300;
+    int z = 400;
     int i;
     int j;
-    
+    int k;
+    int hit;
+
 	r = 100;
-    i = x - r - r;
     j = y - r;
+    i = x - r;
+    k = z - r;
     dx = x + r;
 	dy = y + r;
-    while (i < dy && dy < HEIGHT)
+    hit = 0;
+    
+    
+    while (j < dy && dy < HEIGHT)
     {
-        j = y;
-        while (j < dx && dx < WIDTH)
+        i = x - r;
+        k = z - r;
+        while (i < dx && dx < WIDTH)
         {
-            if ((i - y) * (i - y) + (j - x) * (j - x)  < r * r)
-                image_pixel_put(win_dis, j, i, TRGB_GREEN + TRGB_BLUE);
-            j++;
+            if ((j - y) * (j - y) + (i - x) * (i - x) + (k - z) * (k - z) < r * r)
+                image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE);
+            i++;
+            k++;
         }
-        i++;
+        hit = did_it_hit(i, j, k, r);
+        if (hit >= 2)
+            image_pixel_put(win_dis, i, j, TRGB_WHITE);
+        if (hit == 0)
+            image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE + TRGB_WHITE);
+        else
+            image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE + TRGB_BLACK);
+        j++;
     }
     mlx_put_image_to_window (win_dis->mlx_ptr, win_dis->win_ptr, \
         win_dis->img_ptr, 0, 0);

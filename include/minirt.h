@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/15 12:45:07 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/16 20:42:35 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define HEIGHT 600
 # define KEY_ESC 65307
 # define PI 3.14
-
 
 // define color
 # define TRGB_BLACK  0x00000000
@@ -32,6 +31,7 @@
 # include "parsing.h"
 # include "types.h"
 # include "maths.h"
+# include "render.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -67,7 +67,7 @@ bool	create_window(t_scene *s);
 // void	draw_image(t_scene *w_d);
 void	draw_image(t_scene *w_d, t_line *line, t_rect *rect);
 void	image_pixel_put(t_scene *img, int x, int y, int color);
-void	fill_frame(t_scene *s);
+void	fill_frame(t_scene *s, t_point *o, t_vec3 *v);
 
 //-----KEY_HOOK-----
 
@@ -77,7 +77,8 @@ int		mouse_hook(int button, int x, int y, t_scene *w_d);
 
 //-----COLOR-----
 
-int		give_color(t_color *c, int r, int g, int b);
+int		render_color(int x, int y);
+int		give_color(int r, int g, int b);
 
 //-----TIME-----
 

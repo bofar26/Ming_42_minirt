@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/15 12:45:57 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/15 21:33:02 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,10 @@ PARSING = parsing/utils/dispatch_utils.c \
 			parsing/utils/parser_utils.c \
 			parsing/dispatch.c \
 			parsing/parser.c
-		
-FILES = $(SRCS) $(MATHS) $(PARSING)
+RENDER = render/exec.c \
+			render/set_light.c
+
+FILES = $(SRCS) $(MATHS) $(PARSING) $(RENDER)
 OBJS =$(FILES:.c=.o)
 
 LIBFT_DIR = libft
