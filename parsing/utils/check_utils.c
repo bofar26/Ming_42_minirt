@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dispatch_utils.c                                   :+:      :+:    :+:   */
+/*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/09 18:16:52 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 15:37:58 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/11 17:50:50 by mipang            #+#    #+#             */
+/*   Updated: 2025/12/11 20:37:16 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parsing.h"
 
-int	is_space(char c)
+int	check_ratio(double r)
 {
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
+	if (r < 0 || r > 1)
+		return (0);
+	return (1);
 }
+
+int	check_rgb(int c)
+{
+	if (c < 0 || c > 255)
+		return (0);
+	return (1);
+}
+
+
+

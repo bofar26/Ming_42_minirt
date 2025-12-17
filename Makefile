@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
+#    By: mipang <mipang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/11 16:49:21 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/17 16:53:47 by mipang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,12 @@ FILES = $(SRCS) $(MATH) $(PARSING)
 OBJS =$(FILES:.c=.o)
 
 LIBFT_DIR = libft
-LIBFT =$(LIBFT_DIR)/libft.a
+LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx
 MLX = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -lXext -lX11 -lm -lbsd
 
-all:$(NAME)
+all: $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
@@ -45,7 +45,7 @@ $(LIBFT):
 mlx:
 	@make -C $(MLX_DIR)
 
-$(NAME):$(OBJS) $(LIBFT) mlx
+$(NAME): $(OBJS) $(LIBFT) mlx
 	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 
 clean:
@@ -53,12 +53,13 @@ clean:
 	@make -C $(MLX_DIR) clean
 	@make -C $(LIBFT_DIR) clean
 
-fclean:clean
+fclean: clean
 	rm -f $(NAME)
 	@make -C $(MLX_DIR) clean
 	@make -C $(LIBFT_DIR) fclean
 
-re:fclean all
+re: fclean all
 
 .PHONY: clean fclean all re
+
 

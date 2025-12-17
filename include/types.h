@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/11 16:28:56 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 16:52:10 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,27 @@ typedef struct t_light
 	int		set;
 }	t_light;
 
-typedef struct t_scene
+typedef struct t_sphere
 {
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light		light;
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		*address;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	double		shift_x;
-	double		shift_y;
-	double		zoom;
-}	t_scene;
+	t_vec3	sp_center;
+	double	sp_diameter;
+	t_color	sp_color;
+} t_sphere;
+
+typedef struct t_plane
+{
+	t_vec3	pl_point;
+	t_vec3	pl_vector;
+	t_color	pl_color;
+} t_plane;
+
+typedef struct t_cylinder
+{
+	t_vec3	cy_center;
+	t_vec3	cy_vector;
+	double	cy_diameter;
+	double	cy_height;
+	t_color	cy_color;
+} t_cylinder;
 
 #endif

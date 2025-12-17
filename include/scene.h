@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:53:37 by mipang           ###   ########.fr       */
+/*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
+/*   Updated: 2025/12/17 00:25:56 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SCENE_H
+#define SCENE_H
+#include "types.h"
 #include "minirt.h"
 
-int	main(int argc, char **argv)
-{
-	t_scene	*s;
+typedef struct t_scene{
+	t_camera	camera;
+	t_ambient	ambient;
+	t_light		light;
+	t_list		*spheres;
+	int		n_spheres;
+	t_list		*planes;
+	int			n_planes;
+	t_list		*cylinders;
+	int			n_cylinders;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+} t_scene;
 
-	(void)argc;
-	(void)argv;
-	s = NULL;
-	s = scene_init(s);
-	parser_rt(s, "test.rt");
-	if (!create_window(s))
-		close_win(s);
-	draw_image(s);
-	close_win(s);
-	return (0);
-}
+#endif
