@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:44:57 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/16 23:11:45 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 16:37:49 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	dispatch_SP(t_scene *sc, char *p, int lineidx)
 
 	if (!sc)
 		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
-	if (!eat_ident(&p, "SP", 2))
+	if (!eat_ident(&p, "sp", 2))
 		return (parser_error(lineidx, "invalid SP identifier.\n"), 0);
 	dst = add_sphere(sc);
 	if (!dst)

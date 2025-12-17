@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:38:40 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 00:16:51 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 16:37:43 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	dispatch_PL(t_scene *sc, char *p, int lineidx)
 
 	if (!sc)
 		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
-	if (!eat_ident(&p, "PL", 2))
+	if (!eat_ident(&p, "pl", 2))
 		return (parser_error(lineidx, "invalid PL identifier.\n"), 0);
 	dst = add_plane(sc);
 	if (!dst)
