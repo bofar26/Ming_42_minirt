@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2025/12/16 23:23:24 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 17:37:06 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ void	fill_frame(t_scene *s, t_point *o, t_vec3 *v)
 			// image_pixel_put(s, x, y, give_color(245, 66, 233));
 			//coordonate of pixel to print
             // image_pixel_put(s, 400, 300, TRGB_BLUE);
-			ray(s, 0.6, 2, x, y);
-			// image_pixel_put(s, x, y, render_color(s->ambient->ambient_color, x, y));
+			// ray(s, 0.6, 2, x, y);
+			image_pixel_put(s, x, y, ray(s, 0.6, 2, x, y));
+
+			image_pixel_put(s, x, y, render_color(s->ambient->ambient_color, x, y));
 			x++;
 		}
 		y++;
