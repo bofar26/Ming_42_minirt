@@ -6,7 +6,11 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/12/17 17:28:16 by mipang           ###   ########.fr       */
+=======
+/*   Updated: 2025/12/17 17:37:06 by lzannis          ###   ########.fr       */
+>>>>>>> lea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +44,9 @@ bool	create_window(t_scene *s)
     return (true);
 }
 
-void	draw_image(t_scene *w_d)
+void	draw_image(t_scene *w_d, t_line *line, t_rect *rect)
 {
-	fill_frame(w_d);
+	renderer(w_d, line, rect);
 	mlx_put_image_to_window (w_d->mlx_ptr, w_d->win_ptr, \
 		w_d->img_ptr, 0, 0);
 	mlx_hook(w_d->win_ptr, 2, 1L << 0, handle_key_move, w_d);
@@ -61,8 +65,10 @@ void	image_pixel_put(t_scene *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	fill_frame(t_scene *s)
+void	fill_frame(t_scene *s, t_point *o, t_vec3 *v)
 {
+	(void)o;
+	(void)v;
 	int x;
 	int y;
 
@@ -73,14 +79,19 @@ void	fill_frame(t_scene *s)
 		while (x < WIDTH)
 		{
 			// to render whole window
-			image_pixel_put(s, x, y, TRGB_WHITE);
+			// image_pixel_put(s, x, y, give_color(245, 66, 233));
 			//coordonate of pixel to print
-            image_pixel_put(s, 400, 300, TRGB_BLUE);
-			
+            // image_pixel_put(s, 400, 300, TRGB_BLUE);
+			// ray(s, 0.6, 2, x, y);
+			image_pixel_put(s, x, y, ray(s, 0.6, 2, x, y));
+
+			image_pixel_put(s, x, y, render_color(s->ambient->ambient_color, x, y));
 			x++;
 		}
 		y++;
 	}
 	mlx_put_image_to_window (s->mlx_ptr, s->win_ptr, \
 		s->img_ptr, 0, 0);
+	s->render_time = getexacttimeofday() - s->time;
+	printf("render time : %.3lf\n", s->render_time);
 }

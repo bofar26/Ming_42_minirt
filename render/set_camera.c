@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   set_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:39 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/12 21:09:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minirt.h"
 
-void	parser_error(int lineidx, const char *msg)
-{
-	ft_printf("Error\n");
-	ft_printf("line no.%d : %s", lineidx, msg);
-	exit(EXIT_FAILURE);
-}
+// double	get_pos_camera(t_camera *camera, double x, double y, double z)
+// {
+// 	double pos;
+	
+// 	camera->viewpoint = camera->viewpoint->x, camera->viewpoint->y, camera->viewpoint->z;
+// 	camera->orientation = camera->orientation->x, camera->orientation->y, camera->orientation->z;
+// 	camera->fov = 70;
+// 	int		set;
+// 	pos = 
+// }

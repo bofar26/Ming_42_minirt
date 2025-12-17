@@ -6,7 +6,11 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:31:37 by leazannis         #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/12/17 17:23:48 by mipang           ###   ########.fr       */
+=======
+/*   Updated: 2025/12/15 22:52:45 by lzannis          ###   ########.fr       */
+>>>>>>> lea
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +85,7 @@ int	mouse_hook(int button, int x, int y, t_scene *s)
 		s->zoom *= 0.5;
 	if (button == 3)
 		s->zoom *= 2.5;
-	fill_frame(s);
+	// fill_frame(s);
 	mlx_put_image_to_window(s->mlx_ptr, s->win_ptr, \
 		s->img_ptr, 0, 0);
 	return (0);

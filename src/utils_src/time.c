@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:39 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/11 20:24:17 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/11 22:06:38 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minirt.h"
 
-void	parser_error(int lineidx, const char *msg)
+/*Gettimeofday but in milliseconds*/
+int	getexacttimeofday(void)
 {
-	ft_printf("Error\n");
-	ft_printf("line no.%d : %s", lineidx, msg);
-	exit(EXIT_FAILURE);
+	struct timeval	tv;
+	int			seconds;
+	int			microseconds;
+	int			sum;
+
+	if (gettimeofday(&tv, NULL))
+		return (-1);
+	seconds = tv.tv_sec * 1000;
+	microseconds = tv.tv_usec / 1000;
+	sum = seconds + microseconds;
+	return (sum);
 }

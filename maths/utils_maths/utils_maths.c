@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   utils_maths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:39 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/16 18:07:10 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/16 18:07:42 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minirt.h"
 
-void	parser_error(int lineidx, const char *msg)
+double	norm(double val_init, double max_init, double min_fin, double max_fin)
 {
-	ft_printf("Error\n");
-	ft_printf("line no.%d : %s", lineidx, msg);
-	exit(EXIT_FAILURE);
+	return ((val_init / max_init) * (max_fin - min_fin) + min_fin);
 }

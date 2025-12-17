@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:21:43 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 17:58:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define WIDTH 800
 # define HEIGHT 600
 # define KEY_ESC 65307
+# define PI 3.14
 
 // define color
 # define TRGB_BLACK  0x00000000
@@ -30,7 +31,8 @@
 # include "scene.h"
 # include "parsing.h"
 # include "types.h"
-# include "math.h"
+# include "maths.h"
+# include "render.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -39,6 +41,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <X11/keysym.h>
+# include <sys/time.h>
 
 typedef struct s_atof
 {
@@ -53,27 +56,40 @@ typedef struct s_atof
 
 double	ft_atof(char *str);
 
+//-----INIT-----
+
+t_camera	*camera_init(t_camera *camera);
+t_ambient	*ambient_init(t_ambient *ambient);
+t_light		*light_init(t_light *light);
+t_scene		*scene_init(t_scene *sc);
+
 //----CLOSE-----
 
-int		handle_exit(void *param, t_scene *s);
-int		close_win(t_scene *w_d);
+int			handle_exit(void *param, t_scene *s);
+int			close_win(t_scene *w_d);
 
 //-----WINDOW-----
 
-int		handle_key_move(int keycode, t_scene *s);
-bool	create_window(t_scene *s);
-void	draw_image(t_scene *w_d);
-void	image_pixel_put(t_scene *img, int x, int y, int color);
-void	fill_frame(t_scene *s);
+int			handle_key_move(int keycode, t_scene *s);
+bool		create_window(t_scene *s);
+// void	draw_image(t_scene *w_d);
+void		draw_image(t_scene *w_d, t_line *line, t_rect *rect);
+void		image_pixel_put(t_scene *img, int x, int y, int color);
+void		fill_frame(t_scene *s, t_point *o, t_vec3 *v);
 
 //-----KEY_HOOK-----
 
 //void	key_hook_color(int key_sym, t_scene *w_d);
 //void	key_up_left_right_down(int key_sym, t_scene *w_d);w
-int		mouse_hook(int button, int x, int y, t_scene *w_d);
+int			mouse_hook(int button, int x, int y, t_scene *w_d);
 
 //-----COLOR-----
 
-int		give_color(t_color *c);
+int			render_color(t_color *c, int x, int y);
+int			give_color(int r, int g, int b);
+
+//-----TIME-----
+
+int			getexacttimeofday(void);
 
 #endif

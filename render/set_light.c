@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   set_light.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:39 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/12 19:30:45 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/15 22:10:01 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minirt.h"
 
-void	parser_error(int lineidx, const char *msg)
+void	set_light(t_light *light)
 {
-	ft_printf("Error\n");
-	ft_printf("line no.%d : %s", lineidx, msg);
-	exit(EXIT_FAILURE);
+	light->pos->x = -50.0;
+	light->pos->y = 0;
+	light->pos->z = 20;
+	//range between 0.0 to 1.0
+	light->ratio = 0.6;
+	light->light_color->r = 10;
+	light->light_color->g = 0;
+	light->light_color->b = 255;
+	// give_color(light->light_color->r, light->light_color->g, light->light_color->b);
 }

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:39 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/15 21:23:12 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/15 21:31:02 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#ifndef RENDER_H
+# define RENDER_H
 
-void	parser_error(int lineidx, const char *msg)
-{
-	ft_printf("Error\n");
-	ft_printf("line no.%d : %s", lineidx, msg);
-	exit(EXIT_FAILURE);
-}
+//-----EXEC-----
+
+void	renderer(t_scene *w_d, t_line *line, t_rect *rect);
+
+//-----SET_LIGHT-----
+
+void	set_light(t_light *light);
+
+# endif
