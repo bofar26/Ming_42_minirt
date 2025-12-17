@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/12/17 17:28:16 by mipang           ###   ########.fr       */
-=======
-/*   Updated: 2025/12/17 17:37:06 by lzannis          ###   ########.fr       */
->>>>>>> lea
+/*   Updated: 2025/12/17 18:39:58 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +81,7 @@ void	fill_frame(t_scene *s, t_point *o, t_vec3 *v)
 			// ray(s, 0.6, 2, x, y);
 			image_pixel_put(s, x, y, ray(s, 0.6, 2, x, y));
 
-			image_pixel_put(s, x, y, render_color(s->ambient->ambient_color, x, y));
+			image_pixel_put(s, x, y, render_color(s->ambient.ambient_color, x, y));
 			x++;
 		}
 		y++;

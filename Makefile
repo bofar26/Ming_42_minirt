@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/17 17:59:48 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/17 18:44:59 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,21 @@ NAME = miniRT
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 
+SRCS_MATHS = \
+			maths/utils_maths/utils_maths.c \
+			maths/geometry.c \
+			maths/point.c \
+			maths/ray.c \
+			maths/vector.c \
+
+SRCS_RENDERER = \
+				render/exec.c \
+				render/set_camera.c \
+				render/set_light.c \
+				
 SRCS_WINDOW = \
-		src/atof.c \
+		src/utils_src/atof.c \
+		src/utils_src/time.c \
 		src/close.c \
 		src/window.c \
 		src/key_hook.c \
@@ -59,7 +72,7 @@ SRCS = \
 	$(SRC_UTILS) \
 	$(SRC_MAIN)
 	
-FILES = $(SRCS) $(SRCS_WINDOW) 
+FILES = $(SRCS) $(SRCS_WINDOW) $(SRCS_RENDERER) $(SRCS_MATHS)
 OBJS =$(FILES:.c=.o)
 
 LIBFT_DIR = libft

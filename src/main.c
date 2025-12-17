@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 11:41:06 by mipang            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/12/17 17:05:59 by mipang           ###   ########.fr       */
-=======
-/*   Updated: 2025/12/15 20:41:27 by lzannis          ###   ########.fr       */
->>>>>>> lea
+/*   Updated: 2025/12/17 18:10:05 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-<<<<<<< HEAD
 	t_scene		*s;
+	t_line line;
+	t_rect rect;
 	const char	*rt_file_name;
-
 
 	if (argc != 2)
 		return (1);
@@ -31,14 +27,6 @@ int	main(int argc, char **argv)
 	s = parser_rt(rt_file_name);
 	if (!s)
 		return (1);
-=======
-	t_scene	*s;
-	t_line line;
-	t_rect rect;
-
-	(void)argc;
-	(void)argv;
-	s = NULL;
 	rect.x = 100;
 	rect.y = 100;
 	rect.side_w = 10;
@@ -48,10 +36,6 @@ int	main(int argc, char **argv)
 	line.y1 = 0;
 	line.x2 = 800;
 	line.y2 = 600;
-	
-	s = scene_init(s);
-	parser_rt(s, "test.rt");
->>>>>>> lea
 	if (!create_window(s))
 		close_win(s);
 	draw_image(s, &line, &rect);

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 00:31:37 by leazannis         #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/12/17 17:23:48 by mipang           ###   ########.fr       */
-=======
-/*   Updated: 2025/12/15 22:52:45 by lzannis          ###   ########.fr       */
->>>>>>> lea
+/*   Updated: 2025/12/17 18:24:35 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
+#include "minirt.h"
 
 /* void	key_hook_color(int key_sym, t_scene *s)
 {

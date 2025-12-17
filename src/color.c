@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/16 22:28:49 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 18:42:15 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 // 	return (c->color);
 // }
 
-int	render_color(t_color *c, int x, int y)
+int	render_color(t_color c, int x, int y)
 {
 	double auto_r;
 	double auto_g;
@@ -37,11 +37,11 @@ int	render_color(t_color *c, int x, int y)
 	auto_g = (double)y / (HEIGHT - 1);
 	auto_b = 0.0;
 	
-	c->r = (int)(255.999 * auto_r);
-	c->g = (int)(255.999 * auto_g);
-	c->b = (int)(255.999 * auto_b);
+	c.r = (int)(255.999 * auto_r);
+	c.g = (int)(255.999 * auto_g);
+	c.b = (int)(255.999 * auto_b);
 
-	return (0xFF << 24 | c->r << 16 | c->g << 8 | c->b);
+	return (0xFF << 24 | c.r << 16 | c.g << 8 | c.b);
 }
 
 int	give_color(int r, int g, int b)

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:58:43 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 18:40:40 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ double	ft_atof(char *str);
 t_camera	*camera_init(t_camera *camera);
 t_ambient	*ambient_init(t_ambient *ambient);
 t_light		*light_init(t_light *light);
-t_scene		*scene_init(t_scene *sc);
 
 //----CLOSE-----
 
@@ -81,11 +80,11 @@ void		fill_frame(t_scene *s, t_point *o, t_vec3 *v);
 
 //void	key_hook_color(int key_sym, t_scene *w_d);
 //void	key_up_left_right_down(int key_sym, t_scene *w_d);w
-int			mouse_hook(int button, int x, int y, t_scene *w_d);
+int	mouse_hook(int button, int x, int y, t_scene *s);
 
 //-----COLOR-----
 
-int			render_color(t_color *c, int x, int y);
+int			render_color(t_color c, int x, int y);
 int			give_color(int r, int g, int b);
 
 //-----TIME-----

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/17 17:37:54 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 18:51:31 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	renderer(t_scene *w_d, t_line *line, t_rect *rect)
 	
 	// set_light(w_d->light);
 	fill_frame(w_d, &o, &v);
-	// draw_rect(rect, w_d);
-	// ft_draw_line(line, w_d);
-	// draw_circle(w_d);
+	draw_rect(rect, w_d);
+	ft_draw_line(line, w_d);
+	draw_circle(w_d);
 }
 
