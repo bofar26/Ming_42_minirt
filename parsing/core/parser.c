@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:13:27 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:52:57 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 17:13:56 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ static void rt_final_check(t_scene *sc)
 }
 
 
-t_scene *parser_rt(t_scene *sc, const char *rt_file_name)
+t_scene *parser_rt(const char  *rt_file_name)
 {
 	int		fd;
 	char	*line;
 	int		lineidx;
+	t_scene	*sc;
 
 	lineidx = 0;
 	fd = open(rt_file_name, O_RDONLY);
@@ -76,11 +77,7 @@ t_scene *parser_rt(t_scene *sc, const char *rt_file_name)
 		scene_free(sc);
 		free(sc);
 		parser_error(0, "Close fd failure.\n");
-<<<<<<< HEAD:parsing/parser.c
-	// rt_final_check(sc);
-=======
 	}
 	rt_final_check(sc);
->>>>>>> origin/parser-ming:parsing/core/parser.c
 	return (sc);
 }

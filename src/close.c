@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:47:04 by leazannis         #+#    #+#             */
-/*   Updated: 2025/12/11 17:22:22 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 17:23:19 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "math.h"
 
 int	close_win(t_scene *w_d)
 {

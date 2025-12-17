@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:50:28 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 17:21:43 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
+# include "scene.h"
 # include "parsing.h"
 # include "types.h"
 # include "math.h"

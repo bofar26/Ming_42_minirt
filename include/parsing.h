@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:56:17 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:50:53 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 17:45:46 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "scene.h"
 #include <limits.h>
 #include <stddef.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 void	parser_error(int lineidx, const char *msg);
 void	skip_space(char **str);

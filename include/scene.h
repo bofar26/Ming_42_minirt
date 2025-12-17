@@ -6,14 +6,14 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 00:25:56 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/17 17:44:39 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 #define SCENE_H
 #include "types.h"
-#include "minirt.h"
+# include "../libft/libft.h"
 
 typedef struct t_scene{
 	t_camera	camera;
@@ -28,6 +28,15 @@ typedef struct t_scene{
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
+	char		*address;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	double		shift_x;
+	double		shift_y;
+	double		time;
+	double		render_time;
+	double		zoom;
 } t_scene;
 
 #endif

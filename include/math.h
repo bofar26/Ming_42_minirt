@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   math.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/11 16:20:06 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/17 17:23:04 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATH_H
 # define MATH_H
+#include "minirt.h"
 
 typedef struct t_point
 {
