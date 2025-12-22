@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:13:27 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 18:38:28 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/22 19:31:41 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	trim_space(char	*str)
 static void rt_final_check(t_scene *sc)
 {
 	if (!sc->ambient.set)
-		parser_error(0, "Missing ambient\n");
+		parser_error(sc, 0, "Missing ambient\n");
 	if (!sc->camera.set)
-		 parser_error(0, "Missing camera\n");
+		 parser_error(sc, 0, "Missing camera\n");
 	if (!sc->light.set)
-		parser_error(0, "Missing light\n");
+		parser_error(sc, 0, "Missing light\n");
 }
 
 
@@ -56,9 +56,8 @@ t_scene *parser_rt(const char  *rt_file_name)
 		return (NULL);
 	if (fd < 0)
 	{
-		free(sc);
 		close(fd);
-		parser_error(0, "Can not open .rt file\n");
+		parser_error(sc, 0, "Can not open .rt file\n");
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
@@ -68,15 +67,13 @@ t_scene *parser_rt(const char  *rt_file_name)
 			if(!dispatch(sc, line, lineidx))
 			{
 				free(line);
-				parser_error(lineidx, "Dispatch failure. Unknown identifier or missing space after identifier\n");
+				parser_error(sc, lineidx, "Dispatch failure. Unknown identifier or missing space after identifier\n");
 			}
 		free(line);
 	}
 	if (close(fd) < 0)
 	{
-		scene_free(sc);
-		free(sc);
-		parser_error(0, "Close fd failure.\n");
+		parser_error(sc, 0, "Close fd failure.\n");
 	}
 	rt_final_check(sc);
 	return (sc);

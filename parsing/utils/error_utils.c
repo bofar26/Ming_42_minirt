@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 19:11:10 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:39 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/22 20:18:50 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "minirt.h"
 
-void	parser_error(int lineidx, const char *msg)
+void	parser_error(t_scene *sc, int lineidx, const char *msg)
 {
 	ft_printf("Error\n");
 	ft_printf("line no.%d : %s", lineidx, msg);
+	get_next_line(-1);
+	close_win(sc);
 	exit(EXIT_FAILURE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_A.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 16:39:17 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 18:04:53 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/22 20:19:08 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static int	parser_A(char **s, t_ambient *out)
 int	dispatch_A(t_scene *sc, char *p, int lineidx)
 {
 	if (!sc)
-		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
+		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "A", 1))
-		return (parser_error(lineidx, "invalid A identifier.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid A identifier.\n"), 0);
 	if (sc->ambient.set)
-		return (parser_error(lineidx, "duplicate ambient (A) not allowed.\n"), 0);
+		return (parser_error(sc, lineidx, "duplicate ambient (A) not allowed.\n"), 0);
 	if (!parser_A(&p, &sc->ambient))
-		return (parser_error(lineidx, "invalid A line.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid A line.\n"), 0);
 	return (1);
 }

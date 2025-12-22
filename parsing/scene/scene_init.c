@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:29:39 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:51:06 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 18:54:54 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	scene_free(t_scene *sc)
 {
 	if (!sc)
 		return ;
-	ft_lstclear(&sc -> planes, del_content);
-	ft_lstclear(&sc -> spheres, del_content);
-	ft_lstclear(&sc -> cylinders, del_content);
+	ft_lstclear(&sc->planes, del_content);
+	ft_lstclear(&sc->spheres, del_content);
+	ft_lstclear(&sc->cylinders, del_content);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dispatch.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:57:17 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:52:45 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 20:09:01 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	dispatch(t_scene *sc, char *line, int lineidx)
 {
 	char	*str;
-	(void)sc;
 
 	str = line;
 	while(is_space(*str))

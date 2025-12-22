@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_L.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:34:59 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 00:13:50 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:28:46 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int	parser_L(char **s, t_light *out)
 int	dispatch_L(t_scene *sc, char *p, int lineidx)
 {
 	if (!sc)
-		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
+		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "L", 1))
-		return (parser_error(lineidx, "invalid L identifier.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid L identifier.\n"), 0);
 	if (!parser_L(&p, &sc->light))
-		return (parser_error(lineidx, "invalid L line.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid L line.\n"), 0);
 	return (1);
 }
 

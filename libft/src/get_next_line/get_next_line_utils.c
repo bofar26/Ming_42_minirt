@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 16:54:41 by mipang            #+#    #+#             */
-/*   Updated: 2025/04/25 14:14:10 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:46:50 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*update_readline(char *readline)
 	if (!readline)
 		return (NULL);
 	while (readline[i] != '\n' && readline[i] != '\0')
-		i ++;
+		i++;
 	if (readline[i] == '\0' || readline[i + 1] == '\0')
 		return (free(readline), NULL);
 	if (!readline[i + 1])

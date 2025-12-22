@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:56:17 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 17:59:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/22 18:58:08 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void	parser_error(int lineidx, const char *msg);
+void	parser_error(t_scene *sc, int lineidx, const char *msg);
 void	skip_space(char **str);
 void	*scene_push(t_list **lst, size_t obj_size);
 void	scene_free(t_scene *sc);

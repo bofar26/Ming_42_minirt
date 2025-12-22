@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_SP.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:44:57 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:37:49 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:29:47 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	dispatch_SP(t_scene *sc, char *p, int lineidx)
 	t_sphere	*dst;
 
 	if (!sc)
-		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
+		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "sp", 2))
-		return (parser_error(lineidx, "invalid SP identifier.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid SP identifier.\n"), 0);
 	dst = add_sphere(sc);
 	if (!dst)
-		return (parser_error(lineidx, "sphere allocation failed.\n"), 0);
+		return (parser_error(sc, lineidx, "sphere allocation failed.\n"), 0);
 	if (!parser_SP(&p, dst))
-		return (parser_error(lineidx, "invalid SP line.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid SP line.\n"), 0);
 	return (1);
 }

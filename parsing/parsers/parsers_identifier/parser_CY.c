@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_CY.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:58:36 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:37:36 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:26:17 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int	dispatch_CY(t_scene *sc, char *p, int lineidx)
 	t_cylinder	*dst;
 
 	if (!sc)
-		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
+		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "cy", 2))
-		return (parser_error(lineidx, "invalid CY identifier.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid CY identifier.\n"), 0);
 	dst = add_cylinder(sc);
 	if (!dst)
-		return (parser_error(lineidx, "cylinder allocation failed.\n"), 0);
+		return (parser_error(sc, lineidx, "cylinder allocation failed.\n"), 0);
 	if (!parser_CY(&p, dst))
-		return (parser_error(lineidx, "invalid CY line.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid CY line.\n"), 0);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:21:01 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/15 22:07:49 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/22 18:38:04 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@
 //             image_pixel_put(win_dis, i, j, TRGB_GREEN + TRGB_BLUE + TRGB_BLACK);
 //         j++;
 //     }
-//     mlx_put_image_to_window (win_dis->mlx_ptr, win_dis->win_ptr, \
-//         win_dis->img_ptr, 0, 0);
+//     mlx_put_image_to_window (win_dis->mlx_ptr, win_dis->win_ptr, win_dis->img_ptr, 0, 0);
 // }
 
 void	draw_circle(t_scene *win_dis)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/17 18:42:15 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/22 18:37:18 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@
 // 	// t = transparency 
 // 	// c->t = ((double)c->count / (double)c->max_iteration);
 // 	// c->t = 0.1;
-// 	c->r = (int)(8 * (1 - c->t) * c->t \
-// 				* c->t * c->t * 255);
-// 	c->g = (int)(15 * (1 - c->t) * (1 - c->t) \
-// 				* c->t * c->t * 255);
-// 	c->b = (int)(5 * (1 - c->t) * (1 - c->t) \
-// 				* (1 - c->t) * c->t * 255);
+// 	c->r = (int)(8 * (1 - c->t) * c->t * c->t * c->t * 255);
+// 	c->g = (int)(15 * (1 - c->t) * (1 - c->t) * c->t * c->t * 255);
+// 	c->b = (int)(5 * (1 - c->t) * (1 - c->t) * (1 - c->t) * c->t * 255);
 // 	c->color = 0xFF << 24 | c->r << 16 | c->g << 8 | c->b;
 // 	return (c->color);
 // }

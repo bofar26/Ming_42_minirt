@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_PL.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 21:38:40 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 16:37:43 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:29:23 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int	dispatch_PL(t_scene *sc, char *p, int lineidx)
 	t_plane	*dst;
 
 	if (!sc)
-		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
+		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "pl", 2))
-		return (parser_error(lineidx, "invalid PL identifier.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid PL identifier.\n"), 0);
 	dst = add_plane(sc);
 	if (!dst)
-		return (parser_error(lineidx, "plane allocation failed.\n"), 0);
+		return (parser_error(sc, lineidx, "plane allocation failed.\n"), 0);
 	if (!parser_PL(&p, dst))
-		return (parser_error(lineidx, "invalid PL line."), 0);
+		return (parser_error(sc, lineidx, "invalid PL line."), 0);
 	return (1);
 }

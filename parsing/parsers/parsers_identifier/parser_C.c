@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_C.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 18:20:48 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 00:13:32 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/22 19:25:55 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static int	parser_C(char **s, t_camera *out)
 int	dispatch_C(t_scene *sc, char *p, int lineidx)
 {
 	if (!sc)
-		return (parser_error(lineidx, "internal: scene is NULL.\n"), 0);
+		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "C", 1))
-		return (parser_error(lineidx, "invalid C identifier.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid C identifier.\n"), 0);
 	if (sc->camera.set)
-		return (parser_error(lineidx, "duplicate ambient (C) not allowed.\n"), 0);
+		return (parser_error(sc, lineidx, "duplicate ambient (C) not allowed.\n"), 0);
 	if (!parser_C(&p, &sc->camera))
-		return (parser_error(lineidx, "invalid C line.\n"), 0);
+		return (parser_error(sc, lineidx, "invalid C line.\n"), 0);
 	return (1);
 }
