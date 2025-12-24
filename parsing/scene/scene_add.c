@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_add.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:53:08 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/16 15:05:13 by mipang           ###   ########.fr       */
+/*   Updated: 2025/12/23 20:08:30 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_plane	*add_plane(t_scene *sc)
 	if (!obj)
 		return (NULL);
 	else
-		sc -> n_planes ++;
+		sc->n_planes++;
 	return (obj);
 }
 
@@ -36,7 +36,7 @@ t_sphere	*add_sphere(t_scene *sc)
 	if (!obj)
 		return (NULL);
 	else
-		sc -> n_spheres ++;
+		sc->n_spheres++;
 	return (obj);
 }
 
@@ -50,6 +50,6 @@ t_cylinder	*add_cylinder(t_scene *sc)
 	if (!obj)
 		return (NULL);
 	else
-		sc -> n_cylinders ++;
+		sc->n_cylinders++;
 	return (obj);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 18:38:02 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/23 13:38:15 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct t_scene{
 	t_ambient	ambient;
 	t_light		light;
 	t_list		*spheres;
-	int		n_spheres;
+	int			n_spheres;
 	t_list		*planes;
 	int			n_planes;
 	t_list		*cylinders;

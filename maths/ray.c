@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/17 18:49:19 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/23 13:15:41 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	did_it_hit(int i, int j, int k, int r)
 
     hit = 0;
 	hit = j * j - ((r * r) * i * k);
-	printf("hit = %d\n", hit);
+	//printf("hit = %d\n", hit);
 	return (hit);
 }
 

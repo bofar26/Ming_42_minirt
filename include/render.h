@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:23:12 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/15 21:31:02 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/23 13:12:56 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	renderer(t_scene *w_d, t_line *line, t_rect *rect);
 
 //-----SET_LIGHT-----
 
-void	set_light(t_light *light);
+void	set_light(t_scene *s);
 
 # endif

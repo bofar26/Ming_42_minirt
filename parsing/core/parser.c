@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:13:27 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/22 19:31:41 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/23 12:47:18 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ t_scene *parser_rt(const char  *rt_file_name)
 	t_scene	*sc;
 
 	lineidx = 0;
+	sc = NULL;
 	fd = open(rt_file_name, O_RDONLY);
-	sc = scene_init();
+	sc = scene_init(sc);
 	if (!sc)
 		return (NULL);
 	if (fd < 0)
@@ -72,9 +73,7 @@ t_scene *parser_rt(const char  *rt_file_name)
 		free(line);
 	}
 	if (close(fd) < 0)
-	{
 		parser_error(sc, 0, "Close fd failure.\n");
-	}
 	rt_final_check(sc);
 	return (sc);
 }

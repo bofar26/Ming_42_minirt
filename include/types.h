@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/17 18:37:12 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/23 20:51:25 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct t_vec3
 typedef struct t_color
 {
 	double	t;
+	t_vec3	pixel_color;
 	int		r;
 	int		g;
 	int		b;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:47 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/23 20:45:00 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,21 @@ typedef struct s_rect
 
 //-----POINT-----
 
-int	pos(t_point *p);
-int	new_pos_add(t_point *p);
-int	new_pos_substract(t_point *p);
+int		pos(t_point *p);
+int		new_pos_add(t_point *p);
+int		new_pos_substract(t_point *p);
 
 //-----VECTOR------
 
-int	vector(t_vec3 *v);
-int	add_vector(t_vec3 *v);
-int	substract_vector(t_vec3 *v);
-int	length_vector(int start, int finish, t_point *p);
+t_vec3	add_vector(t_vec3 *v, double x, double y, double z);
+t_vec3	substract_vector(t_vec3 *v, double x, double y, double z);
+t_vec3	power_vector(t_vec3 *v, double t);
+double	length_vector(double start, double finish, t_point *p);
 
 //-----RAY-----
 
-int	did_it_hit(int i, int j, int k, int r);
+int		did_it_hit(int i, int j, int k, int r);
 float	ray(t_scene *s, float t, int r, int x, int y);
-
 
 //-----GEOMETRY-----
 

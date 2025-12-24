@@ -6,20 +6,20 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:29:39 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/22 18:54:54 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/23 01:05:53 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minirt.h"
 
-t_scene	*scene_init(void)
+t_scene	*scene_init(t_scene *sc)
 {
-	t_scene *sc;
-
 	sc = malloc(sizeof(t_scene));
 	if (!sc)
 		return (NULL);
 	ft_memset(sc, 0, sizeof(t_scene));
+	sc->zoom = 2.0;
+	sc->time = getexacttimeofday();
 	return (sc);
 }
 
