@@ -6,12 +6,13 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/23 13:15:41 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/24 15:01:45 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+//calcul quadrature to know if the ray hit the object or not
 // b^2 - r^2ac
 int	did_it_hit(int i, int j, int k, int r)
 {
@@ -22,7 +23,7 @@ int	did_it_hit(int i, int j, int k, int r)
 	//printf("hit = %d\n", hit);
 	return (hit);
 }
-
+//calcul to know if the ray hit the sphere:
 // (bx^2 + by^2 + bz^2)t^2 + (2(axbx + ayby + azbz)t + (ax^2 + ay^2 + az^2 - r^2) = 0
 // a = ray origin
 // b = ray direction
@@ -58,6 +59,7 @@ float	ray(t_scene *s, float t, int r, int x, int y)
 		return(TRGB_BLACK);
 }
 
-
+//fct ray :
+//P(t) = a + tb; 
 // a = o->x + v->x * t;
 // b = o->y + v->y * t;

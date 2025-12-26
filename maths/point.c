@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   point.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:27:57 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/11 18:05:28 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/26 14:35:07 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_point p;
+t_point3 p;
 
-// int pos(t_point *p)
+// int pos(t_point3 *p)
 // {
 // 	int pos;
 
@@ -22,7 +22,7 @@ t_point p;
 // 	return (pos);
 // }
 
-// int new_pos_add(t_point *p)
+// int new_pos_add(t_point3 *p)
 // {
 // 	int x;
 // 	int y;
@@ -37,7 +37,7 @@ t_point p;
 // 	return (x, y, z);
 // }
 
-// int new_pos_substract(t_point *p)
+// int new_pos_substract(t_point3 *p)
 // {
 // 	int x;
 // 	int y;

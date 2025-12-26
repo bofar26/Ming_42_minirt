@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/23 20:45:00 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/26 14:34:47 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 # define MATH_H
 #include "minirt.h"
 
-typedef struct t_point
+typedef struct t_point3
 {
-	int	x;
-	int	y;
-	int	z;
-}	t_point;
+	double	x;
+	double	y;
+	double	z;
+}	t_point3;
 
 typedef struct t_ray
 {
-	t_point	o;
+	t_point3	o;
 	t_vec3	d;
 	float	time;
 	char	*medium;
@@ -49,16 +49,16 @@ typedef struct s_rect
 
 //-----POINT-----
 
-int		pos(t_point *p);
-int		new_pos_add(t_point *p);
-int		new_pos_substract(t_point *p);
+int		pos(t_point3 *p);
+int		new_pos_add(t_point3 *p);
+int		new_pos_substract(t_point3 *p);
 
 //-----VECTOR------
 
 t_vec3	add_vector(t_vec3 *v, double x, double y, double z);
 t_vec3	substract_vector(t_vec3 *v, double x, double y, double z);
 t_vec3	power_vector(t_vec3 *v, double t);
-double	length_vector(double start, double finish, t_point *p);
+double	length_vector(double start, double finish, t_point3 *p);
 
 //-----RAY-----
 

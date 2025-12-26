@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/23 20:51:25 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/26 15:08:07 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,15 @@ typedef struct t_color
 
 typedef struct t_camera
 {
-	t_vec3	viewpoint;
+	t_vec3	viewpoint;//camera_center
 	t_vec3	orientation;
+	t_vec3	viewport_u;//x axis
+	t_vec3	viewport_v;//y axis
+	t_vec3	pixel_delta_u;//horizontal vector
+	t_vec3	pixel_delta_v;//vertical vector
+	double	viewport_height;
+    double	viewport_width;
+	double	focal_lenght;
 	int		fov;
 	int		set;
 }	t_camera;

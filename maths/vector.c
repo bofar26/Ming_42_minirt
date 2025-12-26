@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:28:31 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/23 20:45:46 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/26 14:35:39 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_vec3 power_vector(t_vec3 *v, double t)
     return (*v);
 }
 
-double	length_vector(double start, double finish, t_point *p)
+double	length_vector(double start, double finish, t_point3 *p)
 {
     double length;
     

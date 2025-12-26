@@ -6,7 +6,7 @@
 /*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/24 12:24:43 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/24 14:54:33 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pi
 	auto_r = pixel_color_x;
 	auto_g = pixel_color_y;
 	auto_b = pixel_color_z;
-	printf("x %.1f y %.1f z %.1f\n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
+	//printf("x %.1f y %.1f z %.1f\n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
 	c.r = (int)(auto_r);
 	c.g = (int)(auto_g);
 	c.b = (int)(auto_b);
-	printf("r %d g %d b %d\n", c.r, c.g, c.b);
+	//printf("r %d g %d b %d\n", c.r, c.g, c.b);
 	return (0xFF << 24 | c.r << 16 | c.g << 8 | c.b);
 }
 
