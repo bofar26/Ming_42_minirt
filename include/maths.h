@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/26 14:34:47 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/29 20:41:21 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ typedef struct t_point3
 typedef struct t_ray
 {
 	t_point3	o;
-	t_vec3	d;
-	float	time;
-	char	*medium;
-	char	*material;
+	t_vec3		d;
+	float		time;
+	char		*medium;
+	char		*material;
 }	t_ray;
 
 typedef struct s_line
@@ -63,7 +63,8 @@ double	length_vector(double start, double finish, t_point3 *p);
 //-----RAY-----
 
 int		did_it_hit(int i, int j, int k, int r);
-float	ray(t_scene *s, float t, int r, int x, int y);
+float	ray_sphere(t_scene *s, float t, int r, int x, int y);
+t_vec3	ray(t_vec3 *origin, t_vec3 *direction, double t);
 
 //-----GEOMETRY-----
 

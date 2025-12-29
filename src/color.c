@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/24 14:54:33 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/29 21:12:39 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@
 // 	return (c->color);
 // }
 
+//normalisation position to int to translate color
+// -0.1 >> [0,255] 
+t_vec3	ray_color(t_vec3 direction)
+{
+	double a;
+	
+	a = 0.5 * (direction.y + 1.0);
+	direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	return (direction);
+}
+
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)
 {
 	double auto_r;
@@ -37,9 +50,9 @@ int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pi
 	auto_g = pixel_color_y;
 	auto_b = pixel_color_z;
 	//printf("x %.1f y %.1f z %.1f\n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
-	c.r = (int)(auto_r);
-	c.g = (int)(auto_g);
-	c.b = (int)(auto_b);
+	c.r = (int)(255.999 *auto_r);
+	c.g = (int)(255.999 *auto_g);
+	c.b = (int)(255.999 *auto_b);
 	//printf("r %d g %d b %d\n", c.r, c.g, c.b);
 	return (0xFF << 24 | c.r << 16 | c.g << 8 | c.b);
 }

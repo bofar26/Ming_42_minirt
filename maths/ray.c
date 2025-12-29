@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/24 15:01:45 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/29 20:40:46 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ int	did_it_hit(int i, int j, int k, int r)
 // b = ray direction
 // r = radius
 // t = hit distance
-float	ray(t_scene *s, float t, int r, int x, int y)
+float	ray_sphere(t_scene *s, float t, int r, int x, int y)
 {
 	(void)t;
+	(void)x;
+	(void)y;
 	double a;
 	double b;
 	double c;
 	double discriminant;
 	
-	s->camera.viewpoint.x = 0;
-	s->camera.viewpoint.y = 0;
-	s->camera.viewpoint.z = 2;
-	s->camera.orientation.x = (norm(x, WIDTH, -2, 2) * s->zoom - 1.0) + s->shift_x;
-	s->camera.orientation.y = (norm(y, HEIGHT, -2, 2) * s->zoom - 1.0) + s->shift_y;
-	s->camera.orientation.z = 1;
-	// s->pt.c1 = (norm(x, WIDTH, -2, 2) * s->zoom - 1.0) + s->shift_x;
-	// s->pt.c2 = (norm(y, HEIGHT, -2, 2) * s->zoom - 1.0) + s->shift_y;
+	// s->camera.viewpoint.x = 0;
+	// s->camera.viewpoint.y = 0;
+	// s->camera.viewpoint.z = 2;
+	// s->camera.orientation.x = ;
+	// s->camera.orientation.y = ;
+	// s->camera.orientation.z = 1;
 
 	a = s->camera.orientation.x * s->camera.orientation.x + s->camera.orientation.y \
 	* s->camera.orientation.y + s->camera.orientation.z * s->camera.orientation.z;
@@ -63,3 +63,12 @@ float	ray(t_scene *s, float t, int r, int x, int y)
 //P(t) = a + tb; 
 // a = o->x + v->x * t;
 // b = o->y + v->y * t;
+t_vec3	ray(t_vec3 *origin, t_vec3 *direction, double t)
+{
+	t_vec3	ray_final;
+
+	ray_final.x = origin->x + t * direction->x;
+	ray_final.y = origin->y + t * direction->y;
+	ray_final.z = origin->z + t * direction->z;
+	return (ray_final);
+}

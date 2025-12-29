@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/24 12:08:18 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/29 21:12:45 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ bool	create_window(t_scene *s);
 // void	draw_image(t_scene *w_d);
 void	draw_image(t_scene *w_d, t_line *line, t_rect *rect);
 void	image_pixel_put(t_scene *img, int x, int y, int color);
-void	fill_frame(t_scene *s, t_point *o, t_vec3 *v);
+void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v);
 
 //-----KEY_HOOK-----
 
@@ -78,6 +78,7 @@ int		mouse_hook(int button, int x, int y, t_scene *s);
 
 //-----COLOR-----
 
+t_vec3	ray_color(t_vec3 direction);
 int		write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z);
 t_vec3	render_color(t_color c, int x, int y);
 int		give_color(int r, int g, int b);

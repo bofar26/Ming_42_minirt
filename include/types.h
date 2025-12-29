@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/26 15:08:07 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/29 19:02:22 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ typedef struct t_color
 typedef struct t_camera
 {
 	t_vec3	viewpoint;//camera_center
-	t_vec3	orientation;
+	t_vec3	orientation;//ray_direction
 	t_vec3	viewport_u;//x axis
 	t_vec3	viewport_v;//y axis
 	t_vec3	pixel_delta_u;//horizontal vector
 	t_vec3	pixel_delta_v;//vertical vector
+	t_vec3	viewport_upper_left;
+	t_vec3	pixel00_loc;
+	t_vec3	pixel_center;
 	double	viewport_height;
     double	viewport_width;
 	double	focal_lenght;

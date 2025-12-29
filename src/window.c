@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2025/12/24 14:57:14 by leazannis        ###   ########.fr       */
+/*   Updated: 2025/12/29 21:12:48 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ void	image_pixel_put(t_scene *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	fill_frame(t_scene *s, t_point *o, t_vec3 *v)
+void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v)
 {
 	(void)o;
 	(void)v;
 	int x;
 	int y;
+	t_vec3	final_ray;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -82,9 +83,14 @@ void	fill_frame(t_scene *s, t_point *o, t_vec3 *v)
 			// ray(s, 0.6, 2, x, y);
 			//image_pixel_put(s, x, y, ray(s, 0.6, 2, x, y));
 			//image_pixel_put(s, x, y, render_color(s->ambient.ambient_color, x, y));
-			s->ambient.ambient_color.pixel_color = render_color(s->ambient.ambient_color, x, y);
-			s->ambient.ambient_color.pixel_color.z = 0;
+			render_background(&s->camera, x, y);
+			final_ray = ray(&s->camera.viewpoint, &s->camera.orientation, s->ambient.ratio);
+			s->ambient.ambient_color.pixel_color = ray_color(final_ray);
+			printf("x %.1f y %.1f z %.1f\n", s->ambient.ambient_color.pixel_color.x, s->ambient.ambient_color.pixel_color.y, s->ambient.ambient_color.pixel_color.z);
 			image_pixel_put(s, x, y ,write_color(s->ambient.ambient_color, s->ambient.ambient_color.pixel_color.x, s->ambient.ambient_color.pixel_color.y, s->ambient.ambient_color.pixel_color.z));
+			// s->ambient.ambient_color.pixel_color = render_color(s->ambient.ambient_color, x, y);
+			// s->ambient.ambient_color.pixel_color.z = 0;
+			// image_pixel_put(s, x, y ,write_color(s->ambient.ambient_color, s->ambient.ambient_color.pixel_color.x, s->ambient.ambient_color.pixel_color.y, s->ambient.ambient_color.pixel_color.z));
 			x++;
 		}
 		y++;
