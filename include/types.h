@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/29 19:02:22 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 15:36:28 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct t_sphere
 {
 	t_vec3	sp_center;
 	double	sp_diameter;
+	double	sp_radius;
 	t_color	sp_color;
 } t_sphere;
 

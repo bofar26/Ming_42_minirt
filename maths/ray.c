@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/29 20:40:46 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 16:41:11 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,31 @@ int	did_it_hit(int i, int j, int k, int r)
 	return (hit);
 }
 //calcul to know if the ray hit the sphere:
+// x^2 + y^2 + z^2 + = r^2 >> point is on the surface of the sphere
+// x^2 + y^2 + z^2 + < r^2 >> point is inside the sphere
+// x^2 + y^2 + z^2 + > r^2 >> point is outside the sphere
 // (bx^2 + by^2 + bz^2)t^2 + (2(axbx + ayby + azbz)t + (ax^2 + ay^2 + az^2 - r^2) = 0
 // a = ray origin
 // b = ray direction
 // r = radius
 // t = hit distance
-float	ray_sphere(t_scene *s, float t, int r, int x, int y)
+bool	ray_sphere(t_scene *s, float t, int r)
 {
 	(void)t;
-	(void)x;
-	(void)y;
+	t_vec3 oc;
 	double a;
 	double b;
 	double c;
 	double discriminant;
 	
-	// s->camera.viewpoint.x = 0;
-	// s->camera.viewpoint.y = 0;
-	// s->camera.viewpoint.z = 2;
-	// s->camera.orientation.x = ;
-	// s->camera.orientation.y = ;
-	// s->camera.orientation.z = 1;
-
-	a = s->camera.orientation.x * s->camera.orientation.x + s->camera.orientation.y \
-	* s->camera.orientation.y + s->camera.orientation.z * s->camera.orientation.z;
+	a = 0.0;
+	oc = substract_vector(&s->camera.viewpoint, &s->sphere.sp_center);
+	a = exp2f(s->camera.orientation.x) + exp2f(s->camera.orientation.y) + exp2f(s->camera.orientation.z);
 	b = 2 * (s->camera.viewpoint.x * s->camera.orientation.x + s->camera.viewpoint.y \
 		* s->camera.orientation.y + s->camera.viewpoint.z * s->camera.orientation.z);
-	c = (s->camera.viewpoint.x * s->camera.viewpoint.x + s->camera.viewpoint.y \
-		* s->camera.viewpoint.y + s->camera.viewpoint.z * s->camera.viewpoint.z) - r * r;
+	c = (exp2f(s->camera.viewpoint.x) + exp2f(s->camera.viewpoint.y) + exp2f(s->camera.viewpoint.z)) - r * r;
 	discriminant = did_it_hit(a, b, c, r);
-	if (discriminant >= 0.0)
-		return (give_color(245, 66, 233));
-	else
-		return(TRGB_BLACK);
+	return (discriminant >= 0.0);
 }
 
 //fct ray :
@@ -72,3 +64,33 @@ t_vec3	ray(t_vec3 *origin, t_vec3 *direction, double t)
 	ray_final.z = origin->z + t * direction->z;
 	return (ray_final);
 }
+
+// float	ray_sphere(t_scene *s, float t, int r, int x, int y)
+// {
+// 	(void)t;
+// 	(void)x;
+// 	(void)y;
+// 	double a;
+// 	double b;
+// 	double c;
+// 	double discriminant;
+	
+// 	// s->camera.viewpoint.x = 0;
+// 	// s->camera.viewpoint.y = 0;
+// 	// s->camera.viewpoint.z = 2;
+// 	// s->camera.orientation.x = ;
+// 	// s->camera.orientation.y = ;
+// 	// s->camera.orientation.z = 1;
+
+// 	a = s->camera.orientation.x * s->camera.orientation.x + s->camera.orientation.y \
+// 	* s->camera.orientation.y + s->camera.orientation.z * s->camera.orientation.z;
+// 	b = 2 * (s->camera.viewpoint.x * s->camera.orientation.x + s->camera.viewpoint.y \
+// 		* s->camera.orientation.y + s->camera.viewpoint.z * s->camera.orientation.z);
+// 	c = (s->camera.viewpoint.x * s->camera.viewpoint.x + s->camera.viewpoint.y \
+// 		* s->camera.viewpoint.y + s->camera.viewpoint.z * s->camera.viewpoint.z) - r * r;
+// 	discriminant = did_it_hit(a, b, c, r);
+// 	if (discriminant >= 0.0)
+// 		return (give_color(245, 66, 233));
+// 	// else
+// 	// 	return(TRGB_BLACK);
+// }

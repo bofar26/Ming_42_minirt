@@ -6,13 +6,14 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/29 20:41:21 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 16:20:36 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATH_H
 # define MATH_H
 #include "minirt.h"
+#include <stdbool.h>
 
 typedef struct t_point3
 {
@@ -56,14 +57,14 @@ int		new_pos_substract(t_point3 *p);
 //-----VECTOR------
 
 t_vec3	add_vector(t_vec3 *v, double x, double y, double z);
-t_vec3	substract_vector(t_vec3 *v, double x, double y, double z);
-t_vec3	power_vector(t_vec3 *v, double t);
-double	length_vector(double start, double finish, t_point3 *p);
+t_vec3	substract_vector(t_vec3 *p, t_vec3 *c);
+t_vec3	power_vector_to_itself(t_vec3 *v);
+double	length_vector(double start, double finish);
 
 //-----RAY-----
 
 int		did_it_hit(int i, int j, int k, int r);
-float	ray_sphere(t_scene *s, float t, int r, int x, int y);
+bool	ray_sphere(t_scene *s, float t, int r);
 t_vec3	ray(t_vec3 *origin, t_vec3 *direction, double t);
 
 //-----GEOMETRY-----

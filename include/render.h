@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:23:12 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/29 19:05:09 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 15:44:37 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,10 @@ void	calculate_viewport_height(t_camera *c);
 void	calculate_upper_left(t_camera *c);
 void	set_camera_init(t_camera *c);
 void	set_camera(t_camera *c);
+
+//-----SET_SPHERE-----
+
+void	set_sphere(t_sphere *s);
+
 
 # endif
