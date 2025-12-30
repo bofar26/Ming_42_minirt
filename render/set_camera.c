@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/29 21:26:06 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 21:30:50 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	calculate_viewport_height(t_camera *c)
 {   
-    c->viewport_height = 10.0;
+    c->viewport_height = 4.0;
     c->viewport_width = c->viewport_height * (double)WIDTH / HEIGHT;
     printf("viewport_width %.1f\n", c->viewport_width);
 }

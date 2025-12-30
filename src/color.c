@@ -6,11 +6,12 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/29 21:12:39 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 22:05:00 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "maths.h"
 
 // int	give_color(t_color *c)
 // {
@@ -26,15 +27,27 @@
 
 //normalisation position to int to translate color
 // -0.1 >> [0,255] 
-t_vec3	ray_color(t_vec3 direction)
+t_vec3	ray_color(t_scene *s, t_vec3 direction)
 {
+	(void)s;
+	t_vec3	unit_direction;
 	double a;
+	double b;
 	
-	a = 0.5 * (direction.y + 1.0);
-	direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	direction.z = (1.0 - a) * 1.0 + a * 1.0;
-	return (direction);
+	b = length(length_squared(&direction));
+	unit_direction = unit_vector(&direction, b);
+	if (ray_sphere(s, &direction, 0, 2))
+	{
+		direction.x = 1;
+		direction.y = 0;
+		direction.z = 0;
+		return(direction);
+	}
+	a = 0.5 * (unit_direction.y + 1.0);
+	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	return (unit_direction);
 }
 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)

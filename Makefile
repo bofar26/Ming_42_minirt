@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2025/12/30 15:38:09 by lzannis          ###   ########.fr        #
+#    Updated: 2025/12/30 19:25:37 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS_MATHS = \
 			maths/point.c \
 			maths/ray.c \
 			maths/vector.c \
+			maths/vector1.c 
 
 SRCS_RENDERER = \
 				render/exec.c \

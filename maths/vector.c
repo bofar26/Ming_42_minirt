@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:28:31 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 16:35:37 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 19:56:25 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ t_vec3	add_vector(t_vec3 *v, double x, double y, double z)
 
 t_vec3	substract_vector(t_vec3 *p, t_vec3 *c)
 {
-	c->x -= p->x;
-	c->y -= p->y;
-	c->z -= p->z;
-	return (*c);
+	t_vec3	r;
+	r.x = c->x - p->x;
+	r.y = c->y - p->y;
+	r.z = c->z - p->z;
+	return (r);
 }
 
 t_vec3	power_vector_to_itself(t_vec3 *v)
@@ -43,3 +44,5 @@ double	length_vector(double start, double finish)
     length = finish - start;
     return (length);
 }
+
+

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 16:20:36 by lzannis          ###   ########.fr       */
+/*   Updated: 2025/12/30 22:05:14 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,14 @@ t_vec3	add_vector(t_vec3 *v, double x, double y, double z);
 t_vec3	substract_vector(t_vec3 *p, t_vec3 *c);
 t_vec3	power_vector_to_itself(t_vec3 *v);
 double	length_vector(double start, double finish);
+double	length(double a);
+double	length_squared(t_vec3 *v);
+t_vec3	unit_vector(t_vec3 *v, double a);
 
 //-----RAY-----
 
 int		did_it_hit(int i, int j, int k, int r);
-bool	ray_sphere(t_scene *s, float t, int r);
+bool	ray_sphere(t_scene *s, t_vec3 *direction, float t, int r);
 t_vec3	ray(t_vec3 *origin, t_vec3 *direction, double t);
 
 //-----GEOMETRY-----

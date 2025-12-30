@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_sphere.c                                       :+:      :+:    :+:   */
+/*   vector1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/30 15:25:45 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 21:29:39 by lzannis          ###   ########.fr       */
+/*   Created: 2025/12/30 19:24:32 by lzannis           #+#    #+#             */
+/*   Updated: 2025/12/30 19:25:17 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	set_sphere(t_sphere *s)
+//fcts to normalize 
+double	length(double a)
 {
-	s->sp_center.x = 0.0;
-	s->sp_center.y = 0.0;
-	s->sp_center.z = 4.0;
-	s->sp_color.r = 245;
-	s->sp_color.g = 66;
-	s->sp_color.b = 233;
-	s->sp_diameter = 4;
-	s->sp_radius = s->sp_diameter / 2;
+	a = sqrtf(a);
+	return (a);
+}
+
+double	length_squared(t_vec3 *v)
+{
+	double a;
+
+	a = v->x * v->x + v->y * v->y + v->z * v->z;
+	return (a);
+}
+
+t_vec3	unit_vector(t_vec3 *v, double a)
+{
+	v->x /= a;
+	v->y /= a;
+	v->z /= a;
+	return (*v);
 }
