@@ -6,31 +6,31 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:24:32 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 19:25:17 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/05 18:23:49 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 //fcts to normalize 
-double	length(double a)
+double	dot_squared(double a)
 {
 	a = sqrtf(a);
 	return (a);
 }
 
-double	length_squared(t_vec3 *v)
+double	dot(t_vec3 v)
 {
 	double a;
 
-	a = v->x * v->x + v->y * v->y + v->z * v->z;
+	a = v.x * v.x + v.y * v.y + v.z * v.z;
 	return (a);
 }
 
-t_vec3	unit_vector(t_vec3 *v, double a)
+t_vec3	unit_vector(t_vec3 v, double a)
 {
-	v->x /= a;
-	v->y /= a;
-	v->z /= a;
-	return (*v);
+	v.x /= a;
+	v.y /= a;
+	v.z /= a;
+	return (v);
 }

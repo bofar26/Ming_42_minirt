@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 22:05:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/05 20:10:15 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,58 @@
 
 //normalisation position to int to translate color
 // -0.1 >> [0,255] 
-t_vec3	ray_color(t_scene *s, t_vec3 direction)
+t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 {
-	(void)s;
 	t_vec3	unit_direction;
+	(void)s;
+	// (void)x;
+	// (void)y;
 	double a;
 	double b;
+	double discriminant = 0.0;
 	
-	b = length(length_squared(&direction));
-	unit_direction = unit_vector(&direction, b);
-	if (ray_sphere(s, &direction, 0, 2))
+	// normalisaton
+	b = dot_squared(dot(direction));
+	unit_direction = unit_vector(direction, b);
+	
+	//printf("%f\n", s->ambient.ambient_color.pixel_color.x);
+	// if (ray_sphere(s,&unit_direction, 0, 5, x , y))
+	// {
+	// 	image_pixel_put(s, x, y, TRGB_RED);
+	// 	unit_direction.x = 0;
+	// 	unit_direction.y = 0;
+	// 	unit_direction.z = 0;
+	// 	return (unit_direction);
+	// }
+	discriminant = ray_sphere(s, direction, 0, 5, x , y);
+	printf("d = %.1f\n", discriminant);
+	if (discriminant >= 0.0)
 	{
-		direction.x = 1;
-		direction.y = 0;
-		direction.z = 0;
-		return(direction);
+		// image_pixel_put(s, x, y, give_color(255,0,0));
+		unit_direction.x = 1;
+		unit_direction.y = 0;
+		unit_direction.z = 0;
+		return (unit_direction);
 	}
+	//gradient
 	a = 0.5 * (unit_direction.y + 1.0);
-	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
-	return (unit_direction);
+	//blue
+	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	// unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	// return (unit_direction);
+	// black
+	// else
+	{
+		unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
+		unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
+		unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
+		return (unit_direction);
+	}
+	// unit_direction.x = 0;
+	// unit_direction.y = 0;
+	// unit_direction.z = 0;
+	// return(unit_direction);
 }
 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)

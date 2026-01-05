@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 22:17:29 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/05 20:02:04 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	did_it_hit(int i, int j, int k, int r)
 
     hit = 0;
 	hit = j * j - (4 * i * k);
-	//printf("hit = %d\n", hit);
+	// printf("hit = %d\n", hit);
 	return (hit);
 }
 //calcul to know if the ray hit the sphere:
@@ -33,40 +33,48 @@ int	did_it_hit(int i, int j, int k, int r)
 // b = ray direction
 // r = radius
 // t = hit distance
-bool	ray_sphere(t_scene *s, t_vec3 *direction, float t, int r)
+double	ray_sphere(t_scene *s, t_vec3 direction, float t, int r, int x, int y)
 {
 	(void)t;
-	(void)direction;
+	(void)x;
+	(void)y;
 	t_vec3 oc;
 	double a;
 	double b;
 	double c;
-	// double d;
 	double discriminant;
 	
 	a = 0.0;
-	oc = substract_vector(&s->camera.viewpoint, &s->sphere.sp_center);
-	// d = length(length_squared(&oc));
-	// oc = unit_vector(&oc, d);
-	a = length_squared(direction);
-	b = 2 * (oc.x * direction->x + oc.y * direction->y + oc.z * direction->z);
-	c = (length_squared(&oc)) - r * r;
-	printf("a %.1f, b %.1f, c %.1f\n", a, b, c);
+	discriminant = 0.0;
+	oc = substract_vector(s->camera.viewpoint, s->sphere.sp_center);
+	// printf("x %.1fy %.1f z %.1f\n", direction.x, direction.y, direction.z);
+	// printf("oc x %.1f oc y %.1f oc z %.1f\n", oc.x, oc.y, oc.z);
+	a = dot(direction);
+	b = 2 * (oc.x * direction.x + oc.y * direction.y + oc.z * direction.z);
+	c = (dot(oc)) - (r * r);
+	// printf("a %.1f, b %.1f, c %.1f\n", a, b, c);
 	discriminant = did_it_hit(a, b, c, r);
-	return (discriminant >= 0.0);
+	// if (x == 400 && discriminant > 0)
+	// {
+	// 	printf("d = %.1f\n", discriminant);
+	// }
+	// if (discriminant >= 0)
+	// 	image_pixel_put(s, x, y, TRGB_RED);
+	return (discriminant);	
 }
 
 //fct ray :
 //P(t) = a + tb; 
 // a = o->x + v->x * t;
 // b = o->y + v->y * t;
-t_vec3	ray(t_vec3 *origin, t_vec3 *direction, double t)
+t_vec3	ray(t_vec3 origin, t_vec3 direction)
 {
 	t_vec3	ray_final;
 
-	ray_final.x = origin->x + t * direction->x;
-	ray_final.y = origin->y + t * direction->y;
-	ray_final.z = origin->z + t * direction->z;
+	ray_final.x = origin.x + direction.x;
+	ray_final.y = origin.y + direction.y;
+	ray_final.z = origin.z + direction.z;
+	// printf("x  %.1f y %.1f z %.1f\n", ray_final.x, ray_final.y, ray_final.z);
 	return (ray_final);
 }
 

@@ -6,20 +6,21 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 15:25:45 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/30 21:29:39 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/05 20:08:51 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	set_sphere(t_sphere *s)
+t_sphere	set_sphere(t_sphere sp)
 {
-	s->sp_center.x = 0.0;
-	s->sp_center.y = 0.0;
-	s->sp_center.z = 4.0;
-	s->sp_color.r = 245;
-	s->sp_color.g = 66;
-	s->sp_color.b = 233;
-	s->sp_diameter = 4;
-	s->sp_radius = s->sp_diameter / 2;
+	sp.sp_center.x = 0.0;
+	sp.sp_center.y = 0.0;
+	sp.sp_center.z = 30.0;
+	sp.sp_color.r = 245;
+	sp.sp_color.g = 66;
+	sp.sp_color.b = 233;
+	sp.sp_diameter = 1;
+	sp.sp_radius = sp.sp_diameter / 2;
+	return (sp);
 }
