@@ -6,18 +6,20 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:28:31 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/05 18:34:12 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/06 14:46:50 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vec3	add_vector(t_vec3 *v, double x, double y, double z)
+t_vec3	add_vector(t_vec3 v, t_vec3 u)
 {
-	x += v->x;
-	y += v->y;
-	z += v->z;
-	return (*v);
+	t_vec3 w;
+	
+	w.x = v.x + u.x ;
+	w.y = v.y + u.y ;
+	w.z = v.z + u.z ;
+	return (w);
 }
 
 t_vec3	substract_vector(t_vec3 p, t_vec3 c)
@@ -35,6 +37,14 @@ t_vec3	power_vector_to_itself(t_vec3 *v)
     v->y *= v->y;
     v->z *= v->z;
     return (*v);
+}
+t_vec3	power_vector_to_t(t_vec3 v, double t)
+{
+	t_vec3 u;
+    u.x = v.x * t;
+    u.y = v.y * t;
+    u.z = v.z * t;
+    return (u);
 }
 
 double	length_vector(double start, double finish)

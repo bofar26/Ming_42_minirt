@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 21:21:01 by lzannis           #+#    #+#             */
-/*   Updated: 2025/12/22 18:38:04 by leazannis        ###   ########.fr       */
+/*   Updated: 2026/01/06 14:56:44 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	draw_circle(t_scene *win_dis)
             i++;
             k++;
         }
-        hit = did_it_hit(i, j, k, r);
+        hit = did_it_hit(i, j, k);
         if (hit >= 2)
             image_pixel_put(win_dis, i, j, TRGB_WHITE);
         if (hit == 0)

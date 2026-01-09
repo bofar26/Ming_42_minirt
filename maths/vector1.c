@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:24:32 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/05 18:23:49 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/06 13:59:03 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ double	dot_squared(double a)
 	return (a);
 }
 
-double	dot(t_vec3 v)
+double	dot(t_vec3 v, t_vec3 u)
 {
 	double a;
 
-	a = v.x * v.x + v.y * v.y + v.z * v.z;
+	a = v.x * u.x + v.y * u.y + v.z * u.z;
 	return (a);
 }
 

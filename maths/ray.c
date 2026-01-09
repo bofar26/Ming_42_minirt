@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/05 20:02:04 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/06 14:56:12 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 //calcul quadrature to know if the ray hit the object or not
 // b^2 - r^2ac
-int	did_it_hit(int i, int j, int k, int r)
+int	did_it_hit(int i, int j, int k)
 {
-	(void)r;
     int hit;
 
     hit = 0;
@@ -33,34 +32,31 @@ int	did_it_hit(int i, int j, int k, int r)
 // b = ray direction
 // r = radius
 // t = hit distance
-double	ray_sphere(t_scene *s, t_vec3 direction, float t, int r, int x, int y)
+double	ray_sphere(t_scene *s, t_vec3 direction, float t, double r, int x, int y)
 {
-	(void)t;
 	(void)x;
 	(void)y;
-	t_vec3 oc;
-	double a;
-	double b;
-	double c;
-	double discriminant;
+	t_vec3	oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
 	
 	a = 0.0;
 	discriminant = 0.0;
 	oc = substract_vector(s->camera.viewpoint, s->sphere.sp_center);
-	// printf("x %.1fy %.1f z %.1f\n", direction.x, direction.y, direction.z);
-	// printf("oc x %.1f oc y %.1f oc z %.1f\n", oc.x, oc.y, oc.z);
-	a = dot(direction);
-	b = 2 * (oc.x * direction.x + oc.y * direction.y + oc.z * direction.z);
-	c = (dot(oc)) - (r * r);
+	a = dot(direction, direction);
+	b = -2 * dot(oc, direction);
+	c = (dot(oc, oc)) - (r * r);
 	// printf("a %.1f, b %.1f, c %.1f\n", a, b, c);
-	discriminant = did_it_hit(a, b, c, r);
-	// if (x == 400 && discriminant > 0)
-	// {
-	// 	printf("d = %.1f\n", discriminant);
-	// }
-	// if (discriminant >= 0)
-	// 	image_pixel_put(s, x, y, TRGB_RED);
-	return (discriminant);	
+	discriminant = did_it_hit(a, b, c);
+	if (discriminant < 0)
+		return (-1);
+	else
+	{
+		t = (-b - sqrtf(discriminant)) / (2.0 * a);
+		return (t);	
+	}
 }
 
 //fct ray :
@@ -101,7 +97,7 @@ t_vec3	ray(t_vec3 origin, t_vec3 direction)
 // 		* s->camera.orientation.y + s->camera.viewpoint.z * s->camera.orientation.z);
 // 	c = (s->camera.viewpoint.x * s->camera.viewpoint.x + s->camera.viewpoint.y \
 // 		* s->camera.viewpoint.y + s->camera.viewpoint.z * s->camera.viewpoint.z) - r * r;
-// 	discriminant = did_it_hit(a, b, c, r);
+// 	discriminant = did_it_hit(a, b, c);
 // 	if (discriminant >= 0.0)
 // 		return (give_color(245, 66, 233));
 // 	// else

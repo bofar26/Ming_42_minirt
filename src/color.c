@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/05 20:10:15 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/06 14:52:47 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,56 +29,48 @@
 // -0.1 >> [0,255] 
 t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 {
-	t_vec3	unit_direction;
-	(void)s;
 	// (void)x;
 	// (void)y;
-	double a;
-	double b;
-	double discriminant = 0.0;
+	t_vec3	unit_direction;
+	t_vec3	n;
+	t_vec3	ray_sp;
+	t_vec3	ray_sp_final;
+	double	a;
+	double	b;
+	double	c;
+	double	t;
 	
+	t = ray_sphere(s, direction, 0, 0.1, x , y);
+	// printf("d = %.1f\n", discriminant);
+	if (t > 0.0)
+	{
+		ray_sp = power_vector_to_t(direction, t);
+		ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
+		c = dot_squared(dot(ray_sp_final, ray_sp_final));
+		n = unit_vector(ray_sp_final, c);
+		n = substract_vector(s->sphere.sp_center, n);
+		n.x *= 0.5 + 1;
+		n.y *= 0.5 + 1;
+		n.z *= 0.5 + 1;
+		return (n);
+	}
 	// normalisaton
-	b = dot_squared(dot(direction));
+	b = dot_squared(dot(direction, direction));
 	unit_direction = unit_vector(direction, b);
-	
-	//printf("%f\n", s->ambient.ambient_color.pixel_color.x);
-	// if (ray_sphere(s,&unit_direction, 0, 5, x , y))
-	// {
-	// 	image_pixel_put(s, x, y, TRGB_RED);
-	// 	unit_direction.x = 0;
-	// 	unit_direction.y = 0;
-	// 	unit_direction.z = 0;
-	// 	return (unit_direction);
-	// }
-	discriminant = ray_sphere(s, direction, 0, 5, x , y);
-	printf("d = %.1f\n", discriminant);
-	if (discriminant >= 0.0)
-	{
-		// image_pixel_put(s, x, y, give_color(255,0,0));
-		unit_direction.x = 1;
-		unit_direction.y = 0;
-		unit_direction.z = 0;
-		return (unit_direction);
-	}
-	//gradient
+	//gradient blue
 	a = 0.5 * (unit_direction.y + 1.0);
-	//blue
-	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	// unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
-	// return (unit_direction);
+	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	// gradient black
+	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
+	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
+	// unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
 	// black
-	// else
-	{
-		unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
-		unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
-		unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
-		return (unit_direction);
-	}
 	// unit_direction.x = 0;
 	// unit_direction.y = 0;
 	// unit_direction.z = 0;
-	// return(unit_direction);
+	return(unit_direction);
 }
 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)
