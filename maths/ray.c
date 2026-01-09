@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/06 14:56:12 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:03:58 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	did_it_hit(int i, int j, int k)
     int hit;
 
     hit = 0;
-	hit = j * j - (4 * i * k);
+	hit = j * j - (i * k);
 	// printf("hit = %d\n", hit);
 	return (hit);
 }
@@ -40,21 +40,23 @@ double	ray_sphere(t_scene *s, t_vec3 direction, float t, double r, int x, int y)
 	double	a;
 	double	b;
 	double	c;
+	// double	t1;
 	double	discriminant;
 	
 	a = 0.0;
 	discriminant = 0.0;
 	oc = substract_vector(s->camera.viewpoint, s->sphere.sp_center);
 	a = dot(direction, direction);
-	b = -2 * dot(oc, direction);
+	b = dot(oc, direction);
 	c = (dot(oc, oc)) - (r * r);
-	// printf("a %.1f, b %.1f, c %.1f\n", a, b, c);
 	discriminant = did_it_hit(a, b, c);
 	if (discriminant < 0)
-		return (-1);
+		return (-1.0);
 	else
 	{
-		t = (-b - sqrtf(discriminant)) / (2.0 * a);
+		// t = (b - sqrtf(discriminant)) / a;
+		t = (b + sqrtf(discriminant)) / a;
+
 		return (t);	
 	}
 }
