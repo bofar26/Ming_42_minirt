@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/06 14:52:47 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/09 15:43:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	double	c;
 	double	t;
 	
-	t = ray_sphere(s, direction, 0, 0.1, x , y);
+	t = ray_sphere(s, direction, 0, 0.5, x , y);
 	// printf("d = %.1f\n", discriminant);
 	if (t > 0.0)
 	{
 		ray_sp = power_vector_to_t(direction, t);
 		ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
+		ray_sp_final = substract_vector(s->sphere.sp_center, ray_sp_final);
 		c = dot_squared(dot(ray_sp_final, ray_sp_final));
 		n = unit_vector(ray_sp_final, c);
-		n = substract_vector(s->sphere.sp_center, n);
-		n.x *= 0.5 + 1;
-		n.y *= 0.5 + 1;
-		n.z *= 0.5 + 1;
+		n.x = 0.5 * (n.x + 1);
+		n.y = 0.5 * (n.y + 1);
+		n.z = 0.5 * (n.z + 1);
 		return (n);
 	}
 	// normalisaton
@@ -59,13 +59,13 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	unit_direction = unit_vector(direction, b);
 	//gradient blue
 	a = 0.5 * (unit_direction.y + 1.0);
-	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	// unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
 	// gradient black
-	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
-	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
-	// unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
+	unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
+	unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
+	unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
 	// black
 	// unit_direction.x = 0;
 	// unit_direction.y = 0;
