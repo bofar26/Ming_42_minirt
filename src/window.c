@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2026/01/06 14:32:20 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:29:54 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v)
 			c = normalize_viewport(c, x, y);
 			// printf(" after x %.1f y %.1f z %.1f\n",s->camera.orientation.x, s->camera.orientation.y, s->camera.orientation.z);
 			final_ray = ray(c.viewpoint, c.orientation);
-			s->ambient.ambient_color.pixel_color = ray_color(s, final_ray, x, y);
-			image_pixel_put(s, x, y ,write_color(s->ambient.ambient_color, s->ambient.ambient_color.pixel_color.x, s->ambient.ambient_color.pixel_color.y, s->ambient.ambient_color.pixel_color.z));
+			s->sphere.sp_color.pixel_color = ray_color(s, final_ray, x, y);
+			image_pixel_put(s, x, y ,write_color(s->sphere.sp_color, s->sphere.sp_color.pixel_color.x, s->sphere.sp_color.pixel_color.y, s->sphere.sp_color.pixel_color.z));
 			x++;
 		}
 		y++;

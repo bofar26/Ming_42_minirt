@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/05 17:00:10 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:38:50 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	renderer(t_scene *w_d, t_line *line, t_rect *rect)
 	c = set_camera(c);
 	w_d->camera = c;
 	w_d->sphere = sp;
-	set_light(w_d);
+	set_light(w_d->light);
 	fill_frame(w_d, &o, &v);
 	// draw_rect(rect, w_d);
 	// ft_draw_line(line, w_d);

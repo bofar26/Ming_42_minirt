@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/09 17:02:42 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/11 14:27:09 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		ray_sp = power_vector_to_t(direction, t);
 		ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
 		ray_sp_final = substract_vector(s->sphere.sp_center, ray_sp_final);
+		ray_sp_final = unit_vector(ray_sp_final, 0.5);
 		c = dot_squared(dot(ray_sp_final, ray_sp_final));
 		n = unit_vector(ray_sp_final, c);
 		n.x = 0.5 * (n.x + 1);

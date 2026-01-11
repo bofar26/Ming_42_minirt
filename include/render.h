@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:23:12 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/05 17:01:24 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/09 17:39:22 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		renderer(t_scene *w_d, t_line *line, t_rect *rect);
 
 //-----SET_LIGHT-----
 
-void		set_light(t_scene *s);
+void		set_light(t_light l);
 
 //-----SET_CAMERA-----
 

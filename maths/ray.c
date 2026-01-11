@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/09 17:03:58 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/11 15:10:17 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,30 @@ double	ray_sphere(t_scene *s, t_vec3 direction, float t, double r, int x, int y)
 	(void)x;
 	(void)y;
 	t_vec3	oc;
-	double	a;
-	double	b;
-	double	c;
-	// double	t1;
-	double	discriminant;
+	double ray_min;
+	double ray_max;
 	
-	a = 0.0;
-	discriminant = 0.0;
+	s->a = 0.0;
+	s->discriminant = 0.0;
+	ray_min = 0.001;
+	ray_max = INFINITY;
 	oc = substract_vector(s->camera.viewpoint, s->sphere.sp_center);
-	a = dot(direction, direction);
-	b = dot(oc, direction);
-	c = (dot(oc, oc)) - (r * r);
-	discriminant = did_it_hit(a, b, c);
-	if (discriminant < 0)
+	s->a = dot(direction, direction);
+	s->b = dot(oc, direction);
+	s->c = (dot(oc, oc)) - (r * r);
+	s->discriminant = did_it_hit(s->a, s->b, s->c);
+	if (s->discriminant < 0)
 		return (-1.0);
-	else
+	t = (s->b - sqrtf(s->discriminant)) / s->a;
+	if (t <= ray_min || t >= ray_max)
 	{
-		// t = (b - sqrtf(discriminant)) / a;
-		t = (b + sqrtf(discriminant)) / a;
-
-		return (t);	
+		t = (s->b + sqrtf(s->discriminant)) / s->a;
+		if (t <= ray_min || t >= ray_max)
+			return (-1.0);
+		return (t);
 	}
+	else
+		return (t);
 }
 
 //fct ray :
