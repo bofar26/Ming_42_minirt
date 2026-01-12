@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:29:39 by mipang            #+#    #+#             */
-/*   Updated: 2025/12/23 01:05:53 by leazannis        ###   ########.fr       */
+/*   Updated: 2026/01/11 16:01:50 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_scene	*scene_init(t_scene *sc)
 	if (!sc)
 		return (NULL);
 	ft_memset(sc, 0, sizeof(t_scene));
+	sc->ray_min = 0.001;
+	sc->ray_max = INFINITY;
 	sc->zoom = 2.0;
 	sc->time = getexacttimeofday();
 	return (sc);

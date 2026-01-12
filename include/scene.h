@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/09 18:10:48 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/11 16:39:02 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ typedef struct t_scene{
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
-	t_sphere	sphere;
+	t_sphere	sph1;
+	t_sphere	sph2;
 	t_list		*spheres;
 	int			n_spheres;
 	t_list		*planes;
@@ -37,6 +38,8 @@ typedef struct t_scene{
 	double		b;
 	double		c;
 	double		discriminant;
+	double		ray_min;
+	double		ray_max;
 	double		shift_x;
 	double		shift_y;
 	double		time;

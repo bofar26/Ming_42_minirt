@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/09 17:38:50 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/11 16:45:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,24 @@ t_camera	normalize_viewport(t_camera c, int i, int j)
 	c.orientation.z = c.pixel_center.z - c.viewpoint.z;
 	return (c);
 } 
-void	renderer(t_scene *w_d, t_line *line, t_rect *rect)
+void	renderer(t_scene *w_d)
 {
-	(void)line;
-	(void)rect;
 	t_point3 o;
 	t_vec3 v;
 	t_camera c;
-	t_sphere sp;
-	
+	t_sphere sp1;
+	t_sphere sp2;
+
 	c = w_d->camera;
-	sp = w_d->sphere;
-	sp = set_sphere(sp);
+	sp1 = w_d->sph1;
+	sp2 = w_d->sph2;
+	sp1 = set_sph1(sp1);
+	sp2 = set_sph2(sp2);
 	c = set_camera(c);
 	w_d->camera = c;
-	w_d->sphere = sp;
+	w_d->sph1 = sp1;
+	w_d->sph2 = sp2;
 	set_light(w_d->light);
 	fill_frame(w_d, &o, &v);
-	// draw_rect(rect, w_d);
-	// ft_draw_line(line, w_d);
-	// draw_circle(w_d);
 }
 

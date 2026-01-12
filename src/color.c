@@ -6,63 +6,54 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/11 14:27:09 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/12 15:27:52 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "maths.h"
 
-// int	give_color(t_color *c)
-// {
-// 	// t = transparency 
-// 	// c->t = ((double)c->count / (double)c->max_iteration);
-// 	// c->t = 0.1;
-// 	c->r = (int)(8 * (1 - c->t) * c->t * c->t * c->t * 255);
-// 	c->g = (int)(15 * (1 - c->t) * (1 - c->t) * c->t * c->t * 255);
-// 	c->b = (int)(5 * (1 - c->t) * (1 - c->t) * (1 - c->t) * c->t * 255);
-// 	c->color = 0xFF << 24 | c->r << 16 | c->g << 8 | c->b;
-// 	return (c->color);
-// }
-
-//normalisation position to int to translate color
-// -0.1 >> [0,255] 
-t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
+t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y)
 {
-	// (void)x;
-	// (void)y;
-	t_vec3	unit_direction;
+	(void)x;
+	(void)y;
 	t_vec3	n;
 	t_vec3	ray_sp;
 	t_vec3	ray_sp_final;
+	double	c;
+	
+	ray_sp = power_vector_to_t(direction, t);
+	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
+	ray_sp_final = substract_vector(center, ray_sp_final);
+	ray_sp_final = unit_vector(ray_sp_final, radius);
+	c = dot_squared(dot(ray_sp_final, ray_sp_final));
+	n = unit_vector(ray_sp_final, c);
+	n.x = 0.5 * (n.x + 1);
+	n.y = 0.5 * (n.y + 1);
+	n.z = 0.5 * (n.z + 1);
+	return (n);
+}
+
+//normalisation position to int to translate color
+// -0.1 >> [0,255] 
+t_vec3	ray_color(t_scene *s, t_vec3 direction, t_vec3 sp_direction, int x, int y)
+{
+	// (void)x;
+	// (void)y;
+	(void)sp_direction;
+	t_vec3	unit_direction;
+	t_vec3	n;
 	double	a;
 	double	b;
-	double	c;
 	double	t;
-	double	t1;
-
 	
-	t = ray_sphere(s, direction, 0, 0.5, x , y);
-	// printf("d = %.1f\n", discriminant);
-	if (t > 0.0)
-	{
-		ray_sp = power_vector_to_t(direction, t);
-		ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
-		ray_sp_final = substract_vector(s->sphere.sp_center, ray_sp_final);
-		ray_sp_final = unit_vector(ray_sp_final, 0.5);
-		c = dot_squared(dot(ray_sp_final, ray_sp_final));
-		n = unit_vector(ray_sp_final, c);
-		n.x = 0.5 * (n.x + 1);
-		n.y = 0.5 * (n.y + 1);
-		n.z = 0.5 * (n.z + 1);
-		return (n);
-	}
-	t1 = ray_sphere(s, direction, 0, 0.5, x , y);
-	// if (t1 > 0.0)
+	// t = ray_sphere(s, direction, s->sph1.sp_center, 0, s->sph1.sp_radius, x , y);
+	// if (t > 0.0)
 	// {
-	// 	ray_sp = power_vector_to_t(direction, t1);
+	// 	ray_sp = power_vector_to_t(direction, t);
 	// 	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
-	// 	ray_sp_final = substract_vector(s->sphere.sp_center, ray_sp_final);
+	// 	ray_sp_final = substract_vector(s->sph1.sp_center, ray_sp_final);
+	// 	ray_sp_final = unit_vector(ray_sp_final, s->sph1.sp_radius);
 	// 	c = dot_squared(dot(ray_sp_final, ray_sp_final));
 	// 	n = unit_vector(ray_sp_final, c);
 	// 	n.x = 0.5 * (n.x + 1);
@@ -70,6 +61,12 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	// 	n.z = 0.5 * (n.z + 1);
 	// 	return (n);
 	// }
+	t = ray_sphere(s, direction, s->sph1.sp_center, 0, s->sph1.sp_radius, x, y);
+	if (t > 0.0)
+	{
+		n = hit_color(s, direction, s->sph1.sp_center, s->sph1.sp_radius, t, x, y);
+		return (n);
+	}
 	// normalisaton
 	b = dot_squared(dot(direction, direction));
 	unit_direction = unit_vector(direction, b);

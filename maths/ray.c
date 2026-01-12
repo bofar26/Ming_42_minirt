@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/11 15:10:17 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/11 16:49:51 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	did_it_hit(int i, int j, int k)
 	// printf("hit = %d\n", hit);
 	return (hit);
 }
+
 //calcul to know if the ray hit the sphere:
 // x^2 + y^2 + z^2 + = r^2 >> point is on the surface of the sphere
 // x^2 + y^2 + z^2 + < r^2 >> point is inside the sphere
@@ -32,19 +33,15 @@ int	did_it_hit(int i, int j, int k)
 // b = ray direction
 // r = radius
 // t = hit distance
-double	ray_sphere(t_scene *s, t_vec3 direction, float t, double r, int x, int y)
+double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, float t, double r, int x, int y)
 {
 	(void)x;
 	(void)y;
 	t_vec3	oc;
-	double ray_min;
-	double ray_max;
 	
 	s->a = 0.0;
 	s->discriminant = 0.0;
-	ray_min = 0.001;
-	ray_max = INFINITY;
-	oc = substract_vector(s->camera.viewpoint, s->sphere.sp_center);
+	oc = substract_vector(s->camera.viewpoint, center);
 	s->a = dot(direction, direction);
 	s->b = dot(oc, direction);
 	s->c = (dot(oc, oc)) - (r * r);
@@ -52,10 +49,10 @@ double	ray_sphere(t_scene *s, t_vec3 direction, float t, double r, int x, int y)
 	if (s->discriminant < 0)
 		return (-1.0);
 	t = (s->b - sqrtf(s->discriminant)) / s->a;
-	if (t <= ray_min || t >= ray_max)
+	if (t <= s->ray_min || t >= s->ray_max)
 	{
 		t = (s->b + sqrtf(s->discriminant)) / s->a;
-		if (t <= ray_min || t >= ray_max)
+		if (t <= s->ray_min || t >= s->ray_max)
 			return (-1.0);
 		return (t);
 	}

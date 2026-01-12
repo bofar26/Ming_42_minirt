@@ -6,11 +6,16 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/11 15:11:43 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/11 16:14:36 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+double  degrees_to_radians(double fov)
+{
+  return (fov * PI / 180.0);
+}
 
 t_camera	calculate_viewport_height(t_camera c)
 {   
