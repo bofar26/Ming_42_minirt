@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 15:10:01 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 15:51:58 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, float t, double r
 	if (s->discriminant < 0)
 		return (-1.0);
 	t = (s->b + sqrtf(s->discriminant)) / s->a;
-	// if (t <= s->ray_min || t >= s->ray_max)
-	// {
-	// 	t = (s->b + sqrtf(s->discriminant)) / s->a;
-	// 	// if (t <= s->ray_min || t >= s->ray_max)
-	// 	// 	return (-1.0);
-	// 	return (t);
-	// }
-	// else
+	if (t <= s->ray_min || t >= s->ray_max)
+	{
+		t = (s->b - sqrtf(s->discriminant)) / s->a;
+		if (t <= s->ray_min || t >= s->ray_max)
+			return (-1.0);
+		return (t);
+	}
+	else
 		return (t);
 }
 

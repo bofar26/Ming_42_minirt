@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 15:11:52 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 17:36:48 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, dou
 	ray_sp_final = unit_vector(ray_sp_final, radius);
 	c = dot_squared(dot(ray_sp_final, ray_sp_final));
 	n = unit_vector(ray_sp_final, c);
-	n.x = 0.5 * (n.x + 1);
-	n.y = 0.5 * (n.y + 1);
-	n.z = 0.5 * (n.z + 1);
+	// n.x = 0.5 * (n.x + 1);
+	// n.y = 0.5 * (n.y + 1);
+	// n.z = 0.5 * (n.z + 1);
 	// n.x = 1;
 	// n.y = 0;
 	// n.z = 0;
@@ -68,6 +68,7 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, t_vec3 sp_direction, int x, int y
 	if (t > 0.0)
 	{
 		n = hit_color(s, direction, s->sph1.sp_center, s->sph1.sp_radius, t, x, y);
+		n = render_color(s->sph1.sp_color, x, y);
 		return (n);
 	}
 	// normalisaton
@@ -111,19 +112,28 @@ int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pi
 
 t_vec3	render_color(t_color c, int x, int y)
 {
-	double auto_r;
+	(void)x;
+	(void)y;
+	double auto_r;	
 	double auto_g;
 	double auto_b;
 	
-	auto_r = (double)x / (WIDTH - 1);
-	auto_g = (double)y / (HEIGHT - 1);
+	// auto_r = (double)x / (WIDTH - 1);
+	// auto_g = (double)y / (HEIGHT - 1);
+	auto_r = 0.0;
+	auto_g = 0.0;
 	auto_b = 0.0;
-	c.r = (int)(255.999 * auto_r);
-	c.g = (int)(255.999 * auto_g);
-	c.b = (int)(255.999 * auto_b);
-	c.pixel_color.x = (double)c.r;
-	c.pixel_color.y = (double)c.g;
-	c.pixel_color.z = (double)c.b;
+	// c.r = (int)(255.999 * auto_r);
+	// c.g = (int)(255.999 * auto_g);
+	// c.b = (int)(255.999 * auto_b);
+	printf("r %d g %d g %d\n", c.r, c.g, c.b);
+	auto_r = (int)(255.999 * c.r) / 50000;
+	auto_g = (int)(255.999 * c.g) / 50000;
+	auto_b = (int)(255.999 * c.b) / 50000;
+	c.pixel_color.x = (double)auto_r;
+	c.pixel_color.y = (double)auto_g;
+	c.pixel_color.z = (double)auto_b;
+	printf("x %.1f y %.1f z%.1f \n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
 	return (c.pixel_color);
 }
 
