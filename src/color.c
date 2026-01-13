@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/12 16:24:06 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 15:11:52 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, dou
 	n.x = 0.5 * (n.x + 1);
 	n.y = 0.5 * (n.y + 1);
 	n.z = 0.5 * (n.z + 1);
+	// n.x = 1;
+	// n.y = 0;
+	// n.z = 0;
 	return (n);
 }
 
@@ -72,13 +75,13 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, t_vec3 sp_direction, int x, int y
 	unit_direction = unit_vector(direction, b);
 	//gradient blue
 	a = 0.5 * (unit_direction.y + 1.0);
-	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	// unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
 	// gradient black
-	unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
-	unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
-	unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
+	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
+	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
+	// unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
 	// black
 	// unit_direction.x = 0;
 	// unit_direction.y = 0;

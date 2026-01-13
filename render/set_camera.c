@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/12 17:06:26 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 14:42:13 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_camera	set_camera_init(t_camera c)
   c.viewpoint.z = 1.9;
   c.orientation.x = 0;
   c.orientation.y = 0;
-  c.orientation.z = -0.9;
+  c.orientation.z = -1;
   c = calculate_viewport_height(c);
-  c.viewport_u.x =  c.viewport_width;
+  c.viewport_u.x = c.viewport_width;
   c.viewport_u.y = 0;
   c.viewport_u.z = 0;
   c.viewport_v.x = 0;
