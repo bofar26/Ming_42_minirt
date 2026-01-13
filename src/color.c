@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 17:36:48 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 19:37:34 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, dou
 	t_vec3	ray_sp_final;
 	double	c;
 	
+	c = 0.0;
 	ray_sp = power_vector_to_t(direction, t);
 	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
 	ray_sp_final = substract_vector(center, ray_sp_final);
 	ray_sp_final = unit_vector(ray_sp_final, radius);
-	c = dot_squared(dot(ray_sp_final, ray_sp_final));
+	c = dot(ray_sp_final, ray_sp_final);
+	c = dot_squared(c);
 	n = unit_vector(ray_sp_final, c);
 	// n.x = 0.5 * (n.x + 1);
 	// n.y = 0.5 * (n.y + 1);
@@ -46,29 +48,20 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, t_vec3 sp_direction, int x, int y
 	(void)sp_direction;
 	t_vec3	unit_direction;
 	t_vec3	n;
+	t_sphere *sp1;
 	double	a;
 	double	b;
 	double	t;
 	
-	// t = ray_sphere(s, direction, s->sph1.sp_center, 0, s->sph1.sp_radius, x , y);
-	// if (t > 0.0)
-	// {
-	// 	ray_sp = power_vector_to_t(direction, t);
-	// 	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
-	// 	ray_sp_final = substract_vector(s->sph1.sp_center, ray_sp_final);
-	// 	ray_sp_final = unit_vector(ray_sp_final, s->sph1.sp_radius);
-	// 	c = dot_squared(dot(ray_sp_final, ray_sp_final));
-	// 	n = unit_vector(ray_sp_final, c);
-	// 	n.x = 0.5 * (n.x + 1);
-	// 	n.y = 0.5 * (n.y + 1);
-	// 	n.z = 0.5 * (n.z + 1);
-	// 	return (n);
-	// }
-	t = ray_sphere(s, direction, s->sph1.sp_center, 0, s->sph1.sp_radius, x, y);
+	sp1 = s->spheres->content;
+	a = 0.0;
+	b = 0.0;
+	t = 0.0;
+	t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, x, y);
 	if (t > 0.0)
 	{
-		n = hit_color(s, direction, s->sph1.sp_center, s->sph1.sp_radius, t, x, y);
-		n = render_color(s->sph1.sp_color, x, y);
+		n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
+		n = render_color(sp1->sp_color, x, y);
 		return (n);
 	}
 	// normalisaton
@@ -126,14 +119,12 @@ t_vec3	render_color(t_color c, int x, int y)
 	// c.r = (int)(255.999 * auto_r);
 	// c.g = (int)(255.999 * auto_g);
 	// c.b = (int)(255.999 * auto_b);
-	printf("r %d g %d g %d\n", c.r, c.g, c.b);
 	auto_r = (int)(255.999 * c.r) / 50000;
 	auto_g = (int)(255.999 * c.g) / 50000;
 	auto_b = (int)(255.999 * c.b) / 50000;
 	c.pixel_color.x = (double)auto_r;
 	c.pixel_color.y = (double)auto_g;
 	c.pixel_color.z = (double)auto_b;
-	printf("x %.1f y %.1f z%.1f \n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
 	return (c.pixel_color);
 }
 

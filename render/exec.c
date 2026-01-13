@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/11 16:45:43 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 18:24:34 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,19 @@ void	renderer(t_scene *w_d)
 	t_point3 o;
 	t_vec3 v;
 	t_camera c;
-	t_sphere sp1;
-	t_sphere sp2;
+	t_sphere *sp1;
+	// t_sphere sp2;
 
 	c = w_d->camera;
-	sp1 = w_d->sph1;
-	sp2 = w_d->sph2;
-	sp1 = set_sph1(sp1);
-	sp2 = set_sph2(sp2);
+	sp1 = (t_sphere *)w_d->spheres->content;
+	// sp2 = w_d->sph2;
+	// sp1 = set_sph1(sp1);
+	// sp2 = set_sph2(sp2);
+	printf("spheres.z %.1f spheres.diameter %.1f \n", sp1->sp_center.z, sp1->sp_diameter);
 	c = set_camera(c);
 	w_d->camera = c;
-	w_d->sph1 = sp1;
-	w_d->sph2 = sp2;
+	// w_d->sph1 = sp1;
+	// w_d->sph2 = sp2;
 	set_light(w_d->light);
 	fill_frame(w_d, &o, &v);
 }

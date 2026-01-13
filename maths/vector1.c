@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 19:24:32 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/06 13:59:03 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 19:40:32 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 //fcts to normalize 
 double	dot_squared(double a)
 {
-	a = sqrtf(a);
-	return (a);
+	double b;
+
+	b = 0.0;
+	b = sqrt(a);
+	return (b);
 }
 
 double	dot(t_vec3 v, t_vec3 u)

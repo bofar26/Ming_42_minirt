@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2026/01/12 15:28:29 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 18:30:42 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v)
 	t_vec3	ray_background;
 	t_vec3	ray_sp_norm;
 	t_camera c;
+	t_sphere *sp1;
 
 	c = s->camera;
+	sp1 = s->spheres->content;
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -86,8 +88,8 @@ void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v)
 			// printf(" after x %.1f y %.1f z %.1f\n",s->camera.orientation.x, s->camera.orientation.y, s->camera.orientation.z);
 			ray_background = ray(c.viewpoint, c.orientation);
 			ray_sp_norm = ray(c.viewpoint, s->sph1.sp_center);
-			s->sph1.sp_color.pixel_color = ray_color(s, ray_background, ray_sp_norm, x, y);
-			image_pixel_put(s, x, y ,write_color(s->sph1.sp_color, s->sph1.sp_color.pixel_color.x, s->sph1.sp_color.pixel_color.y, s->sph1.sp_color.pixel_color.z));
+			sp1->sp_color.pixel_color = ray_color(s, ray_background, ray_sp_norm, x, y);
+			image_pixel_put(s, x, y ,write_color(sp1->sp_color, sp1->sp_color.pixel_color.x, sp1->sp_color.pixel_color.y, sp1->sp_color.pixel_color.z));
 			x++;
 		}
 		y++;

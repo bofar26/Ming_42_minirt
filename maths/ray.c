@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 15:51:58 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/13 19:46:08 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,34 @@ int	did_it_hit(int i, int j, int k)
 // b = ray direction
 // r = radius
 // t = hit distance
-double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, float t, double r, int x, int y)
+double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, int x, int y)
 {
 	(void)x;
 	(void)y;
 	t_vec3	oc;
+	double t;
 	
-	// s->a = 0.0;
-	// s->discriminant = 0.0;
+	t = 0.0;
+	s->a = 0.0;
+	s->b = 0.0;
+	s->c = 0.0;
+	s->discriminant = 0.0;
 	oc = substract_vector(s->camera.viewpoint, center);
 	s->a = dot(direction, direction);
-	s->b = dot(oc, direction);
+	s->b = -2.0 * dot(oc, direction);
 	s->c = (dot(oc, oc)) - (r * r);
-	s->discriminant = did_it_hit(s->a, s->b, s->c);
-	if (s->discriminant < 0)
+	s->discriminant = s->b * s->b - (s->a * s->c);
+	if (s->discriminant < 0.0)
 		return (-1.0);
-	t = (s->b + sqrtf(s->discriminant)) / s->a;
-	if (t <= s->ray_min || t >= s->ray_max)
-	{
-		t = (s->b - sqrtf(s->discriminant)) / s->a;
-		if (t <= s->ray_min || t >= s->ray_max)
-			return (-1.0);
-		return (t);
-	}
-	else
+	t = (-s->b - sqrt(s->discriminant)) / (2.0 * s->a);
+	// if (t <= s->ray_min || t >= s->ray_max)
+	// {
+	// 	t = (-s->b + sqrt(s->discriminant)) / (2.0 * s->a);
+	// 	if (t <= s->ray_min || t >= s->ray_max)
+	// 		return (-1.0);
+	// 	return (t);
+	// }
+	// else
 		return (t);
 }
 
