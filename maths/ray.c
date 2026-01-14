@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 19:46:08 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/14 10:52:33 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, int x, 
 	s->discriminant = 0.0;
 	oc = substract_vector(s->camera.viewpoint, center);
 	s->a = dot(direction, direction);
-	s->b = -2.0 * dot(oc, direction);
+	s->b = dot(oc, direction);
 	s->c = (dot(oc, oc)) - (r * r);
 	s->discriminant = s->b * s->b - (s->a * s->c);
 	if (s->discriminant < 0.0)
 		return (-1.0);
-	t = (-s->b - sqrt(s->discriminant)) / (2.0 * s->a);
+	t = (s->b + sqrt(s->discriminant)) / (s->a);
 	// if (t <= s->ray_min || t >= s->ray_max)
 	// {
 	// 	t = (-s->b + sqrt(s->discriminant)) / (2.0 * s->a);

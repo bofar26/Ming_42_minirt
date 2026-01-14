@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 20:44:57 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/13 18:06:16 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/14 17:31:54 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ int	dispatch_SP(t_scene *sc, char *p, int lineidx)
 		return (parser_error(sc, lineidx, "sphere allocation failed.\n"), 0);
 	if (!parser_SP(&p, dst))
 		return (parser_error(sc, lineidx, "invalid SP line.\n"), 0);
-	printf("dst.sp_diameter %.1f\n", dst->sp_diameter);
+	dst->sp_radius = dst->sp_diameter / 2;
 	return (1);
 }

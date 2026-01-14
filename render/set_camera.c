@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 19:24:54 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/14 17:46:54 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double  degrees_to_radians(double fov)
 t_camera	calculate_viewport_height(t_camera c)
 {   
     c.viewport_height = 2.0;
-    c.viewport_width = c.viewport_height * (double)WIDTH / HEIGHT;
+    c.viewport_width = c.viewport_height * (((double)WIDTH) / ((double)HEIGHT));
     printf("viewport_width %.1f\n", c.viewport_width);
     return (c);
 }

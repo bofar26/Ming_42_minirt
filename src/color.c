@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/13 19:37:34 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/14 10:49:37 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, t_vec3 sp_direction, int x, int y
 	if (t > 0.0)
 	{
 		n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
-		n = render_color(sp1->sp_color, x, y);
+		// n = render_color(sp1->sp_color, x, y);
+		n.x = 0.5 * (n.x + 1);
+		n.y = 0.5 * (n.y + 1);
+		n.z = 0.5 * (n.z + 1);
 		return (n);
 	}
 	// normalisaton
