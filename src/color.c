@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/14 10:49:37 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/15 19:31:55 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, dou
 {
 	(void)x;
 	(void)y;
+	(void)radius;
 	t_vec3	n;
 	t_vec3	ray_sp;
 	t_vec3	ray_sp_final;
@@ -30,37 +31,38 @@ t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, dou
 	c = dot(ray_sp_final, ray_sp_final);
 	c = dot_squared(c);
 	n = unit_vector(ray_sp_final, c);
-	// n.x = 0.5 * (n.x + 1);
-	// n.y = 0.5 * (n.y + 1);
-	// n.z = 0.5 * (n.z + 1);
-	// n.x = 1;
-	// n.y = 0;
-	// n.z = 0;
 	return (n);
 }
 
 //normalisation position to int to translate color
 // -0.1 >> [0,255] 
-t_vec3	ray_color(t_scene *s, t_vec3 direction, t_vec3 sp_direction, int x, int y)
+t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 {
 	// (void)x;
 	// (void)y;
-	(void)sp_direction;
-	t_vec3	unit_direction;
-	t_vec3	n;
-	t_sphere *sp1;
-	double	a;
-	double	b;
-	double	t;
+	t_vec3		unit_direction;
+	t_vec3		n;
+	t_sphere	*sp1;
+	t_list		*temp;
+	double		a;
+	double		b;
+	double		t;
 	
-	sp1 = s->spheres->content;
 	a = 0.0;
 	b = 0.0;
 	t = 0.0;
-	t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, x, y);
-	if (t > 0.0)
+	temp = s->spheres;
+	s->closest_so_far = s->ray_min;
+	while (temp)
 	{
-		n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
+		sp1 = temp->content;
+		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, &n, x, y);
+		// n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
+		s->closest_so_far = t;
+		temp = temp->next;
+	} 
+	// if (t > 0.0)
+	{
 		// n = render_color(sp1->sp_color, x, y);
 		n.x = 0.5 * (n.x + 1);
 		n.y = 0.5 * (n.y + 1);

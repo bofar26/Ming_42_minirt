@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/11 16:39:02 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/15 15:00:25 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct t_scene{
 	double		discriminant;
 	double		ray_min;
 	double		ray_max;
+	double		closest_so_far;
 	double		shift_x;
 	double		shift_y;
 	double		time;

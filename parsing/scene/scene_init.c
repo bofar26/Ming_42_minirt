@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:29:39 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/14 10:38:27 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/15 15:49:33 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	*scene_push(t_list **lst, size_t obj_size)
 		return (NULL);
 	}
 	ft_lstadd_back(lst, node);
+	node->next = NULL;
 	return (obj);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/14 10:52:33 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/15 18:35:54 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	did_it_hit(int i, int j, int k)
 // b = ray direction
 // r = radius
 // t = hit distance
-double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, int x, int y)
+double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 *n, int x, int y)
 {
 	(void)x;
 	(void)y;
@@ -53,15 +53,19 @@ double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, int x, 
 	if (s->discriminant < 0.0)
 		return (-1.0);
 	t = (s->b + sqrt(s->discriminant)) / (s->a);
-	// if (t <= s->ray_min || t >= s->ray_max)
-	// {
-	// 	t = (-s->b + sqrt(s->discriminant)) / (2.0 * s->a);
-	// 	if (t <= s->ray_min || t >= s->ray_max)
-	// 		return (-1.0);
-	// 	return (t);
-	// }
-	// else
+	if (t <= s->closest_so_far || t >= s->ray_max)
+	{
+		t = (s->b - sqrt(s->discriminant)) / (s->a);
+		if (t <= s->closest_so_far || t >= s->ray_max)
+			return (-1.0);
+		*n = hit_color(s, direction, center, r, t, x, y);
 		return (t);
+	}
+	else
+	{
+		*n = hit_color(s, direction, center, r, t, x, y);
+		return (t);
+	}
 }
 
 //fct ray :
