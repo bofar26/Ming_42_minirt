@@ -6,14 +6,14 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/15 19:31:55 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/15 21:17:46 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "maths.h"
 
-t_vec3	hit_color(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y)
+t_vec3	calculate_normal(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y)
 {
 	(void)x;
 	(void)y;
@@ -52,18 +52,22 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	b = 0.0;
 	t = 0.0;
 	temp = s->spheres;
-	s->closest_so_far = s->ray_min;
+	s->closest_so_far = s->ray_max;
 	while (temp)
 	{
 		sp1 = temp->content;
 		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, &n, x, y);
 		// n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
-		s->closest_so_far = t;
+		if (t > 0.0)
+		{
+			s->closest_so_far = t;
+			s->closest_object = sp1->sp_color;
+		}
 		temp = temp->next;
 	} 
-	// if (t > 0.0)
-	{
-		// n = render_color(sp1->sp_color, x, y);
+	if (s->closest_so_far < s->ray_max)
+	{	
+		// n = render_color(s->closest_object, x, y);
 		n.x = 0.5 * (n.x + 1);
 		n.y = 0.5 * (n.y + 1);
 		n.z = 0.5 * (n.z + 1);
@@ -116,14 +120,9 @@ t_vec3	render_color(t_color c, int x, int y)
 	double auto_g;
 	double auto_b;
 	
-	// auto_r = (double)x / (WIDTH - 1);
-	// auto_g = (double)y / (HEIGHT - 1);
 	auto_r = 0.0;
 	auto_g = 0.0;
 	auto_b = 0.0;
-	// c.r = (int)(255.999 * auto_r);
-	// c.g = (int)(255.999 * auto_g);
-	// c.b = (int)(255.999 * auto_b);
 	auto_r = (int)(255.999 * c.r) / 50000;
 	auto_g = (int)(255.999 * c.g) / 50000;
 	auto_b = (int)(255.999 * c.b) / 50000;
