@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/15 19:40:20 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/16 14:18:11 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct t_scene{
 	double		ray_min;
 	double		ray_max;
 	double		closest_so_far;
+	double		pixel_shading_sample;//color scae factor for a sum of pixel samples
 	double		shift_x;
 	double		shift_y;
 	double		time;

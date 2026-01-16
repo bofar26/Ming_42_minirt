@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/15 14:12:11 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/16 14:20:28 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ typedef struct t_camera
 	t_vec3	orientation;//ray_direction
 	t_vec3	viewport_u;//x axis
 	t_vec3	viewport_v;//y axis
-	t_vec3	pixel_delta_u;//horizontal vector
-	t_vec3	pixel_delta_v;//vertical vector
+	t_vec3	pixel_delta_u;//horizontal vector, offset of pixel to the right
+	t_vec3	pixel_delta_v;//vertical vector, offset of pixel below
 	t_vec3	viewport_upper_left;
-	t_vec3	pixel00_loc;
+	t_vec3	pixel00_loc;//location of the first pixel(0,0) in the upper left corner
 	t_vec3	pixel_center;
 	double	viewport_height;
     double	viewport_width;
 	double	focal_lenght;
-	int		fov;
+	int		fov;//field of vision
 	int		set;
 }	t_camera;
 

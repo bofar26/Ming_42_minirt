@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 18:28:31 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/06 14:46:50 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/16 14:29:53 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_vec3	power_vector_to_itself(t_vec3 *v)
     v->z *= v->z;
     return (*v);
 }
+
 t_vec3	power_vector_to_t(t_vec3 v, double t)
 {
 	t_vec3 u;
