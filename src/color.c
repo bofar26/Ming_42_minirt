@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/15 21:17:46 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/16 13:36:36 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	} 
 	if (s->closest_so_far < s->ray_max)
 	{	
-		// n = render_color(s->closest_object, x, y);
-		n.x = 0.5 * (n.x + 1);
-		n.y = 0.5 * (n.y + 1);
-		n.z = 0.5 * (n.z + 1);
+		n = render_color(s->closest_object, x, y);
+		// n.x = 0.5 * (n.x + 1);
+		// n.y = 0.5 * (n.y + 1);
+		// n.z = 0.5 * (n.z + 1);
 		return (n);
 	}
 	// normalisaton
