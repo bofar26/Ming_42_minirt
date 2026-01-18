@@ -6,13 +6,14 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/16 14:31:59 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/18 15:33:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "maths.h"
 
+//normal = vector perpendicular to a surface 
 t_vec3	calculate_normal(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y)
 {
 	(void)x;
@@ -42,15 +43,20 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	// (void)y;
 	t_vec3		unit_direction;
 	t_vec3		n;
+	// t_vec3		unit_dir_l;
 	t_sphere	*sp1;
 	t_list		*temp;
+	t_light		l;
 	double		a;
 	double		b;
+	// double		c;
+	// double		d;
 	double		t;
 	
 	a = 0.0;
 	b = 0.0;
 	t = 0.0;
+	l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	while (temp)
@@ -58,7 +64,7 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		sp1 = temp->content;
 		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, &n, x, y);
 		// n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
-		if (t > 0.0)
+		if (t > 0.0 && t < s->closest_so_far)
 		{
 			s->closest_so_far = t;
 			s->closest_object = sp1->sp_color;
@@ -71,6 +77,13 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		// n.x = 0.5 * (n.x + 1);
 		// n.y = 0.5 * (n.y + 1);
 		// n.z = 0.5 * (n.z + 1);
+		// c = dot_squared(dot(l.pos, l.pos));
+		// unit_dir_l = unit_vector(l.pos, c);
+		// unit_dir_l = power_vector_to_t(unit_dir_l, -1);
+		// d = fmax(dot(unit_dir_l, n), 0.0);// == cos(angle)
+		// n.x = n.x * d;
+		// n.y = n.y * d;
+		// n.z = n.z * d;
 		return (n);
 	}
 	// normalisaton

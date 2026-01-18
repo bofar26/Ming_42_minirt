@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/15 19:42:12 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/16 19:05:50 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define HEIGHT 600
 # define KEY_ESC 65307
 # define PI 3.14
+# define MIN +INFINITY 
+# define MAX -INFINITY
 
 // define color
 # define TRGB_BLACK  0x00000000
