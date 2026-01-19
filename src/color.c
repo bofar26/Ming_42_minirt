@@ -6,44 +6,24 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/16 14:31:59 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/18 17:23:58 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "maths.h"
 
-t_vec3	calculate_normal(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y)
-{
-	(void)x;
-	(void)y;
-	(void)radius;
-	t_vec3	n;
-	t_vec3	ray_sp;
-	t_vec3	ray_sp_final;
-	double	c;
-	
-	c = 0.0;
-	ray_sp = power_vector_to_t(direction, t);
-	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
-	ray_sp_final = substract_vector(center, ray_sp_final);
-	ray_sp_final = unit_vector(ray_sp_final, radius);
-	c = dot(ray_sp_final, ray_sp_final);
-	c = dot_squared(c);
-	n = unit_vector(ray_sp_final, c);
-	return (n);
-}
-
-//normalisation position to int to translate color
-// -0.1 >> [0,255] 
+//assign color to pixel depending on their posistion on the screen
 t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 {
 	// (void)x;
 	// (void)y;
-	t_vec3		unit_direction;
 	t_vec3		n;
+	t_vec3		unit_direction;
+	// t_vec3		unit_dir_l;
 	t_sphere	*sp1;
 	t_list		*temp;
+	t_light		l;
 	double		a;
 	double		b;
 	double		t;
@@ -51,47 +31,41 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	a = 0.0;
 	b = 0.0;
 	t = 0.0;
+	l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	while (temp)
 	{
 		sp1 = temp->content;
 		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, &n, x, y);
-		// n = hit_color(s, direction, sp1->sp_center, sp1->sp_radius, t, x, y);
-		if (t > 0.0)
+		if (t > 0.0 && t < s->closest_so_far)
 		{
 			s->closest_so_far = t;
 			s->closest_object = sp1->sp_color;
 		}
 		temp = temp->next;
-	} 
+	}
 	if (s->closest_so_far < s->ray_max)
 	{	
 		n = render_color(s->closest_object, x, y);
 		// n.x = 0.5 * (n.x + 1);
 		// n.y = 0.5 * (n.y + 1);
 		// n.z = 0.5 * (n.z + 1);
+		// b = dot_squared(dot(l.pos, l.pos));
+		// unit_dir_l = unit_vector(l.pos, b);
+		// unit_dir_l = power_vector_to_t(unit_dir_l, -1);
+		// a = fmax(dot(unit_dir_l, n), 0.0);// == cos(angle)
+		// n.x = n.x * a;
+		// n.y = n.y * a;
+		// n.z = n.z * a;
 		return (n);
 	}
-	// normalisaton
-	b = dot_squared(dot(direction, direction));
-	unit_direction = unit_vector(direction, b);
-	//gradient blue
-	a = 0.5 * (unit_direction.y + 1.0);
-	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
-	// gradient black
-	// unit_direction.x = (1.0 - a) * 1.0 + a * 0.0;
-	// unit_direction.y = (1.0 - a) * 1.0 + a * 0.0;
-	// unit_direction.z = (1.0 - a) * 1.0 + a * 0.0;
-	// black
-	// unit_direction.x = 0;
-	// unit_direction.y = 0;
-	// unit_direction.z = 0;
+	unit_direction = render_background(s, direction);
 	return(unit_direction);
 }
 
+//normalisation position to int to translate color
+// -0.1 >> [0,255] 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)
 {
 	double auto_r;
@@ -111,7 +85,8 @@ int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pi
 	//printf("r %d g %d b %d\n", c.r, c.g, c.b);
 	return (0xFF << 24 | c.r << 16 | c.g << 8 | c.b);
 }
-
+// take original color in int [0,255] translate them in double
+// assign them to a position (x,y,z)
 t_vec3	render_color(t_color c, int x, int y)
 {
 	(void)x;

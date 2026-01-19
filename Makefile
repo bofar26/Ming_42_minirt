@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2026/01/13 19:06:25 by lzannis          ###   ########.fr        #
+#    Updated: 2026/01/18 16:06:47 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 
 SRCS_MATHS = \
 			maths/utils_maths/utils_maths.c \
-			maths/geometry.c \
 			maths/point.c \
 			maths/ray.c \
 			maths/vector.c \
@@ -33,8 +32,9 @@ SRCS_WINDOW = \
 		src/close.c \
 		src/window.c \
 		src/key_hook.c \
-		src/color.c
-
+		src/color.c \
+		src/color1.c
+		
 SRC_PARSING_CORE = \
 	parsing/core/parser.c \
 	parsing/core/dispatch.c

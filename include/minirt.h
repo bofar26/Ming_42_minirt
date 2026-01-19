@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/15 19:42:12 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/18 17:44:16 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define HEIGHT 600
 # define KEY_ESC 65307
 # define PI 3.14
+# define RAND_MAX 2147483647
 
 // define color
 # define TRGB_BLACK  0x00000000
@@ -77,11 +78,12 @@ int		mouse_hook(int button, int x, int y, t_scene *s);
 
 //-----COLOR-----
 
-t_vec3	calculate_normal(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y);
 t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y);
 int		write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z);
 t_vec3	render_color(t_color c, int x, int y);
 int		give_color(int r, int g, int b);
+
+t_vec3	render_background(t_scene *s, t_vec3 direction);
 
 //-----TIME-----
 

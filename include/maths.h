@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/15 18:28:48 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/19 15:00:20 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ typedef struct s_rect
     int    color;
 }      t_rect;
 
+typedef struct s_rand
+{
+	unsigned int	x;
+	unsigned int	y;
+	unsigned int	z;
+	unsigned int	c;
+}	t_rand;
+
 //-----POINT-----
 
 int		pos(t_point3 *p);
@@ -67,7 +75,8 @@ t_vec3	unit_vector(t_vec3 v, double a);
 
 //-----RAY-----
 
-int		did_it_hit(int i, int j, int k);
+t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y);
+bool	is_front_face(t_vec3 direction,t_vec3 normal);
 double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 *n, int x, int y);
 t_vec3	ray(t_vec3 origin, t_vec3 direction);
 
@@ -80,5 +89,7 @@ void	draw_rect(t_rect *rect, t_scene *win_dis);
 //-----UTILS_MATHS-----
 
 double	norm(double val_init, double max_init, double min_fin, double max_fin);
+unsigned int	kiss_seed(t_rand r);
+
 
 #endif
