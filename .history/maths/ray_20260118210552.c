@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/18 21:05:54 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/18 21:05:52 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_vec3	ray(t_vec3 origin, t_vec3 direction)
 // 	// s->camera.orientation.y = ;
 // 	// s->camera.orientation.z = 1;
 
-// 	a = s->camera.orientation.x * s->camera.orientation.x + s->camera.orientation.y 
+// 	a = s->camera.orientation.x * s->camera.orientation.x + s->camera.orientation.y \
 // 	* s->camera.orientation.y + s->camera.orientation.z * s->camera.orientation.z;
 // 	b = 2 * (s->camera.viewpoint.x * s->camera.orientation.x + s->camera.viewpoint.y
 // 		* s->camera.orientation.y + s->camera.viewpoint.z * s->camera.orientation.z);

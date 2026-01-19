@@ -12,6 +12,26 @@
 
 #include "minirt.h"
 
+static t_vec3	cross_vec3(t_vec3 a, t_vec3 b)
+{
+	t_vec3	out;
+
+	out.x = a.y * b.z - a.z * b.y;
+	out.y = a.z * b.x - a.x * b.z;
+	out.z = a.x * b.y - a.y * b.x;
+	return (out);
+}
+
+static t_vec3	normalize_vec3(t_vec3 v)
+{
+	double	len;
+
+	len = dot_squared(dot(v, v));
+	if (len == 0.0)
+		return (v);
+	return (unit_vector(v, len));
+}
+
 double  degrees_to_radians(double fov)
 {
   return (fov * PI / 180.0);
@@ -19,47 +39,56 @@ double  degrees_to_radians(double fov)
 
 t_camera	calculate_viewport_height(t_camera c)
 {   
-    c.viewport_height = 2.0;
-    c.viewport_width = c.viewport_height * (((double)WIDTH) / ((double)HEIGHT));
-    printf("viewport_width %.1f\n", c.viewport_width);
-    return (c);
+	double	theta;
+
+	theta = degrees_to_radians((double)c.fov);
+	c.viewport_height = 2.0 * tan(theta / 2.0);
+	c.viewport_width = c.viewport_height * (((double)WIDTH) / ((double)HEIGHT));
+	printf("viewport_width %.1f\n", c.viewport_width);
+	return (c);
 }
 
 t_camera	calculate_upper_left(t_camera c)
 {
-  c.viewport_upper_left.x = c.viewpoint.x - c.viewport_u.x / 2 - c.viewport_v.x / 2;
-  c.viewport_upper_left.y = c.viewpoint.y - c.viewport_u.y / 2 - c.viewport_v.y / 2;
-  c.viewport_upper_left.z = c.viewpoint.z - c.focal_lenght - c.viewport_u.z / 2 - c.viewport_v.z / 2;
-  c.pixel00_loc.x = c.viewport_upper_left.x + 0.5 * (c.pixel_delta_u.x + c.pixel_delta_v.x);
-  c.pixel00_loc.y = c.viewport_upper_left.y + 0.5 * (c.pixel_delta_u.y + c.pixel_delta_v.y);
-  c.pixel00_loc.z = c.viewport_upper_left.z + 0.5 * (c.pixel_delta_u.z + c.pixel_delta_v.z);
-  return (c);
+	t_vec3	forward;
+	t_vec3	viewport_center;
+	t_vec3	half_u;
+	t_vec3	half_v;
+
+	forward = normalize_vec3(c.orientation);
+	viewport_center = add_vector(c.viewpoint, \
+		power_vector_to_t(forward, c.focal_lenght));
+	half_u = power_vector_to_t(c.viewport_u, 0.5);
+	half_v = power_vector_to_t(c.viewport_v, 0.5);
+	c.viewport_upper_left = substract_vector(half_u, viewport_center);
+	c.viewport_upper_left = substract_vector(half_v, c.viewport_upper_left);
+	c.pixel00_loc.x = c.viewport_upper_left.x + 0.5 * (c.pixel_delta_u.x + c.pixel_delta_v.x);
+	c.pixel00_loc.y = c.viewport_upper_left.y + 0.5 * (c.pixel_delta_u.y + c.pixel_delta_v.y);
+	c.pixel00_loc.z = c.viewport_upper_left.z + 0.5 * (c.pixel_delta_u.z + c.pixel_delta_v.z);
+	return (c);
 
 }
 
 t_camera	set_camera_init(t_camera c)
 {
-  c.focal_lenght = 1.0;
-  c.viewpoint.x = 0;
-  c.viewpoint.y = 0;
-  c.viewpoint.z = 1.2;//between 1.01 and 1.9
-  c.orientation.x = 0;
-  c.orientation.y = 0;
-  c.orientation.z = -1;
-  c = calculate_viewport_height(c);
-  c.viewport_u.x = c.viewport_width;
-  c.viewport_u.y = 0;
-  c.viewport_u.z = 0;
-  c.viewport_v.x = 0;
-  c.viewport_v.y = -c.viewport_height;
-  c.viewport_v.z = 0;
-  c.pixel_delta_u.x = c.viewport_u.x / WIDTH;
-  c.pixel_delta_u.y = c.viewport_u.y / WIDTH;
-  c.pixel_delta_u.z = c.viewport_u.z / WIDTH;
-  c.pixel_delta_v.x = c.viewport_v.x / HEIGHT;
-  c.pixel_delta_v.y = c.viewport_v.y / HEIGHT;
-  c.pixel_delta_v.z = c.viewport_v.z / HEIGHT;
-  return (c);
+	t_vec3	forward;
+	t_vec3	world_up;
+	t_vec3	right;
+	t_vec3	up;
+
+	c.focal_lenght = 1.0;
+	c = calculate_viewport_height(c);
+	forward = normalize_vec3(c.orientation);
+	world_up = (t_vec3){0, 1, 0};
+	if (fabs(dot(forward, world_up)) > 0.999)
+		world_up = (t_vec3){0, 0, 1};
+	right = normalize_vec3(cross_vec3(forward, world_up));
+	up = cross_vec3(right, forward);
+	c.viewport_u = power_vector_to_t(right, c.viewport_width);
+	c.viewport_v = power_vector_to_t(up, -c.viewport_height);
+	c.pixel_delta_u = power_vector_to_t(c.viewport_u, 1.0 / (double)WIDTH);
+	c.pixel_delta_v = power_vector_to_t(c.viewport_v, 1.0 / (double)HEIGHT);
+	return (c);
 }
 
 t_camera	set_camera(t_camera c)
@@ -68,4 +97,3 @@ t_camera	set_camera(t_camera c)
   c = calculate_upper_left(c);
   return (c);
 }
-
