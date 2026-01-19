@@ -85,7 +85,7 @@ void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v)
 			// printf("before x %.1f y %.1f z %.1f\n",s->camera.orientation.x, s->camera.orientation.y, s->camera.orientation.z);
 			c = normalize_viewport(c, x, y);
 			// printf(" after x %.1f y %.1f z %.1f\n",s->camera.orientation.x, s->camera.orientation.y, s->camera.orientation.z);
-			ray_background = ray(c.viewpoint, c.orientation);
+			ray_background = c.orientation;
 			sp1->sp_color.pixel_color = ray_color(s, ray_background, x, y);
 			image_pixel_put(s, x, y ,write_color(sp1->sp_color, sp1->sp_color.pixel_color.x, sp1->sp_color.pixel_color.y, sp1->sp_color.pixel_color.z));
 			x++;
