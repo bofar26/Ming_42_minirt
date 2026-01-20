@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 16:20:34 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/20 17:22:02 by leazannis        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	// t_vec3		unit_dir_l;
 	t_sphere	*sp1;
 	t_list		*temp;
-	t_light		l;
-	double		a;
-	double		b;
+	//t_light		l;
+	//double		a;
+	//double		b;
 	double		t;
 	
-	a = 0.0;
-	b = 0.0;
+	//a = 0.0;
+	//b = 0.0;
 	t = 0.0;
-	l = s->light;
+	//l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	while (temp)
