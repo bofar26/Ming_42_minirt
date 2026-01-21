@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:43:27 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 16:16:17 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/21 16:46:43 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,11 @@ bool	surrounds_to_min_and_max(double min, double max, double x)
 	return (x > min && x < max);
 }
 
+double	clamp(double min, double max, double x)
+{
+	if (x < min)
+		return (min);
+	if (x > max)
+		return (max);
+	return (x);	
+}

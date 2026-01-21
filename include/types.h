@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/18 17:24:47 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/21 17:22:13 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct t_camera
 	t_vec3	viewport_upper_left;
 	t_vec3	pixel00_loc;//location of the first pixel(0,0) in the upper left corner
 	t_vec3	pixel_center;
+	t_vec3	offset;//vector of random point [-.5,-.5]-[+.5,+.5]
 	double	viewport_height;
     double	viewport_width;
 	double	focal_lenght;

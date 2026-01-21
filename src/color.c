@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/20 17:22:02 by leazannis        ###   ########.fr       */
+/*   Updated: 2026/01/21 16:43:49 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,24 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 // -0.1 >> [0,255] 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)
 {
-	double auto_r;
-	double auto_g;
-	double auto_b;
+	double	auto_r;
+	double	auto_g;
+	double	auto_b;
+	double	min;
+	double	max;
 	
 	c.r = 0;
 	c.g = 0;
 	c.b = 0;
+	min = 0.000;
+	max = 0.999;
 	auto_r = pixel_color_x;
 	auto_g = pixel_color_y;
 	auto_b = pixel_color_z;
 	//printf("x %.1f y %.1f z %.1f\n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
-	c.r = (int)(255.999 *auto_r);
-	c.g = (int)(255.999 *auto_g);
-	c.b = (int)(255.999 *auto_b);
+	c.r = (int)(255.999 * clamp(min, max, auto_r));
+	c.g = (int)(255.999 * clamp(min, max, auto_g));
+	c.b = (int)(255.999 * clamp(min, max, auto_b));
 	//printf("r %d g %d b %d\n", c.r, c.g, c.b);
 	return (0xFF << 24 | c.r << 16 | c.g << 8 | c.b);
 }
