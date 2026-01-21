@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/21 17:33:47 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/21 21:12:19 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_camera	set_camera(t_camera c)
 	t_rand r;
 	
 	ft_memset(&r, 0, sizeof(t_rand));
+	init_seed(r);
 	c = set_camera_init(c);
 	c.offset = sample_random_pixel(c, r);
 	c = calculate_upper_left(c);

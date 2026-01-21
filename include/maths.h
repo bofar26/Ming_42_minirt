@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/21 16:59:24 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/21 20:38:45 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_vec3				ray(t_vec3 origin, t_vec3 direction);
 //-----UTILS_MATHS-----
 
 double				norm(double val_init, double max_init, double min_fin, double max_fin);
+void				init_seed(t_rand r);
 unsigned long int	seeder(void);
 unsigned int		seed_kiss_no_power(t_rand r);
 double				random_double(unsigned int seed);
