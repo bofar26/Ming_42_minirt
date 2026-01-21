@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/20 21:02:40 by leazannis        ###   ########.fr       */
+/*   Updated: 2026/01/21 14:45:49 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,13 @@ bool	is_front_face(t_vec3 direction,t_vec3 normal);
 double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 *n, int x, int y);
 t_vec3	ray(t_vec3 origin, t_vec3 direction);
 
-//-----GEOMETRY-----
-
-void	draw_circle(t_scene *win_dis);
-void	ft_draw_line(t_line *line, t_scene *win_dis);
-void	draw_rect(t_rect *rect, t_scene *win_dis);
-
 //-----UTILS_MATHS-----
 
 double	norm(double val_init, double max_init, double min_fin, double max_fin);
-unsigned int	kiss_seed(t_rand r);
+unsigned long int	seeder(void);
+unsigned int	seed_kiss_no_power(t_rand r);
+double	random_double(unsigned int seed);
+
 
 
 #endif

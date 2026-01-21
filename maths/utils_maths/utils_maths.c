@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_maths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 18:07:10 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/20 21:06:49 by leazannis        ###   ########.fr       */
+/*   Updated: 2026/01/21 14:45:27 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,33 @@ double	norm(double val_init, double max_init, double min_fin, double max_fin)
 	return ((val_init / max_init) * (max_fin - min_fin) + min_fin);
 }
 
-//write a random number generator using gettimeofday()
-/* double	rand_numb_gen()
+unsigned long int	seeder(void)
 {
-	int	starttime;
-
-	starttime = getexacttimeofday();
-	return (getexacttimeofday() / (RAND_MAX + 1.0));
-} */
+	unsigned long int v;
+	int fd;
+	
+	fd = open("/dev/urandom", O_RDONLY);
+	if (fd < 0)
+		return 1;
+    if (read(fd, &v, sizeof(v)) != sizeof(v))
+		return 1;
+    close(fd);	
+    printf("%llu\n", (unsigned long long)v);
+	return (v);
+}
 
 // KISS RNG by Marsaglia
 // don't initialise struc to 0 or small value
 // change the original value the next use
-unsigned int	kiss_seed(t_rand r)
-{
-	unsigned long long	t;
-	unsigned long long	a;	
-		
-	r.x = 134679852;
-	r.y = 471547000;
-	r.z = 310187518;
-	r.c = 7654321;
-	t = 0;
-	a = 698769069;
-	r.x = 69096 * r.x + 12345;
-	r.y ^= (r.y << 13);
-	r.y = (r.y >> 17);
-	r.y = (r.y << 5);
-	t = a * r.z + r.c;
-	r.c = (t >> 32);
-	r.z = t;
-	return (r.x + r.y + r.z);
-}
-
 // implementation without multiplication
 unsigned int	seed_kiss_no_power(t_rand r)
 {
 	int	t;
 
-	r.x = 134679852;
-	r.y = 471547000;
-	r.z = 310187518;
-	r.w = 7654321;
+	r.x = seeder();
+	r.y = seeder();
+	r.z = seeder();
+	r.w = seeder();
 	r.c = 0;
 	t = 0;
 	r.y ^= (r.y << 5);
@@ -70,4 +55,12 @@ unsigned int	seed_kiss_no_power(t_rand r)
 	r.w = t&214783647;
 	r.x += 1411392427;
 	return (r.x + r.y + r.w);
+}
+
+double	random_double(unsigned int seed)
+{
+	double x;
+
+	x = seed / 4294967296.0;
+	return (x);
 }
