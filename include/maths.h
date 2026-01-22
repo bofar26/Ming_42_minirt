@@ -75,10 +75,10 @@ t_vec3	unit_vector(t_vec3 v, double a);
 
 //-----RAY-----
 
-t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y);
-bool	is_front_face(t_vec3 direction,t_vec3 normal);
 double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 *n, int x, int y);
 t_vec3	ray(t_vec3 origin, t_vec3 direction);
+double	ray_plane(t_scene *s, t_vec3 direction, t_plane *pl, t_vec3 *n);
+double	ray_cylinder(t_scene *s, t_vec3 direction, t_cylinder *cy, t_vec3 *n);
 
 //-----GEOMETRY-----
 

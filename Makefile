@@ -17,7 +17,10 @@ CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 SRCS_MATHS = \
 			maths/utils_maths/utils_maths.c \
 			maths/point.c \
-			maths/ray.c \
+			maths/ray_sphere.c \
+			maths/ray_plane.c \
+			maths/ray_cylinder.c \
+			maths/ray_utils.c \
 			maths/vector.c \
 			maths/vector1.c 
 
@@ -106,5 +109,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean all re
-
 

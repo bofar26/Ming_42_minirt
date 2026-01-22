@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 22:49:55 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/19 22:49:42 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	t_list		*temp;
 	double		t;
 
+	a = 0.0;
+	b = 0.0;
+	t = 0.0;
+	l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	while (temp)

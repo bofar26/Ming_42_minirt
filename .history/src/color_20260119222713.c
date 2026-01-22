@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 22:49:55 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/18 17:23:58 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	t_vec3		unit_direction;
 	// t_vec3		unit_dir_l;
 	t_sphere	*sp1;
-	t_plane		*pl1;
-	t_cylinder	*cy1;
 	t_list		*temp;
+	t_light		l;
+	double		a;
+	double		b;
 	double		t;
-
+	
+	a = 0.0;
+	b = 0.0;
+	t = 0.0;
+	l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	while (temp)
@@ -40,32 +45,8 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		}
 		temp = temp->next;
 	}
-	temp = s->planes;
-	while (temp)
-	{
-		pl1 = temp->content;
-		t = ray_plane(s, direction, pl1, &n);
-		if (t > 0.0 && t < s->closest_so_far)
-		{
-			s->closest_so_far = t;
-			s->closest_object = pl1->pl_color;
-		}
-		temp = temp->next;
-	}
-	temp = s->cylinders;
-	while (temp)
-	{
-		cy1 = temp->content;
-		t = ray_cylinder(s, direction, cy1, &n);
-		if (t > 0.0 && t < s->closest_so_far)
-		{
-			s->closest_so_far = t;
-			s->closest_object = cy1->cy_color;
-		}
-		temp = temp->next;
-	}
 	if (s->closest_so_far < s->ray_max)
-	{
+	{	
 		n = render_color(s->closest_object, x, y);
 		// n.x = 0.5 * (n.x + 1);
 		// n.y = 0.5 * (n.y + 1);
@@ -84,13 +65,13 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 }
 
 //normalisation position to int to translate color
-// -0.1 >> [0,255]
+// -0.1 >> [0,255] 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)
 {
 	double auto_r;
 	double auto_g;
 	double auto_b;
-
+	
 	c.r = 0;
 	c.g = 0;
 	c.b = 0;
@@ -110,10 +91,10 @@ t_vec3	render_color(t_color c, int x, int y)
 {
 	(void)x;
 	(void)y;
-	double auto_r;
+	double auto_r;	
 	double auto_g;
 	double auto_b;
-
+	
 	auto_r = 0.0;
 	auto_g = 0.0;
 	auto_b = 0.0;

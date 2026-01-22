@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_maths.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 18:07:10 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 22:50:12 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/19 15:05:02 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double	rand_numb_gen()
 	int	starttime;
 
 	starttime = getexacttimeofday();
-	return (starttime / (RAND_MAX + 1.0));
+	return (getexacttimeofday() / (RAND_MAX + 1.0));
 }
 
 // KISS RNG by Marsaglia
@@ -32,8 +32,8 @@ double	rand_numb_gen()
 unsigned int	kiss_seed(t_rand r)
 {
 	unsigned long long	t;
-	unsigned long long	a;
-
+	unsigned long long	a;	
+		
 	r.x = 134679852;
 	r.y = 471547000;
 	r.z = 310187518;

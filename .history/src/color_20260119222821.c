@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 22:49:55 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/19 22:28:21 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	t_vec3		unit_direction;
 	// t_vec3		unit_dir_l;
 	t_sphere	*sp1;
-	t_plane		*pl1;
-	t_cylinder	*cy1;
 	t_list		*temp;
 	double		t;
 
+	a = 0.0;
+	b = 0.0;
+	t = 0.0;
+	l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	while (temp)
@@ -37,30 +39,6 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		{
 			s->closest_so_far = t;
 			s->closest_object = sp1->sp_color;
-		}
-		temp = temp->next;
-	}
-	temp = s->planes;
-	while (temp)
-	{
-		pl1 = temp->content;
-		t = ray_plane(s, direction, pl1, &n);
-		if (t > 0.0 && t < s->closest_so_far)
-		{
-			s->closest_so_far = t;
-			s->closest_object = pl1->pl_color;
-		}
-		temp = temp->next;
-	}
-	temp = s->cylinders;
-	while (temp)
-	{
-		cy1 = temp->content;
-		t = ray_cylinder(s, direction, cy1, &n);
-		if (t > 0.0 && t < s->closest_so_far)
-		{
-			s->closest_so_far = t;
-			s->closest_object = cy1->cy_color;
 		}
 		temp = temp->next;
 	}
