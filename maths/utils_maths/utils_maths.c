@@ -6,16 +6,11 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 18:07:10 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/21 20:41:35 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 17:32:38 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-double	norm(double val_init, double max_init, double min_fin, double max_fin)
-{
-	return ((val_init / max_init) * (max_fin - min_fin) + min_fin);
-}
 
 unsigned long int	seeder(void)
 {
@@ -30,33 +25,42 @@ unsigned long int	seeder(void)
     close(fd);	
 	return (v);
 }
-void	init_seed(t_rand r)
+t_rand	init_seed(t_rand r)
 {
 	r.x = seeder();
 	r.y = seeder();
 	r.z = seeder();
 	r.w = seeder();
 	r.c = 0;
+	printf("INIT_SEEDER r.x  %u r.y %u r.z %u r.w %u\n", r.x, r.y, r.z, r.w);
+	return (r);
 }
 
 // KISS RNG by Marsaglia
 // don't initialise struc to 0 or small value
 // change the original value the next use
 // implementation without multiplication
-unsigned int	seed_kiss_no_power(t_rand r)
+t_rand	seed_kiss_no_power(t_rand *r)
 {
 	int	t;
 
 	t = 0;
-	r.y ^= (r.y << 5);
-	r.y ^= (r.y >> 7);
-	r.y ^= (r.y << 22);
-	t = r.z + r.w + r.c;
-	r.z = r.w;
-	r.c = t < 0;
-	r.w = t&214783647;
-	r.x += 1411392427;
-	return (r.x + r.y + r.w);
+	// printf("seed_kiss avt r.x  %u r.y %u r.z %u r.w %u\n", r->x, r->y, r->z, r->w);
+	r->y ^= (r->y << 5);
+	r->y ^= (r->y >> 7);
+	r->y ^= (r->y << 22);
+	t = r->z + r->w + r->c;
+	r->z = r->w;
+	r->c = t < 0;
+	r->w = t&214783647;
+	r->x += 1411392427;
+	// printf("seed_kiss after r.x  %u r.y %u r.z %u r.w %u\n", r->x, r->y, r->z, r->w);
+	return (*r);
+}
+
+unsigned int	seed(t_rand *r)
+{
+	return (r->x + r->y + r->w);
 }
 
 double	random_double(unsigned int seed)

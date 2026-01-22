@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:23:12 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/21 17:32:31 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 17:01:26 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 //-----EXEC-----
 
+t_vec3		sample_random_pixel(t_camera c, t_rand *r);
 t_camera	normalize_viewport(t_camera c, int i, int j);
+void		fill_frame(t_scene *s);
 void		renderer(t_scene *w_d);
 
 //-----SET_LIGHT-----
@@ -29,12 +31,5 @@ t_camera	calculate_viewport_height(t_camera c);
 t_camera	calculate_upper_left(t_camera c);
 t_camera	set_camera_init(t_camera c);
 t_camera	set_camera(t_camera c);
-t_vec3		sample_random_pixel(t_camera c, t_rand r);
-
-
-//-----SET_SPHERE-----
-
-t_sphere	set_sph1(t_sphere sp1);
-t_sphere	set_sph2(t_sphere sp2);
 
 # endif

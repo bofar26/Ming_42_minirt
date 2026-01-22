@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/16 14:18:11 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 16:07:17 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct t_scene{
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
+	int			sample_per_pixel;
+	double		pixel_sample_scale;
 	double		a;
 	double		b;
 	double		c;
