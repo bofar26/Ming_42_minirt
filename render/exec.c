@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/22 17:55:19 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 22:33:28 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	renderer(t_scene *w_d)
 	printf("spheres.z %.1f spheres.diameter %.1f \n", sp1->sp_center.z, sp1->sp_diameter);
 	c = set_camera(c);
 	w_d->camera = c;
-	set_light(w_d->light);
+	printf("light %.1f\n", w_d->light.ratio);
+	// set_light(w_d->light);
 	fill_frame(w_d);
 }
 

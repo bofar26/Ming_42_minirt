@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:29:39 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/22 18:01:19 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 21:57:58 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_scene	*scene_init(t_scene *sc)
 	if (!sc)
 		return (NULL);
 	ft_memset(sc, 0, sizeof(t_scene));
-	sc->sample_per_pixel = 100;
+	sc->sample_per_pixel = 10;
 	sc->pixel_sample_scale = 1.0 / sc->sample_per_pixel;
 	sc->ray_min = 0.001;
 	sc->ray_max = INFINITY;

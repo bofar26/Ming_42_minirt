@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/21 16:43:49 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 15:02:21 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,34 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	// (void)x;
 	// (void)y;
 	t_vec3		n;
+	t_vec3		p;
 	t_vec3		unit_direction;
-	// t_vec3		unit_dir_l;
+	t_vec3		unit_dir_l;
+	t_vec3		ray_light;
+	t_vec3		ray_color;
+	t_vec3		ray_final;
 	t_sphere	*sp1;
 	t_list		*temp;
-	//t_light		l;
-	//double		a;
-	//double		b;
+	t_light		l;
+	double		a;
+	// double		b;
 	double		t;
 	
-	//a = 0.0;
+	a = 0.0;
 	//b = 0.0;
 	t = 0.0;
-	//l = s->light;
+	l = s->light;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
+	// unit_dir_l = (t_vec3){0,0,0};
 	while (temp)
 	{
 		sp1 = temp->content;
-		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, &n, x, y);
+		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius);
 		if (t > 0.0 && t < s->closest_so_far)
 		{
+			p = calculate_impact_point_sphere(s, direction, sp1->sp_center, sp1->sp_radius, t);
+			n = calculate_normal(s, direction, p);
 			s->closest_so_far = t;
 			s->closest_object = sp1->sp_color;
 		}
@@ -47,18 +54,18 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	}
 	if (s->closest_so_far < s->ray_max)
 	{	
-		n = render_color(s->closest_object, x, y);
-		// n.x = 0.5 * (n.x + 1);
-		// n.y = 0.5 * (n.y + 1);
-		// n.z = 0.5 * (n.z + 1);
-		// b = dot_squared(dot(l.pos, l.pos));
-		// unit_dir_l = unit_vector(l.pos, b);
-		// unit_dir_l = power_vector_to_t(unit_dir_l, -1);
-		// a = fmax(dot(unit_dir_l, n), 0.0);// == cos(angle)
-		// n.x = n.x * a;
-		// n.y = n.y * a;
-		// n.z = n.z * a;
-		return (n);
+		// n = render_color(s->closest_object, x, y);
+		// return (n);
+		unit_dir_l = substract_vector(p,l.pos);
+		unit_dir_l = unit_vector(unit_dir_l, -1.0);
+		// unit_dir_l = power_vector_to_t(unit_dir_l, -1.0);
+		a = clamp(0.0, dot(unit_dir_l, n), dot(unit_dir_l, n));// == cos(angle)
+		ray_light = power_vector_to_t(l.pos, a);
+		ray_color = render_color(s->closest_object, x, y);
+		ray_final.x = ray_light.x * ray_color.x;
+		ray_final.y = ray_light.y * ray_color.y;
+		ray_final.z = ray_light.z * ray_color.z;
+		return (ray_final);
 	}
 	unit_direction = render_background(s, direction);
 	return(unit_direction);
