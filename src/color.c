@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/23 15:02:21 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 17:02:05 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	t_list		*temp;
 	t_light		l;
 	double		a;
-	// double		b;
+	double		intensity;
+
 	double		t;
 	
 	a = 0.0;
-	//b = 0.0;
+	intensity = 0.0;
 	t = 0.0;
 	l = s->light;
 	temp = s->spheres;
@@ -60,7 +61,9 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		unit_dir_l = unit_vector(unit_dir_l, -1.0);
 		// unit_dir_l = power_vector_to_t(unit_dir_l, -1.0);
 		a = clamp(0.0, dot(unit_dir_l, n), dot(unit_dir_l, n));// == cos(angle)
-		ray_light = power_vector_to_t(l.pos, a);
+		intensity = a * l.ratio;
+		ray_light = power_vector_to_t(l.pos, intensity);
+		// ray_light = power_vector_to_t(l.pos, l.ratio);
 		ray_color = render_color(s->closest_object, x, y);
 		ray_final.x = ray_light.x * ray_color.x;
 		ray_final.y = ray_light.y * ray_color.y;
@@ -89,11 +92,9 @@ int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pi
 	auto_r = pixel_color_x;
 	auto_g = pixel_color_y;
 	auto_b = pixel_color_z;
-	//printf("x %.1f y %.1f z %.1f\n", c.pixel_color.x, c.pixel_color.y, c.pixel_color.z);
 	c.r = (int)(255.999 * clamp(min, max, auto_r));
 	c.g = (int)(255.999 * clamp(min, max, auto_g));
 	c.b = (int)(255.999 * clamp(min, max, auto_b));
-	//printf("r %d g %d b %d\n", c.r, c.g, c.b);
 	return (0xFF << 24 | c.r << 16 | c.g << 8 | c.b);
 }
 // take original color in int [0,255] translate them in double

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/23 14:40:49 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:46:48 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ t_vec3	ray(t_vec3 origin, t_vec3 direction)
 	ray_final.x = origin.x + direction.x;
 	ray_final.y = origin.y + direction.y;
 	ray_final.z = origin.z + direction.z;
-	// printf("x  %.1f y %.1f z %.1f\n", ray_final.x, ray_final.y, ray_final.z);
 	return (ray_final);
 }

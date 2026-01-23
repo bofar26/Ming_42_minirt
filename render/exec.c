@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/22 22:33:28 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:48:23 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_vec3	sample_random_pixel(t_camera c, t_rand *r)
 	*r = seed_kiss_no_power(r);
 	c.offset.y = random_double(seed(r) - 0.5);
 	c.offset.z = 0.0;
-	// printf("x %.3f y %.3f z %.3f\n", c.offset.x, c.offset.y, c.offset.z);
 	return (c.offset);
 }
 
@@ -93,11 +92,8 @@ void	renderer(t_scene *w_d)
 
 	c = w_d->camera;
 	sp1 = (t_sphere *)w_d->spheres->content;
-	printf("spheres.z %.1f spheres.diameter %.1f \n", sp1->sp_center.z, sp1->sp_diameter);
 	c = set_camera(c);
 	w_d->camera = c;
-	printf("light %.1f\n", w_d->light.ratio);
-	// set_light(w_d->light);
 	fill_frame(w_d);
 }
 

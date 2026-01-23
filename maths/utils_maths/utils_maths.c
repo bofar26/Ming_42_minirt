@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 18:07:10 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/22 17:32:38 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:54:30 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_rand	init_seed(t_rand r)
 	r.z = seeder();
 	r.w = seeder();
 	r.c = 0;
-	printf("INIT_SEEDER r.x  %u r.y %u r.z %u r.w %u\n", r.x, r.y, r.z, r.w);
 	return (r);
 }
 
@@ -45,7 +44,6 @@ t_rand	seed_kiss_no_power(t_rand *r)
 	int	t;
 
 	t = 0;
-	// printf("seed_kiss avt r.x  %u r.y %u r.z %u r.w %u\n", r->x, r->y, r->z, r->w);
 	r->y ^= (r->y << 5);
 	r->y ^= (r->y >> 7);
 	r->y ^= (r->y << 22);
@@ -54,7 +52,6 @@ t_rand	seed_kiss_no_power(t_rand *r)
 	r->c = t < 0;
 	r->w = t&214783647;
 	r->x += 1411392427;
-	// printf("seed_kiss after r.x  %u r.y %u r.z %u r.w %u\n", r->x, r->y, r->z, r->w);
 	return (*r);
 }
 

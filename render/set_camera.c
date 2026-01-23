@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/22 16:07:26 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:47:33 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_camera	calculate_viewport_height(t_camera c)
 	theta = degrees_to_radians((double)c.fov);
 	c.viewport_height = 2.0 * tan(theta / 2.0);
 	c.viewport_width = c.viewport_height * (((double)WIDTH) / ((double)HEIGHT));
-	printf("viewport_width %.1f\n", c.viewport_width);
 	return (c);
 }
 
