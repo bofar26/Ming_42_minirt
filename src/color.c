@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/25 21:11:41 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/25 21:31:00 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ t_vec3	render_color(t_color c, int x, int y)
 	auto_r = 0.0;
 	auto_g = 0.0;
 	auto_b = 0.0;
-	auto_r = (int)(255.999 * c.r) / 50000;
-	auto_g = (int)(255.999 * c.g) / 50000;
-	auto_b = (int)(255.999 * c.b) / 50000;
+	auto_r = (int)(255.999 * c.r) / 40000;
+	auto_g = (int)(255.999 * c.g) / 40000;
+	auto_b = (int)(255.999 * c.b) / 40000;
 	c.pixel_color.x = (double)auto_r;
 	c.pixel_color.y = (double)auto_g;
 	c.pixel_color.z = (double)auto_b;
