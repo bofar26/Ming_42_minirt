@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/23 17:02:05 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/25 21:11:41 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	t_vec3		ray_light;
 	t_vec3		ray_color;
 	t_vec3		ray_final;
+	t_vec3		ambient_light;
 	t_sphere	*sp1;
 	t_list		*temp;
 	t_light		l;
+	t_ambient	am;
 	double		a;
 	double		intensity;
-
 	double		t;
 	
 	a = 0.0;
 	intensity = 0.0;
 	t = 0.0;
 	l = s->light;
+	am = s->ambient;
 	temp = s->spheres;
 	s->closest_so_far = s->ray_max;
 	// unit_dir_l = (t_vec3){0,0,0};
@@ -58,16 +60,20 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		// n = render_color(s->closest_object, x, y);
 		// return (n);
 		unit_dir_l = substract_vector(p,l.pos);
-		unit_dir_l = unit_vector(unit_dir_l, -1.0);
-		// unit_dir_l = power_vector_to_t(unit_dir_l, -1.0);
+		// unit_dir_l = unit_vector(unit_dir_l, -1.0);
+		unit_dir_l = power_vector_to_t(unit_dir_l, -1.0);
 		a = clamp(0.0, dot(unit_dir_l, n), dot(unit_dir_l, n));// == cos(angle)
 		intensity = a * l.ratio;
-		ray_light = power_vector_to_t(l.pos, intensity);
-		// ray_light = power_vector_to_t(l.pos, l.ratio);
+		ray_light = render_color(l.light_color, x, y);
+		ray_light = power_vector_to_t(ray_light, intensity);
 		ray_color = render_color(s->closest_object, x, y);
-		ray_final.x = ray_light.x * ray_color.x;
-		ray_final.y = ray_light.y * ray_color.y;
-		ray_final.z = ray_light.z * ray_color.z;
+		ambient_light = render_color(am.ambient_color, x, y);
+		ambient_light = power_vector_to_t(ambient_light, am.ratio);
+		ray_final.x = (ambient_light.x + ray_light.x) * ray_color.x;
+		ray_final.y = (ambient_light.y + ray_light.y) * ray_color.y;
+		ray_final.z = (ambient_light.z + ray_light.z) * ray_color.z;
+		s->light = l;
+		s->ambient = am;
 		return (ray_final);
 	}
 	unit_direction = render_background(s, direction);

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/23 16:48:23 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/25 21:01:21 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_camera	normalize_viewport(t_camera c, int i, int j)
 t_vec3	get_ray(t_scene *s, t_rand	*r, int x, int y)
 {
 	t_vec3		ray_background;
+	t_vec3		ray_sult;
 	t_camera	c;
 	t_sphere	*sp1;
 	
@@ -43,8 +44,9 @@ t_vec3	get_ray(t_scene *s, t_rand	*r, int x, int y)
 	c.offset = sample_random_pixel(c, r);
 	c = normalize_viewport(c, x, y);
 	ray_background = c.orientation;
-	sp1->sp_color.pixel_color = ray_color(s, ray_background, x, y);
-	return (sp1->sp_color.pixel_color);
+	ray_sult = ray_color(s, ray_background, x, y);
+	s->camera = c;
+	return (ray_sult);
 }
 	
 void	fill_frame(t_scene *s)
