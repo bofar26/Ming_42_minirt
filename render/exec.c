@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/25 21:01:21 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 14:52:18 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,26 @@ t_camera	normalize_viewport(t_camera c, int i, int j)
 	c.orientation.z = c.pixel_center.z - c.viewpoint.z;
 	return (c);
 }
-t_vec3	get_ray(t_scene *s, t_rand	*r, int x, int y)
+t_vec3	get_ray(t_scene *s, t_rand	*r, t_vec3 ray_sult, int x, int y)
 {
 	t_vec3		ray_background;
-	t_vec3		ray_sult;
+	t_vec3		temp;
+	t_vec3		ray_final;
 	t_camera	c;
 	t_sphere	*sp1;
 	
 	c = s->camera;
 	sp1 = s->spheres->content;
+	temp = (t_vec3){0,0,0};
+	ray_final = (t_vec3){0,0,0};
 	c.offset = sample_random_pixel(c, r);
 	c = normalize_viewport(c, x, y);
 	ray_background = c.orientation;
-	ray_sult = ray_color(s, ray_background, x, y);
+	temp = ray_color(s, ray_background, x, y);
+	ray_final = add_vector(ray_sult, temp);
+	ray_sult = ray_final;
 	s->camera = c;
-	return (ray_sult);
+	return (ray_final);
 }
 	
 void	fill_frame(t_scene *s)
@@ -57,10 +62,13 @@ void	fill_frame(t_scene *s)
 	t_color	color_sc;
 	t_color	new_color_sc;
 	t_rand	r;
+	t_vec3	ray_sult;
+
 
 	y = 0;
 	ft_memset(&r, 0, sizeof(t_rand));
 	r = init_seed(r);
+	ray_sult = (t_vec3){0,0,0};
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -71,7 +79,7 @@ void	fill_frame(t_scene *s)
 			while (i < s->sample_per_pixel)
 			{
 				new_color_sc.pixel_color = (t_vec3){0,0,0};
-				new_color_sc.pixel_color = get_ray(s, &r, x, y);
+				new_color_sc.pixel_color = get_ray(s, &r, ray_sult, x, y);
 				color_sc.pixel_color = add_vector(color_sc.pixel_color, new_color_sc.pixel_color);
 				i++;
 			}

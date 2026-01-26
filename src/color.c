@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/25 21:31:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 14:19:06 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		unit_dir_l = substract_vector(p,l.pos);
 		// unit_dir_l = unit_vector(unit_dir_l, -1.0);
 		unit_dir_l = power_vector_to_t(unit_dir_l, -1.0);
-		a = clamp(0.0, dot(unit_dir_l, n), dot(unit_dir_l, n));// == cos(angle)
+		a = dot(unit_dir_l, n);// == cos(angle)
+		if (a < 0.0)
+			a = 0.0;
+		// a = clamp(0.0, dot(unit_dir_l, n), dot(unit_dir_l, n));// == cos(angle)
 		intensity = a * l.ratio;
 		ray_light = render_color(l.light_color, x, y);
 		ray_light = power_vector_to_t(ray_light, intensity);
@@ -72,6 +75,9 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 		ray_final.x = (ambient_light.x + ray_light.x) * ray_color.x;
 		ray_final.y = (ambient_light.y + ray_light.y) * ray_color.y;
 		ray_final.z = (ambient_light.z + ray_light.z) * ray_color.z;
+		ray_final.x = clamp(0.0, ray_color.x, ray_final.x);
+		ray_final.y = clamp(0.0, ray_color.y, ray_final.y);
+		ray_final.z = clamp(0.0, ray_color.z, ray_final.z);
 		s->light = l;
 		s->ambient = am;
 		return (ray_final);
@@ -79,7 +85,7 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y)
 	unit_direction = render_background(s, direction);
 	return(unit_direction);
 }
-
+ 
 //normalisation position to int to translate color
 // -0.1 >> [0,255] 
 int	write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z)
@@ -116,9 +122,12 @@ t_vec3	render_color(t_color c, int x, int y)
 	auto_r = 0.0;
 	auto_g = 0.0;
 	auto_b = 0.0;
-	auto_r = (int)(255.999 * c.r) / 40000;
-	auto_g = (int)(255.999 * c.g) / 40000;
-	auto_b = (int)(255.999 * c.b) / 40000;
+	// auto_r = (int)(255.999 * c.r) / 40000;
+	// auto_g = (int)(255.999 * c.g) / 40000;
+	// auto_b = (int)(255.999 * c.b) / 40000;
+	auto_r = (int)(c.r) / 255.999;
+	auto_g = (int)(c.g) / 255.999;
+	auto_b = (int)(c.b) / 255.999;
 	c.pixel_color.x = (double)auto_r;
 	c.pixel_color.y = (double)auto_g;
 	c.pixel_color.z = (double)auto_b;
