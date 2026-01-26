@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2026/01/22 15:33:29 by lzannis          ###   ########.fr        #
+#    Updated: 2026/01/26 17:03:42 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRCS_MATHS = \
 
 SRCS_RENDERER = \
 				render/exec.c \
-				render/set_camera.c \
-				render/set_light.c 
+				render/exec1.c \
+				render/set_camera.c 
 				
 SRCS_WINDOW = \
 		src/utils_src/atof.c \

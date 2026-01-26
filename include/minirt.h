@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/22 15:31:52 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 16:53:00 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,14 @@ int		mouse_hook(int button, int x, int y, t_scene *s);
 
 //-----COLOR-----
 
-t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y);
+t_vec3	ray_color(t_scene *s, t_vec3 direction);
 int		write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z);
-t_vec3	render_color(t_color c, int x, int y);
+t_vec3	render_color(t_color c);
 int		give_color(int r, int g, int b);
 
 t_vec3	render_background(t_scene *s, t_vec3 direction);
+t_vec3  calculate_light(t_scene *s, t_vec3 n, t_vec3 p);
+
 
 //-----TIME-----
 
