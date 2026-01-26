@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/18 17:44:16 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 15:31:52 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		handle_key_move(int keycode, t_scene *s);
 bool	create_window(t_scene *s);
 void	draw_image(t_scene *w_d);
 void	image_pixel_put(t_scene *img, int x, int y, int color);
-void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v);
 
 //-----KEY_HOOK-----
 

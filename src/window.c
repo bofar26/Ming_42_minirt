@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 23:03:24 by leazannis         #+#    #+#             */
-/*   Updated: 2026/01/15 18:30:55 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 15:30:57 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,40 +60,4 @@ void	image_pixel_put(t_scene *img, int x, int y, int color)
 		return ;
 	dst = img->address + (y * img->size_line + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v)
-{
-	(void)o;
-	(void)v;
-	int 	x;
-	int 	y;
-	t_vec3	ray_background;
-	t_camera c;
-	t_sphere *sp1;
-
-	c = s->camera;
-	sp1 = s->spheres->content;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			// to render whole window
-			// image_pixel_put(s, x, y, give_color(245, 66, 233));
-			// printf("before x %.1f y %.1f z %.1f\n",s->camera.orientation.x, s->camera.orientation.y, s->camera.orientation.z);
-			c = normalize_viewport(c, x, y);
-			// printf(" after x %.1f y %.1f z %.1f\n",s->camera.orientation.x, s->camera.orientation.y, s->camera.orientation.z);
-			ray_background = c.orientation;
-			sp1->sp_color.pixel_color = ray_color(s, ray_background, x, y);
-			image_pixel_put(s, x, y ,write_color(sp1->sp_color, sp1->sp_color.pixel_color.x, sp1->sp_color.pixel_color.y, sp1->sp_color.pixel_color.z));
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window (s->mlx_ptr, s->win_ptr, \
-		s->img_ptr, 0, 0);
-	s->render_time = getexacttimeofday() - s->time;
-	printf("render time : %.3lf\n", s->render_time);
 }

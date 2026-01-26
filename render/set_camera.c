@@ -6,45 +6,24 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 17:50:57 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/18 17:25:11 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:47:33 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static t_vec3	cross_vec3(t_vec3 a, t_vec3 b)
+double	degrees_to_radians(double fov)
 {
-	t_vec3	out;
-
-	out.x = a.y * b.z - a.z * b.y;
-	out.y = a.z * b.x - a.x * b.z;
-	out.z = a.x * b.y - a.y * b.x;
-	return (out);
-}
-
-static t_vec3	normalize_vec3(t_vec3 v)
-{
-	double	len;
-
-	len = dot_squared(dot(v, v));
-	if (len == 0.0)
-		return (v);
-	return (unit_vector(v, len));
-}
-
-double  degrees_to_radians(double fov)
-{
-  return (fov * PI / 180.0);
+	return (fov * PI / 180.0);
 }
 
 t_camera	calculate_viewport_height(t_camera c)
-{   
+{
 	double	theta;
 
 	theta = degrees_to_radians((double)c.fov);
 	c.viewport_height = 2.0 * tan(theta / 2.0);
 	c.viewport_width = c.viewport_height * (((double)WIDTH) / ((double)HEIGHT));
-	printf("viewport_width %.1f\n", c.viewport_width);
 	return (c);
 }
 
@@ -62,11 +41,13 @@ t_camera	calculate_upper_left(t_camera c)
 	half_v = power_vector_to_t(c.viewport_v, 0.5);
 	c.viewport_upper_left = substract_vector(half_u, viewport_center);
 	c.viewport_upper_left = substract_vector(half_v, c.viewport_upper_left);
-	c.pixel00_loc.x = c.viewport_upper_left.x + 0.5 * (c.pixel_delta_u.x + c.pixel_delta_v.x);
-	c.pixel00_loc.y = c.viewport_upper_left.y + 0.5 * (c.pixel_delta_u.y + c.pixel_delta_v.y);
-	c.pixel00_loc.z = c.viewport_upper_left.z + 0.5 * (c.pixel_delta_u.z + c.pixel_delta_v.z);
+	c.pixel00_loc.x = c.viewport_upper_left.x + 0.5 \
+	* (c.pixel_delta_u.x + c.pixel_delta_v.x);
+	c.pixel00_loc.y = c.viewport_upper_left.y + 0.5 \
+	* (c.pixel_delta_u.y + c.pixel_delta_v.y);
+	c.pixel00_loc.z = c.viewport_upper_left.z + 0.5 \
+	* (c.pixel_delta_u.z + c.pixel_delta_v.z);
 	return (c);
-
 }
 
 t_camera	set_camera_init(t_camera c)
@@ -93,7 +74,7 @@ t_camera	set_camera_init(t_camera c)
 
 t_camera	set_camera(t_camera c)
 {
-  c = set_camera_init(c);
-  c = calculate_upper_left(c);
-  return (c);
+	c = set_camera_init(c);
+	c = calculate_upper_left(c);
+	return (c);
 }

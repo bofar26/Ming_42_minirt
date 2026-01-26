@@ -6,7 +6,7 @@
 #    By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 13:02:31 by mipang            #+#    #+#              #
-#    Updated: 2026/01/18 16:06:47 by lzannis          ###   ########.fr        #
+#    Updated: 2026/01/22 15:33:29 by lzannis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS = -Wall -Werror -Wextra -g3 -Iinclude -Iminilibx
 
 SRCS_MATHS = \
 			maths/utils_maths/utils_maths.c \
+			maths/utils_maths/interval.c \
 			maths/point.c \
 			maths/ray.c \
 			maths/vector.c \

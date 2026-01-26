@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/19 16:11:49 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/23 16:46:48 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ bool	is_front_face(t_vec3 direction,t_vec3 normal)
 	else
 		return (true);
 }
-
-//normal = vector perpendicular to a surface 
-t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t, int x, int y)
+// P = ray_origin + t * direction;
+t_vec3	calculate_impact_point_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double radius, double t)
 {
-	(void)x;
-	(void)y;
-	(void)radius;
-	t_vec3	n;
 	t_vec3	ray_sp;
 	t_vec3	ray_sp_final;
-	double	c;
 	
-	c = 0.0;
 	ray_sp = power_vector_to_t(direction, t);
 	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
 	ray_sp_final = substract_vector(center, ray_sp_final);
 	ray_sp_final = unit_vector(ray_sp_final, radius);
-	c = dot(ray_sp_final, ray_sp_final);
-	c = dot_squared(c);
-	n = unit_vector(ray_sp_final, c);
+	return (ray_sp_final);
+}
+
+//normal = vector perpendicular to a surface 
+t_vec3	calculate_normal(t_scene *s, t_vec3 direction, t_vec3 ray_sp_final)
+{
+	(void)s;
+	t_vec3	n;
+
+	n = normalize_vec3(ray_sp_final);
 	if (!is_front_face(direction, n))
 	{
 		n = unit_vector(n, -1);
@@ -63,10 +63,8 @@ t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction, t_vec3 center, doub
 // b = ray direction
 // r = radius
 // t = hit distance
-double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 *n, int x, int y)
+double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r)
 {
-	(void)x;
-	(void)y;
 	t_vec3	oc;
 	double t;
 
@@ -84,14 +82,9 @@ double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 
 		t = (s->b + sqrt(s->discriminant)) / (s->a);
 		if (t <= s->ray_min || t >= s->ray_max)
 			return (-1.0);
-		*n = calculate_normal_sphere(s, direction, center, r, t, x, y);
 		return (t);
 	}
-	else
-	{
-		*n = calculate_normal_sphere(s, direction, center, r, t, x, y);
-		return (t);
-	}
+	return (t);
 }
 
 //fct ray :
@@ -105,6 +98,5 @@ t_vec3	ray(t_vec3 origin, t_vec3 direction)
 	ray_final.x = origin.x + direction.x;
 	ray_final.y = origin.y + direction.y;
 	ray_final.z = origin.z + direction.z;
-	// printf("x  %.1f y %.1f z %.1f\n", ray_final.x, ray_final.y, ray_final.z);
 	return (ray_final);
 }
