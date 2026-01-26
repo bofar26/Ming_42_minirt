@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 17:24:25 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/26 16:59:54 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 20:46:15 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction)
 	while (temp)
 	{
 		sp1 = temp->content;
-		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius);
+		t = ray_sphere(s, direction, sp1->sp_center, sp1->sp_radius, s->camera.viewpoint);
 		if (t > 0.0 && t < s->closest_so_far)
 		{
 			p = calculate_impact_point_sphere(s, direction, sp1->sp_center, sp1->sp_radius, t);
@@ -42,7 +42,7 @@ t_vec3	ray_color(t_scene *s, t_vec3 direction)
 	}
 	if (s->closest_so_far < s->ray_max)
 	{	
-		ray_final = calculate_light(s, n, p);
+		ray_final = calculate_light(s, n, p, sp1);
 		return (ray_final);
 	}
 	unit_direction = render_background(s, direction);

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/26 16:53:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 21:34:53 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ t_vec3	render_color(t_color c);
 int		give_color(int r, int g, int b);
 
 t_vec3	render_background(t_scene *s, t_vec3 direction);
-t_vec3  calculate_light(t_scene *s, t_vec3 n, t_vec3 p);
+int		is_in_shadow(t_scene *s, t_vec3 n, t_vec3 p, t_vec3 unit_dir_l, t_sphere *sp1);
+t_vec3  calculate_light(t_scene *s, t_vec3 n, t_vec3 p, t_sphere *sp1);
 
 
 //-----TIME-----

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 19:39:43 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/23 16:46:48 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 20:39:29 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ t_vec3	calculate_normal(t_scene *s, t_vec3 direction, t_vec3 ray_sp_final)
 // b = ray direction
 // r = radius
 // t = hit distance
-double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r)
+double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center, double r, t_vec3 origin)
 {
 	t_vec3	oc;
 	double t;
 
 	t = 0.0;
-	oc = substract_vector(s->camera.viewpoint, center);
+	oc = substract_vector(origin, center);
 	s->a = dot(direction, direction);
 	s->b = dot(oc, direction);
 	s->c = (dot(oc, oc)) - (r * r);
