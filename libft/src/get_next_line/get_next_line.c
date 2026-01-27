@@ -27,6 +27,23 @@ static int	is_newline(const char *buffer)
 	return (0);
 }
 
+static int	append_readline(char **readline, char **buffer)
+{
+	char	*tmp;
+
+	tmp = copy_buffer(*readline, *buffer);
+	if (!tmp)
+	{
+		free(*buffer);
+		if (*readline)
+			free(*readline);
+		*readline = NULL;
+		return (0);
+	}
+	*readline = tmp;
+	return (1);
+}
+
 static int	readloop(int fd, char **buffer, char **readline)
 {
 	ssize_t	read_value;
@@ -35,7 +52,8 @@ static int	readloop(int fd, char **buffer, char **readline)
 	while (read_value > 0)
 	{
 		(*buffer)[read_value] = '\0';
-		*readline = copy_buffer(*readline, *buffer);
+		if (!append_readline(readline, buffer))
+			return (0);
 		if (is_newline(*readline) == 1)
 			break ;
 		read_value = read(fd, *buffer, BUFFER_SIZE);
@@ -52,22 +70,34 @@ static int	readloop(int fd, char **buffer, char **readline)
 	return (read_value > 0 || (*readline && read_value == 0));
 }
 
+static int	init_buffer(int fd, char **buffer, char **readline)
+{
+	if (fd < 0 || BUFFER_SIZE < 0)
+	{
+		if (*readline)
+			free(*readline);
+		*readline = NULL;
+		return (0);
+	}
+	*buffer = malloc(BUFFER_SIZE + 1);
+	if (!*buffer || BUFFER_SIZE == 0)
+	{
+		if (*readline)
+			free(*readline);
+		*readline = NULL;
+		return (0);
+	}
+	return (1);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*readline;
 	char		*line;
 	char		*buffer;
 
-	if (fd < 0 || BUFFER_SIZE < 0)
-	{
-		if (readline)
-			free(readline);
-		readline = NULL;
+	if (!init_buffer(fd, &buffer, &readline))
 		return (NULL);
-	}
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (fd < 0 || !buffer || BUFFER_SIZE == 0)
-		return (free(readline), NULL);
 	if (readloop(fd, &buffer, &readline) == 0)
 		return (NULL);
 	line = extra_line(readline);

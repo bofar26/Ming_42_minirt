@@ -36,10 +36,13 @@ SRCS_WINDOW = \
 		src/utils_src/time.c \
 		src/close.c \
 		src/window.c \
-		src/key_hook.c \
-		src/color.c \
-		src/color_utils.c \
-		src/color1.c
+	src/key_hook.c \
+	src/color.c \
+	src/color_utils.c \
+	src/color1.c \
+	src/light.c \
+	src/light_utils.c \
+	src/hit_any_object.c
 		
 SRC_PARSING_CORE = \
 	parsing/core/parser.c \
