@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leazannis <leazannis@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 15:56:24 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/27 13:35:09 by leazannis        ###   ########.fr       */
+/*   Updated: 2026/01/27 17:57:27 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,20 @@ int is_in_shadow(t_scene *s, t_vec3 n, t_vec3 p, t_vec3 unit_dir_l, t_sphere *sp
 	t_vec3  dir;
     double  dist_light;
 	t_list	*temp;
-	t_list	*current;
+	t_sphere    *current;
 	double  t;
     
 	t = 0.0;
 	temp = s->spheres;
-	current = s->spheres;
+	current = sp1;
     n = power_vector_to_t(n, 0.0001);
     origin = add_vector(p, n);
     dist_light = dot_squared(dot(unit_dir_l, unit_dir_l));
     dir = normalize_vec3(unit_dir_l);
     s->ray_max = dist_light;
-    while (temp)
+    while (temp )
 	{
 		sp1 = temp->content;
-		current = current->content;
         if ((t_sphere*)sp1 == (t_sphere*)current)
         {
             temp = temp->next;
@@ -69,7 +68,6 @@ int is_in_shadow(t_scene *s, t_vec3 n, t_vec3 p, t_vec3 unit_dir_l, t_sphere *sp
         if (t > 0.0001 && t < dist_light)
             return (1);
 		temp = temp->next;
-        current = current->next;
 	}
     return (0);
 }
