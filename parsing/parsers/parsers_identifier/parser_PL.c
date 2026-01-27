@@ -29,7 +29,7 @@ static int	vec3_range(t_vec3 tmp, double min, double max)
 	return (1);
 }
 
-static int	parser_PL(char **s, t_plane *out)
+static int	parser_pl(char **s, t_plane *out)
 {
 	char	*p;
 	char	*save;
@@ -41,9 +41,9 @@ static int	parser_PL(char **s, t_plane *out)
 	save = *s;
 	if (!parser_vec3(&p, &tmp.pl_point))
 		return (*s = save, 0);
-	if (!parser_vec3(&p, &tmp.pl_vector) ||
-		!vec3_non_zero(tmp.pl_vector) ||
-		!vec3_range(tmp.pl_vector, -1, 1))
+	if (!parser_vec3(&p, &tmp.pl_vector)
+		|| !vec3_non_zero(tmp.pl_vector)
+		|| !vec3_range(tmp.pl_vector, -1, 1))
 		return (*s = save, 0);
 	if (!parser_color(&p, &tmp.pl_color))
 		return (*s = save, 0);
@@ -54,7 +54,7 @@ static int	parser_PL(char **s, t_plane *out)
 	return (1);
 }
 
-int	dispatch_PL(t_scene *sc, char *p, int lineidx)
+int	dispatch_pl(t_scene *sc, char *p, int lineidx)
 {
 	t_plane	*dst;
 
@@ -65,7 +65,7 @@ int	dispatch_PL(t_scene *sc, char *p, int lineidx)
 	dst = add_plane(sc);
 	if (!dst)
 		return (parser_error(sc, lineidx, "plane allocation failed.\n"), 0);
-	if (!parser_PL(&p, dst))
-		return (parser_error(sc, lineidx, "invalid PL line."), 0);
+	if (!parser_pl(&p, dst))
+		return (parser_error(sc, lineidx, "invalid PL line.\n"), 0);
 	return (1);
 }

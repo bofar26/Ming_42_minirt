@@ -12,16 +12,6 @@
 
 #include "minirt.h"
 
-static t_vec3	normalize_vec3(t_vec3 v)
-{
-	double	len;
-
-	len = dot_squared(dot(v, v));
-	if (len == 0.0)
-		return (v);
-	return (unit_vector(v, len));
-}
-
 double	ray_plane(t_scene *s, t_vec3 direction, t_plane *pl, t_vec3 *n)
 {
 	const double	eps = 1e-6;
@@ -38,7 +28,7 @@ double	ray_plane(t_scene *s, t_vec3 direction, t_plane *pl, t_vec3 *n)
 	t = dot(diff, normal) / denom;
 	if (t <= s->ray_min || t >= s->ray_max)
 		return (-1.0);
-	if (n && denom > 0.0)
+	if (n && dot(direction, normal) > 0.0)
 		normal = power_vector_to_t(normal, -1.0);
 	if (n)
 		*n = normal;

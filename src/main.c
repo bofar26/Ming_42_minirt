@@ -12,15 +12,29 @@
 
 #include "minirt.h"
 
+static int	has_rt_extension(const char *path)
+{
+	size_t	len;
+
+	if (!path)
+		return (0);
+	len = ft_strlen(path);
+	if (len < 4)
+		return (0);
+	return (path[len - 3] == '.' && path[len - 2] == 'r'
+		&& path[len - 1] == 't');
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene		*s;
 	const char	*rt_file_name;
 
-	if (argc != 2)
+	if (argc != 2 || !argv || !*argv || !has_rt_extension(argv[1]))
+	{
+		ft_putstr_fd("Error\ninvalid file extension\n", 2);
 		return (1);
-	if (!argv || !*argv)
-		return (1);
+	}
 	rt_file_name = argv[1];
 	s = parser_rt(rt_file_name);
 	if (!s)

@@ -29,10 +29,10 @@ static int	vec3_range(t_vec3 tmp, double min, double max)
 	return (1);
 }
 
-static int	parser_CY(char **s, t_cylinder *out)
+static int	parser_cy(char **s, t_cylinder *out)
 {
-	char	*p;
-	char	*save;
+	char		*p;
+	char		*save;
 	t_cylinder	tmp;
 
 	if (!s || !*s || !out)
@@ -42,8 +42,8 @@ static int	parser_CY(char **s, t_cylinder *out)
 	if (!parser_vec3(&p, &tmp.cy_center))
 		return (*s = save, 0);
 	if (!parser_vec3(&p, &tmp.cy_vector)
-	|| !vec3_range(tmp.cy_vector, -1, 1)
-	|| !vec3_non_zero(tmp.cy_vector))
+		|| !vec3_range(tmp.cy_vector, -1, 1)
+		|| !vec3_non_zero(tmp.cy_vector))
 		return (*s = save, 0);
 	if (!parser_double(&p, &tmp.cy_diameter) || tmp.cy_diameter <= 0.0)
 		return (*s = save, 0);
@@ -58,7 +58,7 @@ static int	parser_CY(char **s, t_cylinder *out)
 	return (1);
 }
 
-int	dispatch_CY(t_scene *sc, char *p, int lineidx)
+int	dispatch_cy(t_scene *sc, char *p, int lineidx)
 {
 	t_cylinder	*dst;
 
@@ -69,7 +69,7 @@ int	dispatch_CY(t_scene *sc, char *p, int lineidx)
 	dst = add_cylinder(sc);
 	if (!dst)
 		return (parser_error(sc, lineidx, "cylinder allocation failed.\n"), 0);
-	if (!parser_CY(&p, dst))
+	if (!parser_cy(&p, dst))
 		return (parser_error(sc, lineidx, "invalid CY line.\n"), 0);
 	return (1);
 }

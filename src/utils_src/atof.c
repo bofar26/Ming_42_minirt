@@ -12,16 +12,6 @@
 
 #include "minirt.h"
 
-/* int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-} */
-
 int	ft_strlen_post_point(char *str)
 {
 	int	i;
@@ -33,7 +23,7 @@ int	ft_strlen_post_point(char *str)
 	j = i;
 	while (str[j])
 		j++;
-	return (j - i -1);
+	return (j - i - 1);
 }
 
 double	ft_power(t_atof *atof)
@@ -57,7 +47,7 @@ int	ft_atoi_atof(char *str)
 	i = 0;
 	nb = 0;
 	if (str[i] == '-')
-	i++;
+		i++;
 	while (str[i] && str[i] != '.')
 	{
 		nb = (nb * 10) + (str[i] - '0');

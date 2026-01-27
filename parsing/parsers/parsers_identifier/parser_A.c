@@ -13,10 +13,10 @@
 #include "parsing.h"
 #include "types.h"
 
-static int	parser_A(char **s, t_ambient *out)
+static int	parser_a(char **s, t_ambient *out)
 {
-	char	*p;
-	char	*save;
+	char		*p;
+	char		*save;
 	t_ambient	tmp;
 
 	if (!s || !*s || !out)
@@ -35,15 +35,16 @@ static int	parser_A(char **s, t_ambient *out)
 	return (1);
 }
 
-int	dispatch_A(t_scene *sc, char *p, int lineidx)
+int	dispatch_a(t_scene *sc, char *p, int lineidx)
 {
 	if (!sc)
 		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "A", 1))
 		return (parser_error(sc, lineidx, "invalid A identifier.\n"), 0);
 	if (sc->ambient.set)
-		return (parser_error(sc, lineidx, "duplicate ambient (A) not allowed.\n"), 0);
-	if (!parser_A(&p, &sc->ambient))
+		return (parser_error(sc, lineidx,
+				"duplicate ambient (A) not allowed.\n"), 0);
+	if (!parser_a(&p, &sc->ambient))
 		return (parser_error(sc, lineidx, "invalid A line.\n"), 0);
 	return (1);
 }

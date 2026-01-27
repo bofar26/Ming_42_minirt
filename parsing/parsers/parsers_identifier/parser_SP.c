@@ -12,10 +12,10 @@
 
 #include "minirt.h"
 
-static int	parser_SP(char **s, t_sphere *out)
+static int	parser_sp(char **s, t_sphere *out)
 {
-	char	*p;
-	char	*save;
+	char		*p;
+	char		*save;
 	t_sphere	tmp;
 
 	if (!s || !*s || !out)
@@ -35,7 +35,7 @@ static int	parser_SP(char **s, t_sphere *out)
 	return (1);
 }
 
-int	dispatch_SP(t_scene *sc, char *p, int lineidx)
+int	dispatch_sp(t_scene *sc, char *p, int lineidx)
 {
 	t_sphere	*dst;
 
@@ -46,8 +46,8 @@ int	dispatch_SP(t_scene *sc, char *p, int lineidx)
 	dst = add_sphere(sc);
 	if (!dst)
 		return (parser_error(sc, lineidx, "sphere allocation failed.\n"), 0);
-	if (!parser_SP(&p, dst))
+	if (!parser_sp(&p, dst))
 		return (parser_error(sc, lineidx, "invalid SP line.\n"), 0);
-	dst->sp_radius = dst->sp_diameter / 2;
+	dst->sp_radius = dst->sp_diameter / 2.0;
 	return (1);
 }

@@ -15,11 +15,11 @@
 int	close_win(t_scene *w_d)
 {
 	if (w_d->mlx_ptr)
-	{	
+	{
 		mlx_destroy_image(w_d->mlx_ptr, w_d->img_ptr);
 		mlx_destroy_window(w_d->mlx_ptr, w_d->win_ptr);
 		mlx_destroy_display(w_d->mlx_ptr);
-		free(w_d->mlx_ptr);	
+		free(w_d->mlx_ptr);
 	}
 	if (w_d->spheres || w_d->cylinders || w_d->planes)
 		scene_free(w_d);

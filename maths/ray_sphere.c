@@ -18,7 +18,7 @@ static bool	is_front_face(t_vec3 direction, t_vec3 normal)
 }
 
 static t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction,
-	t_vec3 center, double radius, double t)
+	t_sphere *sp, double t)
 {
 	t_vec3	ray_sp;
 	t_vec3	ray_sp_final;
@@ -26,8 +26,8 @@ static t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction,
 
 	ray_sp = power_vector_to_t(direction, t);
 	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
-	ray_sp_final = substract_vector(center, ray_sp_final);
-	ray_sp_final = unit_vector(ray_sp_final, radius);
+	ray_sp_final = substract_vector(sp->sp_center, ray_sp_final);
+	ray_sp_final = unit_vector(ray_sp_final, sp->sp_radius);
 	c = dot_squared(dot(ray_sp_final, ray_sp_final));
 	ray_sp_final = unit_vector(ray_sp_final, c);
 	if (!is_front_face(direction, ray_sp_final))
@@ -56,18 +56,15 @@ static double	sphere_root(t_scene *s, t_vec3 direction, t_vec3 oc, double r)
 	return (-1.0);
 }
 
-double	ray_sphere(t_scene *s, t_vec3 direction, t_vec3 center,
-	double r, t_vec3 *n, int x, int y)
+double	ray_sphere(t_scene *s, t_vec3 direction, t_sphere *sp, t_vec3 *n)
 {
 	t_vec3	oc;
 	double	t;
 
-	(void)x;
-	(void)y;
-	oc = substract_vector(s->camera.viewpoint, center);
-	t = sphere_root(s, direction, oc, r);
+	oc = substract_vector(s->camera.viewpoint, sp->sp_center);
+	t = sphere_root(s, direction, oc, sp->sp_radius);
 	if (t < 0.0)
 		return (-1.0);
-	*n = calculate_normal_sphere(s, direction, center, r, t);
+	*n = calculate_normal_sphere(s, direction, sp, t);
 	return (t);
 }

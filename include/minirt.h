@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/18 17:44:16 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 16:53:00 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # define PI 3.14
 # define RAND_MAX 2147483647
 
-// define color
-# define TRGB_BLACK  0x00000000
-# define TRGB_TRANSPARENT  0xFF000000
-# define TRGB_RED  0x00FF0000
-# define TRGB_GREEN  0x0000FF00
-# define TRGB_BLUE  0x000000FF
-# define TRGB_WHITE  0xFFFFFFFF
+/* define color */
+# define TRGB_BLACK 0x00000000
+# define TRGB_TRANSPARENT 0xFF000000
+# define TRGB_RED 0x00FF0000
+# define TRGB_GREEN 0x0000FF00
+# define TRGB_BLUE 0x000000FF
+# define TRGB_WHITE 0xFFFFFFFF
 
 # include "../libft/libft.h"
 # include "../minilibx/mlx.h"
@@ -53,39 +53,37 @@ typedef struct s_atof
 	int		i;
 }	t_atof;
 
-//-----ATOF-----
+/* ATOF */
 
 double	ft_atof(char *str);
 
-//----CLOSE-----
+/* CLOSE */
 
 int		handle_exit(void *param, t_scene *s);
 int		close_win(t_scene *w_d);
 
-//-----WINDOW-----
+/* WINDOW */
 
 int		handle_key_move(int keycode, t_scene *s);
 bool	create_window(t_scene *s);
 void	draw_image(t_scene *w_d);
 void	image_pixel_put(t_scene *img, int x, int y, int color);
-void	fill_frame(t_scene *s, t_point3 *o, t_vec3 *v);
 
-//-----KEY_HOOK-----
-
-//void	key_hook_color(int key_sym, t_scene *w_d);
-//void	key_up_left_right_down(int key_sym, t_scene *w_d);w
+/* KEY_HOOK */
 int		mouse_hook(int button, int x, int y, t_scene *s);
 
-//-----COLOR-----
+/* COLOR */
 
-t_vec3	ray_color(t_scene *s, t_vec3 direction, int x, int y);
-int		write_color(t_color c, double pixel_color_x, double pixel_color_y, double pixel_color_z);
-t_vec3	render_color(t_color c, int x, int y);
+t_vec3	ray_color(t_scene *s, t_vec3 direction);
+int		write_color(t_color c, double pixel_color_x,
+			double pixel_color_y, double pixel_color_z);
+t_vec3	render_color(t_color c);
 int		give_color(int r, int g, int b);
 
 t_vec3	render_background(t_scene *s, t_vec3 direction);
+t_vec3	calculate_light(t_scene *s, t_vec3 n, t_vec3 p);
 
-//-----TIME-----
+/* TIME */
 
 int		getexacttimeofday(void);
 

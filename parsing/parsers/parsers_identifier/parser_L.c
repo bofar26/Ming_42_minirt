@@ -13,7 +13,7 @@
 #include "parsing.h"
 #include "types.h"
 
-static int	parser_L(char **s, t_light *out)
+static int	parser_l(char **s, t_light *out)
 {
 	char	*p;
 	char	*save;
@@ -37,14 +37,13 @@ static int	parser_L(char **s, t_light *out)
 	return (1);
 }
 
-int	dispatch_L(t_scene *sc, char *p, int lineidx)
+int	dispatch_l(t_scene *sc, char *p, int lineidx)
 {
 	if (!sc)
 		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "L", 1))
 		return (parser_error(sc, lineidx, "invalid L identifier.\n"), 0);
-	if (!parser_L(&p, &sc->light))
+	if (!parser_l(&p, &sc->light))
 		return (parser_error(sc, lineidx, "invalid L line.\n"), 0);
 	return (1);
 }
-

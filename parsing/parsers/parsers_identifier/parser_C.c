@@ -29,10 +29,10 @@ static int	vec3_range(t_vec3 tmp, double min, double max)
 	return (1);
 }
 
-static int	parser_C(char **s, t_camera *out)
+static int	parser_c(char **s, t_camera *out)
 {
-	char	*p;
-	char	*save;
+	char		*p;
+	char		*save;
 	t_camera	tmp;
 
 	if (!s || !*s || !out)
@@ -41,8 +41,9 @@ static int	parser_C(char **s, t_camera *out)
 	save = *s;
 	if (!parser_vec3(&p, &tmp.viewpoint))
 		return (*s = save, 0);
-	if (!parser_vec3(&p, &tmp.orientation) ||
-		!vec3_non_zero(tmp.orientation) || !vec3_range(tmp.orientation, -1, 1))
+	if (!parser_vec3(&p, &tmp.orientation)
+		|| !vec3_non_zero(tmp.orientation)
+		|| !vec3_range(tmp.orientation, -1, 1))
 		return (*s = save, 0);
 	if (!parser_int(&p, &tmp.fov) || tmp.fov < 0 || tmp.fov > 180)
 		return (*s = save, 0);
@@ -54,15 +55,16 @@ static int	parser_C(char **s, t_camera *out)
 	return (1);
 }
 
-int	dispatch_C(t_scene *sc, char *p, int lineidx)
+int	dispatch_c(t_scene *sc, char *p, int lineidx)
 {
 	if (!sc)
 		return (parser_error(sc, lineidx, "internal: scene is NULL.\n"), 0);
 	if (!eat_ident(&p, "C", 1))
 		return (parser_error(sc, lineidx, "invalid C identifier.\n"), 0);
 	if (sc->camera.set)
-		return (parser_error(sc, lineidx, "duplicate ambient (C) not allowed.\n"), 0);
-	if (!parser_C(&p, &sc->camera))
+		return (parser_error(sc, lineidx,
+				"duplicate ambient (C) not allowed.\n"), 0);
+	if (!parser_c(&p, &sc->camera))
 		return (parser_error(sc, lineidx, "invalid C line.\n"), 0);
 	return (1);
 }

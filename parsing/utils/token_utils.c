@@ -22,7 +22,7 @@ int	is_space(char c)
 void	skip_space(char **str)
 {
 	while (**str && is_space(**str))
-		(*str) ++;
+		(*str)++;
 }
 
 int	expect_split(char **s, char c)
@@ -35,7 +35,7 @@ int	expect_split(char **s, char c)
 	skip_space(&cur);
 	if (*cur != c)
 		return (0);
-	cur ++;
+	cur++;
 	*s = cur;
 	return (1);
 }
@@ -43,7 +43,7 @@ int	expect_split(char **s, char c)
 int	ensure_eol(char *p)
 {
 	while (*p == '\t' || *p == ' ')
-		p ++;
+		p++;
 	return (*p == '\n' || *p == '\0');
 }
 
@@ -60,7 +60,7 @@ int	eat_ident(char **s, const char *const id, size_t len)
 	{
 		if (p[i] != id[i])
 			return (0);
-		i ++;
+		i++;
 	}
 	if (p[len] != '\0' && !is_space(p[len]))
 		return (0);

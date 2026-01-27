@@ -16,9 +16,9 @@
 int	getexacttimeofday(void)
 {
 	struct timeval	tv;
-	int			seconds;
-	int			microseconds;
-	int			sum;
+	int				seconds;
+	int				microseconds;
+	int				sum;
 
 	if (gettimeofday(&tv, NULL))
 		return (-1);

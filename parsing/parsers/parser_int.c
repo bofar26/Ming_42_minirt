@@ -21,40 +21,40 @@ static int	get_sign(char **p)
 	{
 		if (**p == '-')
 			sign = -1;
-		(*p) ++;
+		(*p)++;
 	}
 	return (sign);
 }
 
 static int	check_overflow(long long result, int digit, int sign)
 {
-	long long	ABS_MIN_LIMIT;
+	long long	abs_min_limit;
 
-	ABS_MIN_LIMIT = (long long)INT_MAX + 1LL;
+	abs_min_limit = (long long)INT_MAX + 1LL;
 	if (sign == 1)
 	{
-		if (result > INT_MAX/10)
+		if (result > INT_MAX / 10)
 			return (1);
-		if (result == INT_MAX/10 && digit > INT_MAX % 10)
+		if (result == INT_MAX / 10 && digit > INT_MAX % 10)
 			return (1);
 	}
 	else
 	{
-		if (result > ABS_MIN_LIMIT/10)
+		if (result > abs_min_limit / 10)
 			return (1);
-		if (result == ABS_MIN_LIMIT/10 && digit > (int)(ABS_MIN_LIMIT % 10))
+		if (result == abs_min_limit / 10
+			&& digit > (int)(abs_min_limit % 10))
 			return (1);
 	}
 	return (0);
 }
 
-
 int	parser_int(char **s, int *out)
 {
-	char	*p;
-	int		sign;
-	int		has_digit;
-	long long	result;
+	char			*p;
+	int				sign;
+	int				has_digit;
+	long long		result;
 
 	has_digit = 0;
 	result = 0;
@@ -69,7 +69,7 @@ int	parser_int(char **s, int *out)
 		if (check_overflow(result, (*p - '0'), sign))
 			return (0);
 		result = result * 10 + (long long)(*p - '0');
-		p ++;
+		p++;
 	}
 	if (has_digit == 0)
 		return (0);
@@ -77,4 +77,3 @@ int	parser_int(char **s, int *out)
 	*s = p;
 	return (1);
 }
-

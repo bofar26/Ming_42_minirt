@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:17:19 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/18 17:24:47 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 16:06:52 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,29 @@ typedef struct t_color
 
 typedef struct t_camera
 {
-	t_vec3	viewpoint;//camera_center
-	t_vec3	orientation;//ray_direction
-	t_vec3	viewport_u;//x axis
-	t_vec3	viewport_v;//y axis
-	t_vec3	pixel_delta_u;//horizontal vector, offset of pixel to the right
-	t_vec3	pixel_delta_v;//vertical vector, offset of pixel below
+	/* camera center */
+	t_vec3	viewpoint;
+	/* ray direction */
+	t_vec3	orientation;
+	/* x axis */
+	t_vec3	viewport_u;
+	/* y axis */
+	t_vec3	viewport_v;
+	/* horizontal vector, offset of pixel to the right */
+	t_vec3	pixel_delta_u;
+	/* vertical vector, offset of pixel below */
+	t_vec3	pixel_delta_v;
 	t_vec3	viewport_upper_left;
-	t_vec3	pixel00_loc;//location of the first pixel(0,0) in the upper left corner
+	/* location of pixel (0,0) in upper-left corner */
+	t_vec3	pixel00_loc;
 	t_vec3	pixel_center;
+	/* random point in [-0.5,-0.5]..[0.5,0.5] */
+	t_vec3	offset;
 	double	viewport_height;
-    double	viewport_width;
+	double	viewport_width;
 	double	focal_lenght;
-	int		fov;//field of vision
+	/* field of vision */
+	int		fov;
 	int		set;
 }	t_camera;
 
@@ -69,14 +79,14 @@ typedef struct t_sphere
 	double	sp_diameter;
 	double	sp_radius;
 	t_color	sp_color;
-} t_sphere;
+}	t_sphere;
 
 typedef struct t_plane
 {
 	t_vec3	pl_point;
 	t_vec3	pl_vector;
 	t_color	pl_color;
-} t_plane;
+}	t_plane;
 
 typedef struct t_cylinder
 {
@@ -85,6 +95,6 @@ typedef struct t_cylinder
 	double	cy_diameter;
 	double	cy_height;
 	t_color	cy_color;
-} t_cylinder;
+}	t_cylinder;
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-static void	trim_space(char	*str)
+static void	trim_space(char *str)
 {
 	char	*start;
 	char	*end;
@@ -22,56 +22,73 @@ static void	trim_space(char	*str)
 	start = str;
 	end = start + ft_strlen(str);
 	while (*start && ((*start == ' ') || *start == '\t'))
-		start ++;
+		start++;
 	while (end > start && ((end[-1] == ' ') || (end[-1] == '\t')
-		|| (end[-1] == '\n') || (end[-1] == '\r')))
-		end --;
+			|| (end[-1] == '\n') || (end[-1] == '\r')))
+		end--;
 	*end = '\0';
 	if (start != str)
 		ft_memmove(str, start, end - start + 1);
 }
 
-static void rt_final_check(t_scene *sc)
+static void	rt_final_check(t_scene *sc)
 {
 	if (!sc->ambient.set)
 		parser_error(sc, 0, "Missing ambient\n");
 	if (!sc->camera.set)
-		 parser_error(sc, 0, "Missing camera\n");
+		parser_error(sc, 0, "Missing camera\n");
 	if (!sc->light.set)
 		parser_error(sc, 0, "Missing light\n");
 }
 
-
-t_scene *parser_rt(const char  *rt_file_name)
+static int	open_rt_file(t_scene *sc, const char *rt_file_name)
 {
-	int		fd;
-	char	*line;
-	int		lineidx;
-	t_scene	*sc;
+	int	fd;
 
-	lineidx = 0;
-	sc = NULL;
 	fd = open(rt_file_name, O_RDONLY);
-	sc = scene_init(sc);
-	if (!sc)
-		return (NULL);
 	if (fd < 0)
 	{
-		close(fd);
 		parser_error(sc, 0, "Can not open .rt file\n");
+		return (-1);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	return (fd);
+}
+
+static void	parse_lines(t_scene *sc, int fd)
+{
+	char	*line;
+	int		lineidx;
+
+	lineidx = 0;
+	line = get_next_line(fd);
+	while (line)
 	{
-		lineidx ++;
+		lineidx++;
 		trim_space(line);
-		if (*line != '\0')
-			if(!dispatch(sc, line, lineidx))
-			{
-				free(line);
-				parser_error(sc, lineidx, "Dispatch failure. Unknown identifier or missing space after identifier\n");
-			}
+		if (*line != '\0' && !dispatch(sc, line, lineidx))
+		{
+			free(line);
+			parser_error(sc, lineidx,
+				"Dispatch failure. Unknown identifier or missing space "
+				"after identifier\n");
+		}
 		free(line);
+		line = get_next_line(fd);
 	}
+}
+
+t_scene	*parser_rt(const char *rt_file_name)
+{
+	int		fd;
+	t_scene	*sc;
+
+	sc = scene_init(NULL);
+	if (!sc)
+		return (NULL);
+	fd = open_rt_file(sc, rt_file_name);
+	if (fd < 0)
+		return (NULL);
+	parse_lines(sc, fd);
 	if (close(fd) < 0)
 		parser_error(sc, 0, "Close fd failure.\n");
 	rt_final_check(sc);

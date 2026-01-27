@@ -6,16 +6,18 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/16 14:18:11 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/22 16:07:17 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
-#define SCENE_H
-#include "types.h"
+# define SCENE_H
+
+# include "types.h"
 # include "../libft/libft.h"
 
-typedef struct t_scene{
+typedef struct s_scene
+{
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
@@ -35,6 +37,8 @@ typedef struct t_scene{
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
+	int			sample_per_pixel;
+	double		pixel_sample_scale;
 	double		a;
 	double		b;
 	double		c;
@@ -42,12 +46,33 @@ typedef struct t_scene{
 	double		ray_min;
 	double		ray_max;
 	double		closest_so_far;
-	double		pixel_shading_sample;//color scae factor for a sum of pixel samples
+	/* color scale factor for sum of pixel samples */
+	double		pixel_shading_sample;
 	double		shift_x;
 	double		shift_y;
 	double		time;
 	double		render_time;
 	double		zoom;
-} t_scene;
+}	t_scene;
+
+typedef struct s_cy_hit
+{
+	t_scene	*s;
+	t_vec3	direction;
+	t_vec3	axis;
+	t_vec3	oc;
+	double	radius;
+	double	half_h;
+}	t_cy_hit;
+
+typedef struct s_hit
+{
+	t_scene	*s;
+	t_vec3	direction;
+	double	t;
+	t_vec3	n;
+	t_vec3	p;
+	t_color	color;
+}	t_hit;
 
 #endif

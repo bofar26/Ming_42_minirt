@@ -6,33 +6,29 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:23:12 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/11 16:43:06 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/26 17:11:55 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 
-//-----EXEC-----
+/* EXEC */
 
+t_vec3		sample_random_pixel(t_camera c, t_rand *r);
 t_camera	normalize_viewport(t_camera c, int i, int j);
+t_vec3		get_ray(t_scene *s, t_rand *r, int x, int y);
+void		fill_frame(t_scene *s);
 void		renderer(t_scene *w_d);
 
-//-----SET_LIGHT-----
+t_vec3		color_each_pixel(t_scene *s, t_rand *r, int x, int y);
 
-void		set_light(t_light l);
+/* SET_CAMERA */
 
-//-----SET_CAMERA-----
-
-double  	degrees_to_radians(double fov);
+double		degrees_to_radians(double fov);
 t_camera	calculate_viewport_height(t_camera c);
 t_camera	calculate_upper_left(t_camera c);
 t_camera	set_camera_init(t_camera c);
 t_camera	set_camera(t_camera c);
 
-//-----SET_SPHERE-----
-
-t_sphere	set_sph1(t_sphere sp1);
-t_sphere	set_sph2(t_sphere sp2);
-
-# endif
+#endif

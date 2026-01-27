@@ -25,6 +25,3 @@ int	check_rgb(int c)
 		return (0);
 	return (1);
 }
-
-
-
