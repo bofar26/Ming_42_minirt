@@ -6,27 +6,11 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 15:56:24 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/26 17:01:13 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/27 22:05:16 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_vec3	render_background(t_scene *s, t_vec3 direction)
-{
-	t_vec3	unit_direction;
-	double	a;
-	double	b;
-
-	(void)s;
-	b = dot_squared(dot(direction, direction));
-	unit_direction = unit_vector(direction, b);
-	a = 0.5 * (unit_direction.y + 1.0);
-	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
-	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
-	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
-	return (unit_direction);
-}
 
 static double	diffuse_intensity(t_vec3 n, t_vec3 p, t_light l)
 {
@@ -45,84 +29,49 @@ static double	diffuse_intensity(t_vec3 n, t_vec3 p, t_light l)
 	return (a * l.ratio);
 }
 
-static bool	hit_any_object(t_scene *s, t_vec3 direction, double max_t)
+bool	ray_shadow(t_scene *s, t_shadow sh)
 {
-	t_list		*temp;
-	t_vec3		n;
-	double		t;
-	t_sphere	*sp;
-	t_plane		*pl;
-	t_cylinder	*cy;
+	bool	shadow;
 
-	temp = s->spheres;
-	while (temp)
-	{
-		sp = temp->content;
-		t = ray_sphere(s, direction, sp, &n);
-		if (t > s->ray_min && t < max_t)
-			return (true);
-		temp = temp->next;
-	}
-	temp = s->planes;
-	while (temp)
-	{
-		pl = temp->content;
-		t = ray_plane(s, direction, pl, &n);
-		if (t > s->ray_min && t < max_t)
-			return (true);
-		temp = temp->next;
-	}
-	temp = s->cylinders;
-	while (temp)
-	{
-		cy = temp->content;
-		t = ray_cylinder(s, direction, cy, &n);
-		if (t > s->ray_min && t < max_t)
-			return (true);
-		temp = temp->next;
-	}
-	return (false);
-}
-
-static bool	is_shadowed(t_scene *s, t_vec3 p, t_vec3 n)
-{
-	t_vec3		to_light;
-	t_vec3		origin;
-	t_vec3		old_origin;
-	double		old_min;
-	double		old_max;
-	double		dist2;
-	double		dist;
-	bool		shadow;
-	double		n_dot_l;
-	const double	bias = 1e-3;
-
-	to_light = substract_vector(s->light.pos, p);
-	dist2 = dot(to_light, to_light);
-	if (dist2 <= 0.0)
-		return (false);
-	dist = sqrt(dist2);
-	n = normalize_vec3(n);
-	n_dot_l = dot(n, to_light);
-	if (n_dot_l < 0.0)
-		n = power_vector_to_t(n, -1.0);
-	origin = add_vector(p, power_vector_to_t(n, bias));
-	old_origin = s->camera.viewpoint;
-	old_min = s->ray_min;
-	old_max = s->ray_max;
-	s->camera.viewpoint = origin;
-	s->ray_min = bias;
-	s->ray_max = dist - bias;
+	shadow = true;
 	if (s->ray_max <= s->ray_min)
 		shadow = false;
 	else
 	{
-		to_light = unit_vector(to_light, dist2);
-		shadow = hit_any_object(s, to_light, s->ray_max);
+		sh.to_light = unit_vector(sh.to_light, sh.dist2);
+		shadow = hit_any_object(s, sh.to_light, s->ray_max);
 	}
-	s->camera.viewpoint = old_origin;
-	s->ray_min = old_min;
-	s->ray_max = old_max;
+	s->camera.viewpoint = sh.old_origin;
+	s->ray_min = sh.old_min;
+	s->ray_max = sh.old_max;
+	return (shadow);
+}
+
+bool	is_shadowed(t_scene *s, t_vec3 p, t_vec3 n)
+{
+	t_shadow		sh;
+	bool			shadow;
+	const double	bias = 1e-3;
+
+	ft_memset(&sh, 0, sizeof(t_shadow));
+	shadow = true;
+	sh.to_light = substract_vector(s->light.pos, p);
+	sh.dist2 = dot(sh.to_light, sh.to_light);
+	if (sh.dist2 <= 0.0)
+		return (false);
+	sh.dist = sqrt(sh.dist2);
+	n = normalize_vec3(n);
+	sh.n_dot_l = dot(n, sh.to_light);
+	if (sh.n_dot_l < 0.0)
+		n = power_vector_to_t(n, -1.0);
+	sh.origin = add_vector(p, power_vector_to_t(n, bias));
+	sh.old_origin = s->camera.viewpoint;
+	sh.old_min = s->ray_min;
+	sh.old_max = s->ray_max;
+	s->camera.viewpoint = sh.origin;
+	s->ray_min = bias;
+	s->ray_max = sh.dist - bias;
+	shadow = ray_shadow(s, sh);
 	return (shadow);
 }
 

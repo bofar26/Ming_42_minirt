@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/22 16:07:17 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/27 21:30:27 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,17 @@ typedef struct s_hit
 	t_vec3	p;
 	t_color	color;
 }	t_hit;
+
+typedef struct s_shadow
+{
+	t_vec3		to_light;
+	t_vec3		origin;
+	t_vec3		old_origin;
+	double		old_min;
+	double		old_max;
+	double		dist2;
+	double		dist;
+	double		n_dot_l;
+}	t_shadow;
 
 #endif
