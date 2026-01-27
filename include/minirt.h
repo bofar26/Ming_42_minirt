@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/27 22:06:41 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/27 22:26:00 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 
 typedef struct s_atof
 {
-	../double	nbr;
+	double	nbr;
 	int		nb;
 	int		sign;
 	int		len;
