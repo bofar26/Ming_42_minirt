@@ -6,11 +6,27 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:10:00 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/26 19:10:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/27 21:23:30 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_vec3	render_background(t_scene *s, t_vec3 direction)
+{
+	t_vec3	unit_direction;
+	double	a;
+	double	b;
+
+	(void)s;
+	b = dot_squared(dot(direction, direction));
+	unit_direction = unit_vector(direction, b);
+	a = 0.5 * (unit_direction.y + 1.0);
+	unit_direction.x = (1.0 - a) * 1.0 + a * 0.5;
+	unit_direction.y = (1.0 - a) * 1.0 + a * 0.7;
+	unit_direction.z = (1.0 - a) * 1.0 + a * 1.0;
+	return (unit_direction);
+}
 
 /* normalisation position to int to translate color */
 /* -0.1 >> [0,255] */

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 12:00:00 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/20 12:00:00 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/28 20:03:05 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static bool	is_front_face(t_vec3 direction, t_vec3 normal)
+bool	is_front_face(t_vec3 direction, t_vec3 normal)
 {
 	return (dot(direction, normal) <= 0.0);
 }
@@ -26,7 +26,7 @@ static t_vec3	calculate_normal_sphere(t_scene *s, t_vec3 direction,
 
 	ray_sp = power_vector_to_t(direction, t);
 	ray_sp_final = add_vector(s->camera.viewpoint, ray_sp);
-	ray_sp_final = substract_vector(sp->sp_center, ray_sp_final);
+	ray_sp_final = substract_vector(ray_sp_final, sp->sp_center);
 	ray_sp_final = unit_vector(ray_sp_final, sp->sp_radius);
 	c = dot_squared(dot(ray_sp_final, ray_sp_final));
 	ray_sp_final = unit_vector(ray_sp_final, c);
@@ -46,7 +46,6 @@ static double	sphere_root(t_scene *s, t_vec3 direction, t_vec3 oc, double r)
 	disc = s->b * s->b - (s->a * s->c);
 	if (disc < 0.0)
 		return (-1.0);
-	s->discriminant = disc;
 	t = (s->b - sqrt(disc)) / s->a;
 	if (t > s->ray_min && t < s->ray_max)
 		return (t);

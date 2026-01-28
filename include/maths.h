@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 15:30:05 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/23 14:38:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/28 19:38:01 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_vec3				normalize_vec3(t_vec3 v);
 
 //-----RAY-----
 
+bool				is_front_face(t_vec3 direction, t_vec3 normal);
 double				ray_sphere(t_scene *s, t_vec3 direction,
 						t_sphere *sp, t_vec3 *n);
 t_vec3				ray(t_vec3 origin, t_vec3 direction);

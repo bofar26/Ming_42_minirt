@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:38:46 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/22 16:07:17 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/28 11:54:22 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ typedef struct s_scene
 	double		a;
 	double		b;
 	double		c;
-	double		discriminant;
 	double		ray_min;
 	double		ray_max;
 	double		closest_so_far;
-	/* color scale factor for sum of pixel samples */
 	double		pixel_shading_sample;
 	double		shift_x;
 	double		shift_y;
@@ -74,5 +72,17 @@ typedef struct s_hit
 	t_vec3	p;
 	t_color	color;
 }	t_hit;
+
+typedef struct s_shadow
+{
+	t_vec3		to_light;
+	t_vec3		origin;
+	t_vec3		old_origin;
+	double		old_min;
+	double		old_max;
+	double		dist2;
+	double		dist;
+	double		n_dot_l;
+}	t_shadow;
 
 #endif

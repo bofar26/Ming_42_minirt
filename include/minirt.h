@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:26:21 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/26 16:53:00 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/28 16:20:35 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIDTH 800
 # define HEIGHT 600
+// # define WIDTH 1600
+// # define HEIGHT 1200
 # define KEY_ESC 65307
 # define PI 3.14
 # define RAND_MAX 2147483647
@@ -82,6 +84,9 @@ int		give_color(int r, int g, int b);
 
 t_vec3	render_background(t_scene *s, t_vec3 direction);
 t_vec3	calculate_light(t_scene *s, t_vec3 n, t_vec3 p);
+
+bool	is_shadowed(t_scene *s, t_vec3 p, t_vec3 n);
+bool	hit_any_object(t_scene *s, t_vec3 direction, double max_t);
 
 /* TIME */
 

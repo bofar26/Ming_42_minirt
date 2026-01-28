@@ -6,7 +6,7 @@
 /*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 21:22:38 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/28 00:10:04 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/27 23:56:03 by mipang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	fill_frame(t_scene *s)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(s->mlx_ptr, s->win_ptr, s->img_ptr, 0, 0);
+	mlx_put_image_to_window(s->mlx_ptr, s-win_ptr>, s->img_ptr, 0, 0);
 	s->render_time = getexacttimeofday() - s->time;
 	printf("render time : %.3lf\n", s->render_time);
 }
