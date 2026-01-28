@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:53:08 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/14 10:41:59 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/28 10:41:52 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_sphere	*add_sphere(t_scene *sc)
 		return (NULL);
 	else
 		sc->n_spheres++;
-	printf("sc->n_spheres %d\n", sc->n_spheres);
 	return (obj);
 }
 

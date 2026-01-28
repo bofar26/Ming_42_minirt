@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cylinder_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mipang <mipang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:20:00 by mipang            #+#    #+#             */
-/*   Updated: 2026/01/26 19:20:00 by mipang           ###   ########.fr       */
+/*   Updated: 2026/01/28 19:39:29 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int	cy_cap_hit(t_cy_hit *h, double t, double sign, t_vec3 *n)
 		return (-1.0);
 	if (n && dot(h->direction, *n) > 0.0)
 		*n = power_vector_to_t(*n, -1.0);
+	// if (!is_front_face(h->direction, *n))
+	// 	*n = unit_vector(*n, -1.0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lzannis <lzannis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 15:56:24 by lzannis           #+#    #+#             */
-/*   Updated: 2026/01/27 22:05:16 by lzannis          ###   ########.fr       */
+/*   Updated: 2026/01/28 20:09:13 by lzannis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ static double	diffuse_intensity(t_vec3 n, t_vec3 p, t_light l)
 	double	len;
 	double	a;
 
-	dir_l = substract_vector(l.pos, p);
+	dir_l = substract_vector(p, l.pos);
 	len = dot_squared(dot(dir_l, dir_l));
 	if (len > 0.0)
 		dir_l = unit_vector(dir_l, len);
+	// dir_l = power_vector_to_t(dir_l, -1);
 	n = normalize_vec3(n);
 	a = dot(dir_l, n);
 	if (a < 0.0)
@@ -55,15 +56,15 @@ bool	is_shadowed(t_scene *s, t_vec3 p, t_vec3 n)
 
 	ft_memset(&sh, 0, sizeof(t_shadow));
 	shadow = true;
-	sh.to_light = substract_vector(s->light.pos, p);
+	sh.to_light = substract_vector(p, s->light.pos);
 	sh.dist2 = dot(sh.to_light, sh.to_light);
 	if (sh.dist2 <= 0.0)
 		return (false);
 	sh.dist = sqrt(sh.dist2);
 	n = normalize_vec3(n);
-	sh.n_dot_l = dot(n, sh.to_light);
-	if (sh.n_dot_l < 0.0)
-		n = power_vector_to_t(n, -1.0);
+	// sh.n_dot_l = dot(n, sh.to_light);
+	// if (sh.n_dot_l < 0.0)
+	// 	n = power_vector_to_t(n, -1.0);
 	sh.origin = add_vector(p, power_vector_to_t(n, bias));
 	sh.old_origin = s->camera.viewpoint;
 	sh.old_min = s->ray_min;
@@ -95,6 +96,24 @@ static t_vec3	combine_light(t_scene *s, double intensity)
 	out.z = clamp(0.0, 1.0, out.z);
 	return (out);
 }
+
+// static t_vec3	ambient_light(t_scene *s, double intensity)
+// {
+// 	t_vec3	ray_color;
+// 	t_vec3	ambient_light;
+// 	t_vec3	out;
+
+// 	ray_color = render_color(s->closest_object);
+// 	ambient_light = render_color(s->ambient.ambient_color);
+// 	ambient_light = power_vector_to_t(ambient_light, s->ambient.ratio);
+// 	out.x = ambient_light.x * ray_color.x;
+// 	out.y = ambient_light.y * ray_color.y;
+// 	out.z = ambient_light.z * ray_color.z;
+// 	out.x = clamp(0.0, 1.0, out.x);
+// 	out.y = clamp(0.0, 1.0, out.y);
+// 	out.z = clamp(0.0, 1.0, out.z);
+// 	return (out);
+// }
 
 t_vec3	calculate_light(t_scene *s, t_vec3 n, t_vec3 p)
 {
