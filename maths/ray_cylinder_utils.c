@@ -57,7 +57,5 @@ int	cy_cap_hit(t_cy_hit *h, double t, double sign, t_vec3 *n)
 		return (-1.0);
 	if (n && dot(h->direction, *n) > 0.0)
 		*n = power_vector_to_t(*n, -1.0);
-	// if (!is_front_face(h->direction, *n))
-	// 	*n = unit_vector(*n, -1.0);
 	return (1);
 }

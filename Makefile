@@ -37,10 +37,10 @@ SRCS_WINDOW = \
 		src/close.c \
 		src/window.c \
 		src/key_hook.c \
-		src/color.c \
-		src/color_utils.c \
-		src/color1.c \
-		src/color2.c
+	src/color.c \
+	src/color_utils.c \
+	src/color1.c \
+	src/color2.c
 
 		
 SRC_PARSING_CORE = \
